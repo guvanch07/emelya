@@ -1,6 +1,8 @@
 import 'package:emelya/constants.dart/app_colors.dart';
 import 'package:emelya/widgets/basket_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,14 +12,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Bottom Nav Bar V2',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: BottomNavBarV2(),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Bottom Nav Bar V2',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: BottomNavBarV2(),
+        );
+      },
     );
   }
 }
@@ -30,7 +36,7 @@ class BottomNavBarV2 extends StatefulWidget {
 class _BottomNavBarV2State extends State<BottomNavBarV2> {
   int currentIndex = 0;
 
-  setBottomBarIndex(index) {
+  setBottomBarIndex(int index) {
     setState(() {
       currentIndex = index;
     });
@@ -39,6 +45,7 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.white.withAlpha(55),
       body: Stack(
@@ -50,83 +57,101 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
               width: size.width,
               height: 90,
               child: Stack(
-                //uncomment to create ripple efect when buttons pressed
-                // clipBehavior: Clip.hardEdge,
                 children: [
                   CustomPaint(
                     size: Size(size.width, 90),
                     painter: BNBCustomPainter(),
                   ),
-                  Center(
+                  const Center(
                     heightFactor: 0.5,
                     child: BasketButton(),
                   ),
-                  Container(
-                    width: size.width,
-                    height: 90,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.home,
-                            color: currentIndex == 0
-                                ? Colors.orange
-                                : Colors.grey.shade400,
-                          ),
-                          onPressed: () {
-                            setBottomBarIndex(0);
-                          },
-                          splashColor: Colors.white,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () => currentIndex = 0,
+                              child: BottomBarButton(
+                                text: 'Меню',
+                                icon: 'menu',
+                                space: 12,
+                                position: 0,
+                                selected: currentIndex,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 1.w,
+                            ),
+                            InkWell(
+                              onTap: () => currentIndex = 1,
+                              child: BottomBarButton(
+                                text: 'Поиск',
+                                icon: 'search',
+                                space: 10,
+                                position: 1,
+                                selected: currentIndex,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 1.w,
+                            ),
+                          ],
                         ),
-                        IconButton(
-                            icon: Icon(
-                              Icons.restaurant_menu,
-                              color: currentIndex == 1
-                                  ? Colors.orange
-                                  : Colors.grey.shade400,
+                      ),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              width: 1.w,
                             ),
-                            onPressed: () {
-                              setBottomBarIndex(1);
-                            }),
-                        Container(
-                          width: size.width * 0.20,
+                            InkWell(
+                              onTap: () => currentIndex = 2,
+                              child: BottomBarButton(
+                                text: 'Кабинет',
+                                icon: 'profile',
+                                space: 10,
+                                position: 2,
+                                selected: currentIndex,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 1.w,
+                            ),
+                            InkWell(
+                              onTap: () => currentIndex = 3,
+                              child: BottomBarButton(
+                                text: 'Каталог',
+                                icon: 'catalog',
+                                space: 10,
+                                position: 3,
+                                selected: currentIndex,
+                              ),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                            icon: Icon(
-                              Icons.bookmark,
-                              color: currentIndex == 2
-                                  ? Colors.orange
-                                  : Colors.grey.shade400,
-                            ),
-                            onPressed: () {
-                              setBottomBarIndex(2);
-                            }),
-                        IconButton(
-                            icon: Icon(
-                              Icons.notifications,
-                              color: currentIndex == 3
-                                  ? Colors.orange
-                                  : Colors.grey.shade400,
-                            ),
-                            onPressed: () {
-                              setBottomBarIndex(3);
-                            }),
-                      ],
-                    ),
+                      ),
+                    ],
                   )
                 ],
               ),
             ),
           ),
           Positioned(
+            left: 33.w,
             bottom: 4,
             child: Container(
               height: 5,
-              width: 33,
+              width: 33.w,
               decoration: BoxDecoration(
                 color: AppColors.primaryColor.withOpacity(0.4),
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(100),
                 ),
               ),
@@ -138,33 +163,92 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
   }
 }
 
+class BottomBarButton extends StatefulWidget {
+  BottomBarButton({
+    Key? key,
+    required this.icon,
+    required this.text,
+    required this.space,
+    required this.position,
+    required this.selected,
+  }) : super(key: key);
+
+  final String icon;
+  final String text;
+  final double space;
+  final int position;
+  int selected;
+
+  @override
+  _BottomBarButtonState createState() => _BottomBarButtonState();
+}
+
+class _BottomBarButtonState extends State<BottomBarButton> {
+  bool isSelected() {
+    if (widget.position == widget.selected) {
+      setState(() {});
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        SvgPicture.asset(
+          'assets/icons/${widget.icon}.svg',
+          color: isSelected() ? AppColors.black : AppColors.primaryColor,
+        ),
+        SizedBox(
+          height: widget.space,
+        ),
+        Text(
+          widget.text,
+          style: TextStyle(
+            color: isSelected() ? AppColors.black : AppColors.primaryColor,
+            fontFamily: 'Arial',
+            fontWeight: FontWeight.w400,
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
+    );
+  }
+}
+
 class BNBCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    Path path_0 = Path();
-    path_0.moveTo(size.width, size.height * 1.000009);
-    path_0.lineTo(0, size.height * 1.000009);
-    path_0.lineTo(0, size.height * 0.1373571);
+    final Path path_0 = Path();
+    path_0.moveTo(size.width, size.height);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.9891446);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.1358696);
     path_0.cubicTo(
-        size.width * 0.2897839,
-        size.height * -0.1465022,
-        size.width * 0.3575639,
-        size.height * 0.1703242,
-        size.width * 0.5950982,
-        size.height * 0.09721231);
+        size.width * 0.2402821,
+        size.height * -0.1449043,
+        size.width * 0.3241667,
+        size.height * 0.1684783,
+        size.width * 0.6181425,
+        size.height * 0.09616098);
     path_0.cubicTo(
-        size.width * 0.8280943,
-        size.height * -0.06045099,
-        size.width * 0.8998035,
-        size.height * 0.01648209,
-        size.width,
-        size.height * 0.1703242);
-    path_0.lineTo(size.width, size.height * 1.000009);
+        size.width * 0.9065000,
+        size.height * -0.05978859,
+        size.width * 0.9952488,
+        size.height * 0.01630826,
+        size.width * 1.119254,
+        size.height * 0.1684783);
+    path_0.lineTo(size.width, size.height);
     path_0.close();
 
-    Paint paint0fill = Paint()..style = PaintingStyle.fill;
-    paint0fill.color = Color(0xffAC4AEB).withOpacity(1.0);
-    canvas.drawPath(path_0, paint0fill);
+    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
+    paint_0_fill.color = AppColors.accentColor;
+    canvas.drawPath(path_0, paint_0_fill);
   }
 
   @override

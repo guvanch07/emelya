@@ -3,9 +3,10 @@ import 'dart:math';
 import 'package:emelya/constants.dart/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BasketButton extends StatefulWidget {
-  BasketButton({Key? key}) : super(key: key);
+  const BasketButton({Key? key}) : super(key: key);
 
   @override
   _BasketButtonState createState() => _BasketButtonState();
@@ -14,19 +15,106 @@ class BasketButton extends StatefulWidget {
 class _BasketButtonState extends State<BasketButton> {
   @override
   Widget build(BuildContext context) {
+    const double buttonSize = 90;
+
     return Center(
       child: Container(
-        width: 90,
-        height: 90,
-        child: BasketButtonBackground(
-          percent: 0.72,
+        width: buttonSize,
+        height: buttonSize,
+        child: const BasketButtonBackground(
+          itemCount: 2,
           fillColor: AppColors.black,
           lineColor: AppColors.primaryColor,
-          freeColor: Colors.yellow,
           lineWidth: 5,
+          size: buttonSize,
+        ),
+      ),
+    );
+  }
+}
+
+class BasketButtonBackground extends StatefulWidget {
+  const BasketButtonBackground({
+    Key? key,
+    required this.size,
+    required this.itemCount,
+    required this.fillColor,
+    required this.lineColor,
+    required this.lineWidth,
+  }) : super(key: key);
+
+  final double size;
+  final int itemCount;
+  final Color fillColor;
+  final Color lineColor;
+  final double lineWidth;
+
+  @override
+  _BasketButtonBackgroundState createState() => _BasketButtonBackgroundState();
+}
+
+class _BasketButtonBackgroundState extends State<BasketButtonBackground> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        CustomPaint(
+          painter: ButtonBackground(
+            size: widget.size,
+            fillColor: widget.fillColor,
+            lineColor: widget.lineColor,
+            lineWidth: widget.lineWidth,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(widget.size / 4),
+          child: SvgPicture.asset('assets/icons/basket.svg'),
+        ),
+        ItemCount(
+          size: widget.size,
+          count: widget.itemCount,
+        ),
+      ],
+    );
+  }
+}
+
+class ItemCount extends StatelessWidget {
+  const ItemCount({
+    Key? key,
+    required this.count,
+    required this.size,
+  }) : super(key: key);
+
+  final int count;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final containerSize = size * 0.22;
+
+    return Positioned(
+      top: containerSize / 1.5,
+      left: size / 2 - containerSize / 2,
+      child: Container(
+        width: containerSize,
+        height: containerSize,
+        decoration: const BoxDecoration(
+          color: AppColors.accentColor,
+          borderRadius: BorderRadius.all(
+            Radius.circular(100),
+          ),
+        ),
+        child: Center(
           child: Text(
-            '72%',
-            style: TextStyle(color: Colors.white),
+            count.toString(),
+            style: const TextStyle(
+              color: AppColors.primaryColor,
+              fontFamily: 'Arial',
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
       ),
@@ -34,68 +122,23 @@ class _BasketButtonState extends State<BasketButton> {
   }
 }
 
-class BasketButtonBackground extends StatelessWidget {
-  final Widget child;
-
-  final double percent;
-  final Color fillColor;
-  final Color lineColor;
-  final Color freeColor;
-  final double lineWidth;
-
-  const BasketButtonBackground({
-    Key? key,
-    required this.child,
-    required this.percent,
+class ButtonBackground extends CustomPainter {
+  ButtonBackground({
     required this.fillColor,
     required this.lineColor,
-    required this.freeColor,
     required this.lineWidth,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        CustomPaint(
-          painter: MyPainter(
-            percent: percent,
-            fillColor: fillColor,
-            lineColor: lineColor,
-            freeColor: freeColor,
-            lineWidth: lineWidth,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(11.0),
-          child: Center(child: child),
-        ),
-      ],
-    );
-  }
-}
-
-class MyPainter extends CustomPainter {
-  final double percent;
-  final Color fillColor;
-  final Color lineColor;
-  final Color freeColor;
-  final double lineWidth;
-
-  MyPainter({
-    required this.percent,
-    required this.fillColor,
-    required this.lineColor,
-    required this.freeColor,
-    required this.lineWidth,
+    required this.size,
   });
+
+  final Color fillColor;
+  final Color lineColor;
+  final double lineWidth;
+  final double size;
 
   @override
   void paint(Canvas canvas, Size size) {
     final arcRect = calculateArcsRect(size);
     drawBackground(canvas, size);
-    // drawFreeArc(canvas, arcRect);
     drawFilledArc(canvas, arcRect);
   }
 
@@ -115,26 +158,12 @@ class MyPainter extends CustomPainter {
     );
   }
 
-  void drawFreeArc(Canvas canvas, Rect arcRect) {
-    final paint = Paint();
-    paint.color = freeColor;
-    paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = lineWidth;
-
-    canvas.drawArc(
-      arcRect,
-      pi * 2 * percent - (pi / 2),
-      pi * 2 * (1.0 - percent),
-      false,
-      paint,
-    );
-  }
-
   void drawBackground(Canvas canvas, Size size) {
     final paint = Paint();
     paint.color = fillColor;
     paint.style = PaintingStyle.fill;
-    canvas.drawCircle(Offset(45, 45), 45, paint);
+    canvas.drawCircle(
+        Offset(this.size / 2, this.size / 2), this.size / 2, paint);
   }
 
   Rect calculateArcsRect(Size size) {
@@ -146,6 +175,6 @@ class MyPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    return false;
   }
 }
