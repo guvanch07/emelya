@@ -76,16 +76,19 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
           left: 0,
           child: Container(
             width: size.width,
-            height: 90,
+            height: 150,
             child: Stack(
               children: [
                 CustomPaint(
                   size: Size(size.width, 90),
                   painter: BNBCustomPainter(),
                 ),
-                const Center(
-                  heightFactor: 0.5,
-                  child: BasketButton(),
+                Center(
+                  child: SizedBox(
+                    height: 120,
+                    width: 90,
+                    child: BasketButton(),
+                  ),
                 ),
                 Row(
                   children: [
@@ -243,27 +246,29 @@ class _BottomBarButtonState extends State<BottomBarButton> {
 }
 
 class BNBCustomPainter extends CustomPainter {
+  final xOffset = 60;
+
   @override
   void paint(Canvas canvas, Size size) {
     final Path path_0 = Path();
-    path_0.moveTo(size.width, size.height);
-    path_0.lineTo(size.width * -0.1183575, size.height * 0.9891446);
-    path_0.lineTo(size.width * -0.1183575, size.height * 0.1358696);
+    path_0.moveTo(size.width, size.height + xOffset);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.9891446 + xOffset);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.1358696 + xOffset);
     path_0.cubicTo(
         size.width * 0.2402821,
-        size.height * -0.1449043,
+        size.height * -0.1449043 + xOffset,
         size.width * 0.3241667,
-        size.height * 0.1684783,
+        size.height * 0.1684783 + xOffset,
         size.width * 0.6181425,
-        size.height * 0.09616098);
+        size.height * 0.09616098 + xOffset);
     path_0.cubicTo(
         size.width * 0.9065000,
-        size.height * -0.05978859,
+        size.height * -0.05978859 + xOffset,
         size.width * 0.9952488,
-        size.height * 0.01630826,
+        size.height * 0.01630826 + xOffset,
         size.width * 1.119254,
-        size.height * 0.1684783);
-    path_0.lineTo(size.width, size.height);
+        size.height * 0.1684783 + xOffset);
+    path_0.lineTo(size.width, size.height + xOffset);
     path_0.close();
 
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;

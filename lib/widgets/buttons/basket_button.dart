@@ -40,12 +40,10 @@ class _BasketButtonState extends State<BasketButton> {
       });
     }
 
-    return Center(
-      child: InkWell(
-        onTap: _incrementCounter,
-        child: Container(
-          width: buttonSize,
-          height: buttonSize,
+    return Stack(
+      children: [
+        InkWell(
+          onTap: _incrementCounter,
           child: BasketButtonRoot(
             itemCount: _count,
             fillColor: AppColors.black,
@@ -54,7 +52,10 @@ class _BasketButtonState extends State<BasketButton> {
             size: buttonSize,
           ),
         ),
-      ),
+        PriceCount(
+          count: _count,
+        ),
+      ],
     );
   }
 }
@@ -95,15 +96,15 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
             lineWidth: widget.lineWidth,
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(widget.size / 4),
-          child: SvgPicture.asset('assets/icons/basket.svg'),
+        Positioned(
+          bottom: -15,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: widget.size / 4, vertical: 150 / 4),
+            child: SvgPicture.asset('assets/icons/basket.svg'),
+          ),
         ),
         ItemCount(
-          size: widget.size,
-          count: widget.itemCount,
-        ),
-        PriceCount(
           size: widget.size,
           count: widget.itemCount,
         ),
@@ -128,7 +129,7 @@ class ItemCount extends StatelessWidget {
     dev.log('item count rebuilded');
 
     return Positioned(
-      top: containerSize / 1.5,
+      top: containerSize / 1.5 + 30,
       left: size / 2 - containerSize / 2,
       child: Container(
         width: containerSize,
@@ -159,23 +160,18 @@ class PriceCount extends StatelessWidget {
   const PriceCount({
     Key? key,
     required this.count,
-    required this.size,
   }) : super(key: key);
 
   final int count;
-  final double size;
 
   @override
   Widget build(BuildContext context) {
-    final containerSize = size * 0.22;
     dev.log('item count rebuilded');
 
     return Positioned(
-      top: -2,
-      left: size / 2 - containerSize / 2,
+      top: 30,
+      left: 35,
       child: Container(
-        width: containerSize,
-        height: containerSize,
         decoration: const BoxDecoration(
           color: AppColors.purple,
           borderRadius: BorderRadius.all(
@@ -214,6 +210,7 @@ class ButtonBackground extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     dev.log('background painted');
+
     final arcRect = calculateArcsRect(size);
     drawBackground(canvas, size);
     drawFilledArc(canvas, arcRect);
@@ -240,13 +237,13 @@ class ButtonBackground extends CustomPainter {
     paint.color = fillColor;
     paint.style = PaintingStyle.fill;
     canvas.drawCircle(
-        Offset(this.size / 2, this.size / 2), this.size / 2, paint);
+        Offset(this.size / 2, this.size / 2 + 30), this.size / 2, paint);
   }
 
   Rect calculateArcsRect(Size size) {
     final offest = lineWidth / 2;
-    final arcRect = Offset(offest, offest) &
-        Size(size.width - offest * 2, size.height - offest * 2);
+    final arcRect = Offset(offest, offest + 30) &
+        Size(size.width - offest * 2, size.width - offest * 2);
     return arcRect;
   }
 
