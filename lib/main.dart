@@ -4,6 +4,7 @@ import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,8 +20,22 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Bottom Nav Bar V2',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
+            textTheme: TextTheme(
+              headline1: GoogleFonts.exo2(
+                textStyle: const TextStyle(
+                  color: AppColors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              bodyText1: const TextStyle(
+                color: AppColors.black,
+                fontFamily: 'Arial',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ),
           home: Onboarding(),
         );
