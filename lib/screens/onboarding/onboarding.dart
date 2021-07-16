@@ -47,7 +47,7 @@ class _OnboardingState extends State<Onboarding> {
 
     _pageController.animateToPage(
       _currentPage,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
     );
   }
@@ -71,7 +71,7 @@ class _OnboardingState extends State<Onboarding> {
     if (currentBackPressTime == null ||
         now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
-      showToast('Нажмите ещё раз, чтобы выйти');
+      // showToast('Нажмите ещё раз, чтобы выйти');
       return Future.value(false);
     }
     SystemChannels.platform.invokeMethod('SystemNavigator.pop');
