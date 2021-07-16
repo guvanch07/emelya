@@ -1,3 +1,4 @@
+import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:emelya/constants.dart/app_colors.dart';
@@ -6,35 +7,61 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BasketButton extends StatefulWidget {
-  const BasketButton({Key? key}) : super(key: key);
+  const BasketButton({
+    Key? key,
+    this.initProductsCount = 0,
+    this.initPriceCount = 0,
+  }) : super(key: key);
+
+  final int initProductsCount;
+  final double initPriceCount;
 
   @override
   _BasketButtonState createState() => _BasketButtonState();
 }
 
 class _BasketButtonState extends State<BasketButton> {
+  late int _count;
+
+  @override
+  void initState() {
+    _count = widget.initProductsCount;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     const double buttonSize = 90;
+    dev.log('root button rebuilded');
 
-    return Center(
-      child: Container(
-        width: buttonSize,
-        height: buttonSize,
-        child: const BasketButtonBackground(
-          itemCount: 2,
-          fillColor: AppColors.black,
-          lineColor: AppColors.white,
-          lineWidth: 5,
-          size: buttonSize,
+    void _incrementCounter() {
+      setState(() {
+        _count++;
+      });
+    }
+
+    return Stack(
+      children: [
+        InkWell(
+          onTap: _incrementCounter,
+          child: BasketButtonRoot(
+            itemCount: _count,
+            fillColor: AppColors.black,
+            lineColor: AppColors.white,
+            lineWidth: 5,
+            size: buttonSize,
+          ),
         ),
-      ),
+        PriceCount(
+          count: _count,
+        ),
+      ],
     );
   }
 }
 
-class BasketButtonBackground extends StatefulWidget {
-  const BasketButtonBackground({
+class BasketButtonRoot extends StatefulWidget {
+  const BasketButtonRoot({
     Key? key,
     required this.size,
     required this.itemCount,
@@ -50,12 +77,14 @@ class BasketButtonBackground extends StatefulWidget {
   final double lineWidth;
 
   @override
-  _BasketButtonBackgroundState createState() => _BasketButtonBackgroundState();
+  _BasketButtonRootState createState() => _BasketButtonRootState();
 }
 
-class _BasketButtonBackgroundState extends State<BasketButtonBackground> {
+class _BasketButtonRootState extends State<BasketButtonRoot> {
   @override
   Widget build(BuildContext context) {
+    dev.log('basket icon button rebuilded');
+
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -67,9 +96,13 @@ class _BasketButtonBackgroundState extends State<BasketButtonBackground> {
             lineWidth: widget.lineWidth,
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(widget.size / 4),
-          child: SvgPicture.asset('assets/icons/basket.svg'),
+        Positioned(
+          bottom: -15,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: widget.size / 4, vertical: 150 / 4),
+            child: SvgPicture.asset('assets/icons/basket.svg'),
+          ),
         ),
         ItemCount(
           size: widget.size,
@@ -93,13 +126,52 @@ class ItemCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final containerSize = size * 0.22;
+    dev.log('item count rebuilded');
 
     return Positioned(
-      top: containerSize / 1.5,
+      top: containerSize / 1.5 + 30,
       left: size / 2 - containerSize / 2,
       child: Container(
         width: containerSize,
         height: containerSize,
+        decoration: const BoxDecoration(
+          color: AppColors.purple,
+          borderRadius: BorderRadius.all(
+            Radius.circular(100),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            count.toString(),
+            style: const TextStyle(
+              color: AppColors.white,
+              fontFamily: 'Arial',
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PriceCount extends StatelessWidget {
+  const PriceCount({
+    Key? key,
+    required this.count,
+  }) : super(key: key);
+
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    dev.log('item count rebuilded');
+
+    return Positioned(
+      top: 30,
+      left: 35,
+      child: Container(
         decoration: const BoxDecoration(
           color: AppColors.purple,
           borderRadius: BorderRadius.all(
@@ -137,6 +209,8 @@ class ButtonBackground extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    dev.log('background painted');
+
     final arcRect = calculateArcsRect(size);
     drawBackground(canvas, size);
     drawFilledArc(canvas, arcRect);
@@ -163,13 +237,13 @@ class ButtonBackground extends CustomPainter {
     paint.color = fillColor;
     paint.style = PaintingStyle.fill;
     canvas.drawCircle(
-        Offset(this.size / 2, this.size / 2), this.size / 2, paint);
+        Offset(this.size / 2, this.size / 2 + 30), this.size / 2, paint);
   }
 
   Rect calculateArcsRect(Size size) {
     final offest = lineWidth / 2;
-    final arcRect = Offset(offest, offest) &
-        Size(size.width - offest * 2, size.height - offest * 2);
+    final arcRect = Offset(offest, offest + 30) &
+        Size(size.width - offest * 2, size.width - offest * 2);
     return arcRect;
   }
 
