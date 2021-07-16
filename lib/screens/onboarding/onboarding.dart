@@ -8,6 +8,7 @@ import 'package:emelya/screens/onboarding/slide.dart';
 import 'package:emelya/widgets/buttons/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
 class Onboarding extends StatefulWidget {
   @override
@@ -25,21 +26,30 @@ class _OnboardingState extends State<Onboarding> {
   }
 
   void inititializePageController() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-        if (_currentPage < 2) {
-          _currentPage++;
-        } else {
-          _currentPage = 0;
-        }
-
-        _pageController.animateToPage(
-          _currentPage,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeIn,
+    WidgetsBinding.instance?.addPostFrameCallback(
+      (_) {
+        Timer.periodic(
+          const Duration(seconds: 5),
+          (Timer timer) {
+            slideNext();
+          },
         );
-      });
-    });
+      },
+    );
+  }
+
+  void slideNext() {
+    if (_currentPage < 2) {
+      _currentPage++;
+    } else {
+      _currentPage = 0;
+    }
+
+    _pageController.animateToPage(
+      _currentPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
@@ -68,7 +78,9 @@ class _OnboardingState extends State<Onboarding> {
     return Future.value(true);
   }
 
-  void _onNextPressed() async {}
+  void _onNextPressed() async {
+    slideNext();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,14 +124,14 @@ class _OnboardingState extends State<Onboarding> {
                 height: 20,
               ),
               Container(
-                width: 65,
+                width: 65.w,
                 height: 52,
                 child: AppElevatedButton(
-                  text: "Пропустить",
+                  text: "Далее",
                   press: _onNextPressed,
                 ),
               ),
-              const SizedBox(height: 30)
+              SizedBox(height: 20.w)
             ],
           ),
         ),

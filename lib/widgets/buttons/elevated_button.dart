@@ -30,6 +30,7 @@ class AppElevatedButton extends StatelessWidget {
       color: color ?? AppColors.purple,
       disabledColor: color,
       onPressed: press,
+      elevation: 0,
       child: Text(
         text,
         textAlign: TextAlign.center,
