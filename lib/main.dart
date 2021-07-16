@@ -168,11 +168,11 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
           ),
         ),
         Positioned(
-          left: 33.w,
-          bottom: 4,
+          left: 35.w,
+          bottom: 5,
           child: Container(
             height: 5,
-            width: 33.w,
+            width: 30.w,
             decoration: BoxDecoration(
               color: AppColors.white.withOpacity(0.4),
               borderRadius: const BorderRadius.all(

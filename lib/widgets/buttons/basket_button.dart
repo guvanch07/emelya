@@ -10,7 +10,7 @@ class BasketButton extends StatefulWidget {
   const BasketButton({
     Key? key,
     this.initProductsCount = 0,
-    this.initPriceCount = 0,
+    this.initPriceCount = 0.0,
   }) : super(key: key);
 
   final int initProductsCount;
@@ -22,10 +22,13 @@ class BasketButton extends StatefulWidget {
 
 class _BasketButtonState extends State<BasketButton> {
   late int _count;
+  late double _price;
+  final Random rand = Random();
 
   @override
   void initState() {
     _count = widget.initProductsCount;
+    _price = widget.initPriceCount;
     super.initState();
   }
 
@@ -36,6 +39,7 @@ class _BasketButtonState extends State<BasketButton> {
 
     void _incrementCounter() {
       setState(() {
+        _price += rand.nextDouble() * 20;
         _count++;
       });
     }
@@ -53,7 +57,22 @@ class _BasketButtonState extends State<BasketButton> {
           ),
         ),
         PriceCount(
-          count: _count,
+          count: _price,
+        ),
+        Positioned(
+          top: 34,
+          left: 38.5,
+          child: CustomPaint(
+            painter: TrianglePainter(
+              strokeColor: AppColors.white,
+              strokeWidth: 10,
+              paintingStyle: PaintingStyle.fill,
+            ),
+            child: Container(
+              height: 7,
+              width: 12,
+            ),
+          ),
         ),
       ],
     );
@@ -129,7 +148,7 @@ class ItemCount extends StatelessWidget {
     dev.log('item count rebuilded');
 
     return Positioned(
-      top: containerSize / 1.5 + 30,
+      top: containerSize / 1.5 + 33,
       left: size / 2 - containerSize / 2,
       child: Container(
         width: containerSize,
@@ -162,35 +181,73 @@ class PriceCount extends StatelessWidget {
     required this.count,
   }) : super(key: key);
 
-  final int count;
+  final double count;
 
   @override
   Widget build(BuildContext context) {
     dev.log('item count rebuilded');
 
     return Positioned(
-      top: 30,
-      left: 35,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: AppColors.purple,
-          borderRadius: BorderRadius.all(
-            Radius.circular(100),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            count.toString(),
-            style: const TextStyle(
+      top: 12,
+      left: 10,
+      child: Stack(
+        fit: StackFit.passthrough,
+        children: [
+          Container(
+            width: 70,
+            height: 25,
+            decoration: BoxDecoration(
               color: AppColors.white,
-              fontFamily: 'Arial',
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+              border: Border.all(
+                width: 1.5,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(100),
+              ),
+            ),
+            child: Center(
+              child: Text('${count.toStringAsFixed(2).replaceAll('.', ',')} р.',
+                  style: Theme.of(context).textTheme.bodyText1),
             ),
           ),
-        ),
+        ],
       ),
     );
+  }
+}
+
+class TrianglePainter extends CustomPainter {
+  final Color strokeColor;
+  final PaintingStyle paintingStyle;
+  final double strokeWidth;
+
+  TrianglePainter(
+      {this.strokeColor = Colors.black,
+      this.strokeWidth = 3,
+      this.paintingStyle = PaintingStyle.stroke});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = strokeColor
+      ..strokeWidth = strokeWidth
+      ..style = paintingStyle;
+
+    canvas.drawPath(getTrianglePath(size.width, size.height), paint);
+  }
+
+  Path getTrianglePath(double x, double y) {
+    return Path()
+      ..moveTo(0, 0)
+      ..lineTo(x, 0)
+      ..lineTo(x / 2, y);
+  }
+
+  @override
+  bool shouldRepaint(TrianglePainter oldDelegate) {
+    return oldDelegate.strokeColor != strokeColor ||
+        oldDelegate.paintingStyle != paintingStyle ||
+        oldDelegate.strokeWidth != strokeWidth;
   }
 }
 
