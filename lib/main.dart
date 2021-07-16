@@ -83,7 +83,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                   size: Size(size.width, 90),
                   painter: BNBCustomPainter(),
                 ),
-                Center(
+                const Center(
                   child: SizedBox(
                     height: 120,
                     width: 90,
@@ -96,7 +96,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 0,
                             child: BottomBarButton(
                               text: 'Меню',
@@ -109,7 +109,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                           SizedBox(
                             width: 1.w,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 1,
                             child: BottomBarButton(
                               text: 'Поиск',
@@ -135,7 +135,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                           SizedBox(
                             width: 1.w,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 2,
                             child: BottomBarButton(
                               text: 'Кабинет',
@@ -148,7 +148,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                           SizedBox(
                             width: 1.w,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 3,
                             child: BottomBarButton(
                               text: 'Каталог',

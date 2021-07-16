@@ -46,7 +46,7 @@ class _BasketButtonState extends State<BasketButton> {
 
     return Stack(
       children: [
-        InkWell(
+        GestureDetector(
           onTap: _incrementCounter,
           child: BasketButtonRoot(
             itemCount: _count,
