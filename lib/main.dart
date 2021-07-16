@@ -1,5 +1,6 @@
 import 'package:emelya/constants.dart/app_colors.dart';
-import 'package:emelya/widgets/basket_button.dart';
+import 'package:emelya/screens/onboarding/onboarding.dart';
+import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: BottomNavBarV2(),
+          home: Onboarding(),
         );
       },
     );
@@ -48,117 +49,121 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
 
     return Scaffold(
       backgroundColor: Colors.white.withAlpha(55),
-      body: Stack(
-        children: [
-          Positioned(
-            bottom: 0,
-            left: 0,
-            child: Container(
-              width: size.width,
-              height: 90,
-              child: Stack(
-                children: [
-                  CustomPaint(
-                    size: Size(size.width, 90),
-                    painter: BNBCustomPainter(),
-                  ),
-                  const Center(
-                    heightFactor: 0.5,
-                    child: BasketButton(),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () => currentIndex = 0,
-                              child: BottomBarButton(
-                                text: 'Меню',
-                                icon: 'menu',
-                                space: 12,
-                                position: 0,
-                                selected: currentIndex,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                            InkWell(
-                              onTap: () => currentIndex = 1,
-                              child: BottomBarButton(
-                                text: 'Поиск',
-                                icon: 'search',
-                                space: 10,
-                                position: 1,
-                                selected: currentIndex,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20.w,
-                      ),
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                            InkWell(
-                              onTap: () => currentIndex = 2,
-                              child: BottomBarButton(
-                                text: 'Кабинет',
-                                icon: 'profile',
-                                space: 10,
-                                position: 2,
-                                selected: currentIndex,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 1.w,
-                            ),
-                            InkWell(
-                              onTap: () => currentIndex = 3,
-                              child: BottomBarButton(
-                                text: 'Каталог',
-                                icon: 'catalog',
-                                space: 10,
-                                position: 3,
-                                selected: currentIndex,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            left: 33.w,
-            bottom: 4,
-            child: Container(
-              height: 5,
-              width: 33.w,
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor.withOpacity(0.4),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(100),
+      body: bottomNavBar(size),
+    );
+  }
+
+  Stack bottomNavBar(Size size) {
+    return Stack(
+      children: [
+        Positioned(
+          bottom: 0,
+          left: 0,
+          child: Container(
+            width: size.width,
+            height: 90,
+            child: Stack(
+              children: [
+                CustomPaint(
+                  size: Size(size.width, 90),
+                  painter: BNBCustomPainter(),
                 ),
+                const Center(
+                  heightFactor: 0.5,
+                  child: BasketButton(),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          InkWell(
+                            onTap: () => currentIndex = 0,
+                            child: BottomBarButton(
+                              text: 'Меню',
+                              icon: 'menu',
+                              space: 12,
+                              position: 0,
+                              selected: currentIndex,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          InkWell(
+                            onTap: () => currentIndex = 1,
+                            child: BottomBarButton(
+                              text: 'Поиск',
+                              icon: 'search',
+                              space: 10,
+                              position: 1,
+                              selected: currentIndex,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20.w,
+                    ),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          InkWell(
+                            onTap: () => currentIndex = 2,
+                            child: BottomBarButton(
+                              text: 'Кабинет',
+                              icon: 'profile',
+                              space: 10,
+                              position: 2,
+                              selected: currentIndex,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
+                          InkWell(
+                            onTap: () => currentIndex = 3,
+                            child: BottomBarButton(
+                              text: 'Каталог',
+                              icon: 'catalog',
+                              space: 10,
+                              position: 3,
+                              selected: currentIndex,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          left: 33.w,
+          bottom: 4,
+          child: Container(
+            height: 5,
+            width: 33.w,
+            decoration: BoxDecoration(
+              color: AppColors.white.withOpacity(0.4),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(100),
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -200,7 +205,7 @@ class _BottomBarButtonState extends State<BottomBarButton> {
       children: [
         SvgPicture.asset(
           'assets/icons/${widget.icon}.svg',
-          color: isSelected() ? AppColors.black : AppColors.primaryColor,
+          color: isSelected() ? AppColors.black : AppColors.white,
         ),
         SizedBox(
           height: widget.space,
@@ -208,7 +213,7 @@ class _BottomBarButtonState extends State<BottomBarButton> {
         Text(
           widget.text,
           style: TextStyle(
-            color: isSelected() ? AppColors.black : AppColors.primaryColor,
+            color: isSelected() ? AppColors.black : AppColors.white,
             fontFamily: 'Arial',
             fontWeight: FontWeight.w400,
             fontSize: 12,
@@ -247,7 +252,7 @@ class BNBCustomPainter extends CustomPainter {
     path_0.close();
 
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = AppColors.accentColor;
+    paint_0_fill.color = AppColors.purple;
     canvas.drawPath(path_0, paint_0_fill);
   }
 

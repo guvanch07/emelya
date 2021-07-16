@@ -24,7 +24,7 @@ class _BasketButtonState extends State<BasketButton> {
         child: const BasketButtonBackground(
           itemCount: 2,
           fillColor: AppColors.black,
-          lineColor: AppColors.primaryColor,
+          lineColor: AppColors.white,
           lineWidth: 5,
           size: buttonSize,
         ),
@@ -101,7 +101,7 @@ class ItemCount extends StatelessWidget {
         width: containerSize,
         height: containerSize,
         decoration: const BoxDecoration(
-          color: AppColors.accentColor,
+          color: AppColors.purple,
           borderRadius: BorderRadius.all(
             Radius.circular(100),
           ),
@@ -110,7 +110,7 @@ class ItemCount extends StatelessWidget {
           child: Text(
             count.toString(),
             style: const TextStyle(
-              color: AppColors.primaryColor,
+              color: AppColors.white,
               fontFamily: 'Arial',
               fontSize: 14,
               fontWeight: FontWeight.w400,
