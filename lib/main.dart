@@ -37,19 +37,19 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          home: Onboarding(),
+          home: AppBottomNavBar(),
         );
       },
     );
   }
 }
 
-class BottomNavBarV2 extends StatefulWidget {
+class AppBottomNavBar extends StatefulWidget {
   @override
-  _BottomNavBarV2State createState() => _BottomNavBarV2State();
+  _AppBottomNavBarState createState() => _AppBottomNavBarState();
 }
 
-class _BottomNavBarV2State extends State<BottomNavBarV2> {
+class _AppBottomNavBarState extends State<AppBottomNavBar> {
   int currentIndex = 0;
 
   setBottomBarIndex(int index) {
