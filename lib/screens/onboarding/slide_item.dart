@@ -22,26 +22,31 @@ class SlideItem extends StatelessWidget {
         ),
         Text(
           slideList[index].title,
-          style: const TextStyle(
-              fontSize: 24,
-              color: AppColors.black,
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.w700),
+          style: Theme.of(context).textTheme.headline1,
           textAlign: TextAlign.center,
         ),
         const SizedBox(
-          height: 15,
+          height: 12,
         ),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15),
+          width: 25.w,
+          height: 1.5,
+          decoration: const BoxDecoration(
+            color: AppColors.purple,
+            borderRadius: BorderRadius.all(
+              Radius.circular(100),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 4.w),
           child: Text(
             slideList[index].description,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColors.black,
-                fontFamily: 'Roboto'),
+            style: Theme.of(context).textTheme.bodyText1,
           ),
         ),
       ],
