@@ -1,11 +1,12 @@
-import 'package:emelya/constants.dart/app_colors.dart';
-import 'package:emelya/screens/catalog/product_item.dart';
 import 'package:emelya/screens/onboarding/onboarding.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'constants/app_colors.dart';
+import 'screens/catalog/catalog.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,41 +46,16 @@ class MyApp extends StatelessWidget {
             ),
           ),
           home: Stack(
-            children: [
-              const SafeArea(
+            children: const [
+              SafeArea(
                 child: CatalogList(),
               ),
               // AppBottomNavBar(),
+              // Onboarding(),
             ],
           ),
         );
       },
-    );
-  }
-}
-
-class CatalogList extends StatelessWidget {
-  const CatalogList({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final itemWidth = 44.w;
-    final itemHeight = 30.h;
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 4.w),
-      child: GridView.builder(
-          itemCount: 8,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 4.w,
-            childAspectRatio: itemWidth / itemHeight,
-          ),
-          itemBuilder: (BuildContext context, int index) => const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: ProductItem(),
-              )),
     );
   }
 }

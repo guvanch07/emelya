@@ -1,4 +1,4 @@
-import 'package:emelya/constants.dart/app_colors.dart';
+import 'package:emelya/constants/app_colors.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

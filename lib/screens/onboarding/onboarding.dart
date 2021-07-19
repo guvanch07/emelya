@@ -1,7 +1,6 @@
 import 'dart:async';
-
-import 'package:emelya/constants.dart/app_colors.dart';
-import 'package:emelya/core/utils.dart/toast.dart';
+import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/core/utils/toast.dart';
 import 'package:emelya/screens/onboarding/slide_dots.dart';
 import 'package:emelya/screens/onboarding/slide_item.dart';
 import 'package:emelya/screens/onboarding/slide.dart';
