@@ -29,6 +29,10 @@ dependencies:
   google_fonts: ^2.1.0
   lint: ^1.5.3
   sizer: ^2.0.13
+  font_awesome_flutter: ^9.1.0
+
+  # carousel_pro: ^1.0.0
+  
 
 dev_dependencies:
   flutter_test:

@@ -1,11 +1,13 @@
 import 'package:emelya/constants.dart/app_colors.dart';
 import 'package:emelya/screens/catalog/product_item.dart';
 import 'package:emelya/screens/onboarding/onboarding.dart';
+import 'package:emelya/screens/onboarding/search.dart';
+import 'package:emelya/screens/product.dart/product_list_view.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,39 +21,41 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Bottom Nav Bar V2',
-          theme: ThemeData(
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            textTheme: TextTheme(
-              headline1: GoogleFonts.exo2(
-                textStyle: const TextStyle(
-                  color: AppColors.black,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              headline2: const TextStyle(
-                color: AppColors.black,
-                fontFamily: 'Arial',
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
-              bodyText1: const TextStyle(
-                color: AppColors.black,
-                fontFamily: 'Arial',
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          home: Stack(
-            children: [
-              const SafeArea(
-                child: CatalogList(),
-              ),
-              // AppBottomNavBar(),
-            ],
-          ),
+          // title: 'Bottom Nav Bar V2',
+          // theme: ThemeData(
+          //   visualDensity: VisualDensity.adaptivePlatformDensity,
+          //   textTheme: TextTheme(
+          //     // headline1: GoogleFonts.exo2(
+          //     //   textStyle: const TextStyle(
+          //     //     color: AppColors.black,
+          //     //     fontSize: 28,
+          //     //     fontWeight: FontWeight.w900,
+          //     //   ),
+          //     // ),
+          //     headline2: const TextStyle(
+          //       color: AppColors.black,
+          //       fontFamily: 'Arial',
+          //       fontSize: 14,
+          //       fontWeight: FontWeight.w700,
+          //     ),
+          //     bodyText1: const TextStyle(
+          //       color: AppColors.black,
+          //       fontFamily: 'Arial',
+          //       fontSize: 14,
+          //       fontWeight: FontWeight.w400,
+          //     ),
+          //   ),
+          // ),
+          home: ProductList(),
+
+          // Stack(
+          //   children: [
+          //     const SafeArea(
+          //       child: SearchProduct(),
+          //     ),
+          //     // AppBottomNavBar(),
+          //   ],
+          // ),
         );
       },
     );
