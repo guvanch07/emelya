@@ -37,7 +37,7 @@ class ProductItem extends StatelessWidget {
               children: [
                 Text(
                   price.toPrice(),
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
                 GestureDetector(
                     onTap: () => {

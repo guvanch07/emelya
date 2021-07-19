@@ -57,7 +57,7 @@ class _OnboardingState extends State<Onboarding> {
     _pageController.dispose();
   }
 
-  _onPageChanged(int index) {
+  void _onPageChanged(int index) {
     setState(() {
       _currentPage = index;
     });
@@ -85,7 +85,8 @@ class _OnboardingState extends State<Onboarding> {
   Widget build(BuildContext context) {
     FocusScope.of(context).unfocus();
     return WillPopScope(
-      onWillPop: _onTap,
+      //TODO: change to _onTap in production
+      onWillPop: null,
       child: Scaffold(
         body: Container(
           color: AppColors.white,

@@ -28,7 +28,7 @@ class CatalogList extends StatelessWidget {
       price: 10.0,
       isFavorite: false,
       imageUri: 'assets/images/dummies/dummy3.png',
-      name: 'Сёмга малосоленая',
+      name: 'Семга малосоленая',
     ),
     ProductEntity(
       price: 3.35,
@@ -40,7 +40,7 @@ class CatalogList extends StatelessWidget {
       price: 2.20,
       isFavorite: false,
       imageUri: 'assets/images/dummies/dummy2.png',
-      name: 'Замороженный красны борщ',
+      name: 'Замороженный красный борщ',
     ),
   ];
 
