@@ -1,4 +1,4 @@
-import 'package:emelya/constants.dart/app_colors.dart';
+import 'package:emelya/constants/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
