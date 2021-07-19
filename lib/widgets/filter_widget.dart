@@ -146,9 +146,49 @@ class FilterExpanded extends StatelessWidget {
                         ?.copyWith(fontSize: 16),
                   ),
                   collapsed: Container(),
-                  expanded: Container(
-                    height: 100,
-                    color: Colors.red,
+                  expanded: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 25),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'от',
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Container(
+                              height: 20,
+                              width: 33.w,
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            Text(
+                              'до',
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                            Container(
+                              height: 20,
+                              width: 33.w,
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                style: const TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
