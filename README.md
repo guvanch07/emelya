@@ -1,3 +1,1 @@
-# Emelya
-
-## Flutter Food Delivery app
+# Emelya -- Flutter Food Delivery app
