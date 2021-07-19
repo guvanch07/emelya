@@ -1,9 +1,11 @@
 import 'package:emelya/constants.dart/app_colors.dart';
+import 'package:emelya/screens/catalog/product_item.dart';
 import 'package:emelya/screens/onboarding/onboarding.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,22 +21,75 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Bottom Nav Bar V2',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
+            textTheme: TextTheme(
+              headline1: GoogleFonts.exo2(
+                textStyle: const TextStyle(
+                  color: AppColors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              headline2: const TextStyle(
+                color: AppColors.black,
+                fontFamily: 'Arial',
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
+              bodyText1: const TextStyle(
+                color: AppColors.black,
+                fontFamily: 'Arial',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ),
-          home: Onboarding(),
+          home: Stack(
+            children: [
+              const SafeArea(
+                child: CatalogList(),
+              ),
+              // AppBottomNavBar(),
+            ],
+          ),
         );
       },
     );
   }
 }
 
-class BottomNavBarV2 extends StatefulWidget {
+class CatalogList extends StatelessWidget {
+  const CatalogList({
+    Key? key,
+  }) : super(key: key);
+
   @override
-  _BottomNavBarV2State createState() => _BottomNavBarV2State();
+  Widget build(BuildContext context) {
+    final itemWidth = 44.w;
+    final itemHeight = 30.h;
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      child: GridView.builder(
+          itemCount: 8,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 4.w,
+            childAspectRatio: itemWidth / itemHeight,
+          ),
+          itemBuilder: (BuildContext context, int index) => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: ProductItem(),
+              )),
+    );
+  }
 }
 
-class _BottomNavBarV2State extends State<BottomNavBarV2> {
+class AppBottomNavBar extends StatefulWidget {
+  @override
+  _AppBottomNavBarState createState() => _AppBottomNavBarState();
+}
+
+class _AppBottomNavBarState extends State<AppBottomNavBar> {
   int currentIndex = 0;
 
   setBottomBarIndex(int index) {
@@ -61,7 +116,7 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
           left: 0,
           child: Container(
             width: size.width,
-            height: 90,
+            height: 150,
             child: Stack(
               children: [
                 CustomPaint(
@@ -69,8 +124,11 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
                   painter: BNBCustomPainter(),
                 ),
                 const Center(
-                  heightFactor: 0.5,
-                  child: BasketButton(),
+                  child: SizedBox(
+                    height: 120,
+                    width: 90,
+                    child: BasketButton(),
+                  ),
                 ),
                 Row(
                   children: [
@@ -78,7 +136,7 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 0,
                             child: BottomBarButton(
                               text: 'Меню',
@@ -91,7 +149,7 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
                           SizedBox(
                             width: 1.w,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 1,
                             child: BottomBarButton(
                               text: 'Поиск',
@@ -117,7 +175,7 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
                           SizedBox(
                             width: 1.w,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 2,
                             child: BottomBarButton(
                               text: 'Кабинет',
@@ -130,7 +188,7 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
                           SizedBox(
                             width: 1.w,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => currentIndex = 3,
                             child: BottomBarButton(
                               text: 'Каталог',
@@ -150,11 +208,11 @@ class _BottomNavBarV2State extends State<BottomNavBarV2> {
           ),
         ),
         Positioned(
-          left: 33.w,
-          bottom: 4,
+          left: 35.w,
+          bottom: 5,
           child: Container(
             height: 5,
-            width: 33.w,
+            width: 30.w,
             decoration: BoxDecoration(
               color: AppColors.white.withOpacity(0.4),
               borderRadius: const BorderRadius.all(
@@ -228,27 +286,29 @@ class _BottomBarButtonState extends State<BottomBarButton> {
 }
 
 class BNBCustomPainter extends CustomPainter {
+  final xOffset = 60;
+
   @override
   void paint(Canvas canvas, Size size) {
     final Path path_0 = Path();
-    path_0.moveTo(size.width, size.height);
-    path_0.lineTo(size.width * -0.1183575, size.height * 0.9891446);
-    path_0.lineTo(size.width * -0.1183575, size.height * 0.1358696);
+    path_0.moveTo(size.width, size.height + xOffset);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.9891446 + xOffset);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.1358696 + xOffset);
     path_0.cubicTo(
         size.width * 0.2402821,
-        size.height * -0.1449043,
+        size.height * -0.1449043 + xOffset,
         size.width * 0.3241667,
-        size.height * 0.1684783,
+        size.height * 0.1684783 + xOffset,
         size.width * 0.6181425,
-        size.height * 0.09616098);
+        size.height * 0.09616098 + xOffset);
     path_0.cubicTo(
         size.width * 0.9065000,
-        size.height * -0.05978859,
+        size.height * -0.05978859 + xOffset,
         size.width * 0.9952488,
-        size.height * 0.01630826,
+        size.height * 0.01630826 + xOffset,
         size.width * 1.119254,
-        size.height * 0.1684783);
-    path_0.lineTo(size.width, size.height);
+        size.height * 0.1684783 + xOffset);
+    path_0.lineTo(size.width, size.height + xOffset);
     path_0.close();
 
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
