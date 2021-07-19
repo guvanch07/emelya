@@ -28,13 +28,12 @@ class ProductItem extends StatelessWidget {
               SvgPicture.asset('assets/icons/favorite.svg'),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 3,
-            ),
-            child: Image.asset(
-              'assets/images/dummy3.png',
-              fit: BoxFit.fitWidth,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3),
+              child: Image.asset(
+                'assets/images/dummies/dummy3.png',
+              ),
             ),
           ),
           Text(
