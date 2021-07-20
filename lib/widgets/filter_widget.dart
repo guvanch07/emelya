@@ -74,6 +74,11 @@ class FilterExpanded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final divider = Container(
+      height: 1,
+      color: AppColors.dividerColor,
+    );
+
     return Container(
       color: AppColors.white,
       child: Padding(
@@ -121,14 +126,10 @@ class FilterExpanded extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            Container(
-              height: 1,
-              color: AppColors.dividerColor,
-            ),
+            divider,
             const SizedBox(
               height: 25,
             ),
-            // const Text('aboba'),
             ExpandableNotifier(
               child: ScrollOnExpand(
                 child: ExpandablePanel(
@@ -145,56 +146,144 @@ class FilterExpanded extends StatelessWidget {
                         .bodyText1
                         ?.copyWith(fontSize: 16),
                   ),
-                  collapsed: Container(),
-                  expanded: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 25),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'от',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            Container(
-                              height: 20,
-                              width: 33.w,
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                style: const TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            Text(
-                              'до',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            Container(
-                              height: 20,
-                              width: 33.w,
-                              child: TextFormField(
-                                keyboardType: TextInputType.text,
-                                style: const TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontSize: 14,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  collapsed: Container(
+                    height: 25,
                   ),
+                  expanded: const PricePicker(),
+                ),
+              ),
+            ),
+            divider,
+            const SizedBox(
+              height: 25,
+            ),
+            ExpandableNotifier(
+              child: ScrollOnExpand(
+                child: ExpandablePanel(
+                  theme: const ExpandableThemeData(
+                    headerAlignment: ExpandablePanelHeaderAlignment.center,
+                    tapBodyToExpand: true,
+                    tapBodyToCollapse: true,
+                    hasIcon: false,
+                  ),
+                  header: Text(
+                    'Вес',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.copyWith(fontSize: 16),
+                  ),
+                  collapsed: Container(),
+                  expanded: const WeightPicker(),
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class WeightPicker extends StatelessWidget {
+  const WeightPicker({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MediaQuery.removePadding(
+      context: context,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Checkbox(
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                side: const BorderSide(color: AppColors.purple),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                ),
+                value: false,
+                onChanged: (onChanged) {},
+              ),
+              Text(
+                '50 г',
+                style: Theme.of(context).textTheme.bodyText1,
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PricePicker extends StatelessWidget {
+  const PricePicker({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const inputDecoration = InputDecoration(
+      border: OutlineInputBorder(),
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      isCollapsed: true,
+      fillColor: Colors.red,
+      focusColor: AppColors.purple,
+      hoverColor: Colors.red,
+    );
+
+    final inputTextStyle = Theme.of(context).textTheme.bodyText1?.copyWith(
+          color: AppColors.purple,
+          fontSize: 16,
+        );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 25),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'от',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Container(
+                height: 30,
+                width: 33.w,
+                child: TextFormField(
+                  decoration: inputDecoration,
+                  keyboardType: TextInputType.text,
+                  style: inputTextStyle,
+                ),
+              ),
+              Text(
+                'до',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Container(
+                height: 30,
+                width: 33.w,
+                child: TextFormField(
+                  decoration: inputDecoration,
+                  keyboardType: TextInputType.text,
+                  style: inputTextStyle,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Slider(
+            value: 0,
+            onChanged: (value) {},
+            activeColor: AppColors.purple,
+          ),
+        ],
       ),
     );
   }
