@@ -1,3 +1,4 @@
+import 'package:emelya/screens/catalog/catalog.dart';
 import 'package:emelya/screens_list.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'constants/app_colors.dart';
+
+const double xOffset = 0;
 
 void main() {
   runApp(MyApp());
@@ -75,32 +78,30 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white.withAlpha(55),
-      body: bottomNavBar(size),
+      backgroundColor: AppColors.backgroundColor,
+      // body: bottomNavBar(size),
+      bottomNavigationBar: bottomNavBar(size),
     );
   }
 
   Stack bottomNavBar(Size size) {
     return Stack(
       children: [
+        const Padding(
+          padding: EdgeInsets.only(bottom: 90),
+          child: CatalogList(),
+        ),
         Positioned(
           bottom: 0,
           left: 0,
           child: Container(
             width: size.width,
-            height: 150,
+            height: 90 + xOffset,
             child: Stack(
               children: [
                 CustomPaint(
                   size: Size(size.width, 90),
                   painter: BNBCustomPainter(),
-                ),
-                const Center(
-                  child: SizedBox(
-                    height: 120,
-                    width: 90,
-                    child: BasketButton(),
-                  ),
                 ),
                 Row(
                   children: [
@@ -193,6 +194,17 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
             ),
           ),
         ),
+        const Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 20),
+            child: SizedBox(
+              height: 120,
+              width: 90,
+              child: BasketButton(),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -258,8 +270,6 @@ class _BottomBarButtonState extends State<BottomBarButton> {
 }
 
 class BNBCustomPainter extends CustomPainter {
-  final xOffset = 60;
-
   @override
   void paint(Canvas canvas, Size size) {
     final Path path_0 = Path();
@@ -286,6 +296,7 @@ class BNBCustomPainter extends CustomPainter {
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
     paint_0_fill.color = AppColors.purple;
     canvas.drawPath(path_0, paint_0_fill);
+    // canvas.drawColor(AppColors.backgroundColor, BlendMode.darken);
   }
 
   @override
