@@ -1,4 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -75,17 +76,23 @@ class FilterExpanded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final divider = Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       height: 1,
       color: AppColors.dividerColor,
     );
 
+    const largePadding = EdgeInsets.symmetric(vertical: 5, horizontal: 16);
+
     return Container(
       color: AppColors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
-        child: Column(
-          children: [
-            Row(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: largePadding,
+            child: Row(
               children: [
                 Text(
                   'Фильтр',
@@ -123,14 +130,17 @@ class FilterExpanded extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 12,
-            ),
-            divider,
-            const SizedBox(
-              height: 25,
-            ),
-            ExpandableNotifier(
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          divider,
+          const SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: largePadding,
+            child: ExpandableNotifier(
               child: ScrollOnExpand(
                 child: ExpandablePanel(
                   theme: const ExpandableThemeData(
@@ -139,12 +149,18 @@ class FilterExpanded extends StatelessWidget {
                     tapBodyToCollapse: true,
                     hasIcon: false,
                   ),
-                  header: Text(
-                    'Цена',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(fontSize: 16),
+                  header: Row(
+                    children: [
+                      Text(
+                        'Цена',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            ?.copyWith(fontSize: 16),
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset('assets/icons/chevron_down.svg'),
+                    ],
                   ),
                   collapsed: Container(
                     height: 25,
@@ -153,66 +169,121 @@ class FilterExpanded extends StatelessWidget {
                 ),
               ),
             ),
-            divider,
-            const SizedBox(
-              height: 25,
-            ),
-            ExpandableNotifier(
-              child: ScrollOnExpand(
-                child: ExpandablePanel(
-                  theme: const ExpandableThemeData(
-                    headerAlignment: ExpandablePanelHeaderAlignment.center,
-                    tapBodyToExpand: true,
-                    tapBodyToCollapse: true,
-                    hasIcon: false,
-                  ),
-                  header: Text(
-                    'Вес',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(fontSize: 16),
-                  ),
-                  collapsed: Container(),
-                  expanded: const WeightPicker(),
+          ),
+          divider,
+          const SizedBox(
+            height: 25,
+          ),
+          ExpandableNotifier(
+            child: ScrollOnExpand(
+              child: ExpandablePanel(
+                theme: const ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  tapBodyToExpand: true,
+                  tapBodyToCollapse: true,
+                  hasIcon: false,
                 ),
+                header: Padding(
+                  padding: largePadding,
+                  child: Row(
+                    children: [
+                      Text(
+                        'Вес',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            ?.copyWith(fontSize: 16),
+                      ),
+                      const Spacer(),
+                      SvgPicture.asset('assets/icons/chevron_down.svg'),
+                    ],
+                  ),
+                ),
+                collapsed: Container(
+                  height: 25,
+                ),
+                expanded: WeightPicker(),
               ),
             ),
-          ],
-        ),
+          ),
+          divider,
+          const SizedBox(
+            height: 12,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 5, 16, 20),
+            child: Row(
+              children: [
+                Expanded(
+                    child: AppOutlinedButton(
+                        text: 'Показать 123 товаров', press: () {})),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
 }
 
 class WeightPicker extends StatelessWidget {
-  const WeightPicker({
+  WeightPicker({
     Key? key,
   }) : super(key: key);
 
+  final List<bool> checkoxValues = [];
+  bool val1 = false;
+  bool val2 = false;
+
   @override
   Widget build(BuildContext context) {
-    return MediaQuery.removePadding(
-      context: context,
-      child: Column(
+    return Column(
+      children: [
+        WeightCheckbox(
+          weight: '50 г',
+          value: val1,
+        ),
+        WeightCheckbox(
+          weight: '100 г',
+          value: val2,
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+      ],
+    );
+  }
+}
+
+class WeightCheckbox extends StatelessWidget {
+  const WeightCheckbox({
+    Key? key,
+    required this.weight,
+    required this.value,
+  }) : super(key: key);
+
+  final String weight;
+  final bool value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+      child: Row(
         children: [
-          Row(
-            children: [
-              Checkbox(
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                side: const BorderSide(color: AppColors.purple),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(6)),
-                ),
-                value: false,
-                onChanged: (onChanged) {},
-              ),
-              Text(
-                '50 г',
-                style: Theme.of(context).textTheme.bodyText1,
-              )
-            ],
+          Checkbox(
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            side: const BorderSide(color: AppColors.purple),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(6)),
+            ),
+            value: value,
+            onChanged: (onChanged) {},
           ),
+          Text(
+            weight,
+            style: Theme.of(context).textTheme.bodyText1,
+          )
         ],
       ),
     );
