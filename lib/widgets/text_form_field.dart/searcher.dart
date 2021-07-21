@@ -23,9 +23,7 @@ class _SearcherState extends State<Searcher> {
         child: new Directionality(
           textDirection: TextDirection.ltr,
           child: new TextField(
-            controller: null,
-            autofocus: false,
-            style: new TextStyle(fontSize: 14.0),
+            style: new TextStyle(fontSize: 15.0),
             decoration: new InputDecoration(
               prefixIcon: Icon(
                 Icons.search,

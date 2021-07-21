@@ -3,9 +3,11 @@ import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:another_carousel_pro/another_carousel_pro.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../main.dart';
-import 'colories.dart';
+import 'calories.dart';
 import 'counter.dart';
 
 class ProductList extends StatelessWidget {
@@ -13,87 +15,97 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Widget image_carousel = Container(
-    //   width: 240,
-    //   height: 123,
-    //   color: Colors.white,
-    //   child: Carousel(
-    //     images: [
-    //       new AssetImage('assets/images/cheese 2.png'),
-    //       new AssetImage('assets/images/cheese 2.png'),
-    //       new AssetImage('assets/images/cheese 2.png'),
-    //     ],
-    //     autoplay: false,
-    //     dotColor: Color(0xFFAC4AEB),
-    //     dotSize: 10.0,
-    //     indicatorBgPadding: 1,
-    //   ),
-    // );
+    Widget image_carousel = SizedBox(
+      width: 260,
+      height: 140,
+      child: Carousel(
+        boxFit: BoxFit.cover,
+        images: [
+          new AssetImage('assets/images/cheese 2.png'),
+          new AssetImage('assets/images/cheese 2.png'),
+          new AssetImage('assets/images/cheese 2.png'),
+        ],
+        autoplay: false,
+        dotColor: Colors.black,
+        dotSize: 6.0,
+        dotIncreasedColor: Color(0xFFAC4AEB),
+        dotPosition: DotPosition.bottomCenter,
+        dotBgColor: Colors.transparent,
+        dotVerticalPadding: 0,
+        indicatorBgPadding: 0,
+        dotIncreaseSize: 2,
+      ),
+    );
 
-    return SafeArea(
-        child: Scaffold(
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(child: TopScreen()),
-              Text(
-                'Сыр «Пошехонский»',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              Container(
-                  width: 390,
-                  height: 240,
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 150,
-                      ),
-                      AppOutlinedButton(
-                        press: () {},
-                        text: '    В корзину  24,45р.          ',
-                        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-                      ),
-                    ],
-                  )),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                    ),
-                    child: Text(
-                      'В наличии 4 кг',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+    return Scaffold(
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        // child: Column(
+        children: <Widget>[
+          Container(child: TopScreen()),
+          Center(
+            child: Text(
+              'Сыр «Пошехонский»',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            width: 390,
+            height: 240,
+            child: Column(
+              children: <Widget>[
+                Center(
+                  child: Container(
+                    child: image_carousel,
+                    height: 150,
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  CounterPc(),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                AppOutlinedButton(
+                  press: () {},
+                  text: '    В корзину  24,45р.          ',
+                  padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            children: [
               Padding(
-                padding: const EdgeInsets.only(top: 20.0),
+                padding: const EdgeInsets.only(
+                  left: 20,
+                ),
                 child: Text(
-                  'Пищевая ценность на 100 г.',
-                  style: TextStyle(fontSize: 16),
+                  'В наличии 4 кг',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(
-                height: 15.0,
+                width: 40,
               ),
-              Calories(),
-              SizedBox(
-                height: 25.0,
-              ),
-              PriceWeight(),
-              AppBottomNavBar(),
+              CounterPc(),
             ],
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, left: 20.0),
+            child: Text(
+              'Пищевая ценность на 100 г.',
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Calories(),
+          SizedBox(
+            height: 25.0,
+          ),
+          PriceWeight(),
+        ],
       ),
-    ));
+    );
   }
 }

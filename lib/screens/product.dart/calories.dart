@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../main.dart';
+
 class Calories extends StatelessWidget {
   const Calories({Key? key}) : super(key: key);
 
@@ -105,7 +107,7 @@ class PriceWeight extends StatelessWidget {
             Text('Годен: 20 суток'),
             Text('Вес/объем: 220 г'),
           ],
-        )
+        ),
       ],
     );
   }

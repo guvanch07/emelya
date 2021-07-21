@@ -1,4 +1,4 @@
-import 'package:emelya/constants.dart/app_colors.dart';
+import 'package:emelya/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppOutlinedButton extends StatelessWidget {
@@ -61,6 +61,29 @@ class AppOutlinedButton extends StatelessWidget {
                 .textTheme
                 .bodyText1
                 ?.copyWith(color: AppColors.purple),
+      ),
+    );
+  }
+}
+
+class CheckBoxButton extends StatelessWidget {
+  const CheckBoxButton({required this.press});
+  final VoidCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 24,
+      width: 24,
+      decoration: BoxDecoration(
+          border: Border.all(color: AppColors.purple),
+          borderRadius: BorderRadius.circular(9.0)),
+      child: MaterialButton(
+        height: 10,
+        minWidth: 16,
+        color: Colors.white,
+        onPressed: press,
+        child: null,
       ),
     );
   }

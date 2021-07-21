@@ -23,15 +23,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  flutter_svg: ^0.22.0
-  # fluttertoast: ^8.0.2
   google_fonts: ^2.1.0
+  cupertino_icons: ^1.0.2
+  expandable: 5.0.1 
+  flutter_svg: ^0.22.0
+  # fluttertoast: ^8.0.7
   lint: ^1.5.3
   sizer: ^2.0.13
   font_awesome_flutter: ^9.1.0
+  syncfusion_flutter_core: ^19.2.48
 
-  # carousel_pro: ^1.0.0
+  another_carousel_pro:
+     git:
+       url: https://github.com/iamnabink/another_carousel_pro.git
+       ref: master
   
 
 dev_dependencies:
@@ -50,9 +55,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-
     - assets/images/onboarding/
-
+    - assets/images/dummies/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

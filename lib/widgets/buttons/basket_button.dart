@@ -1,9 +1,10 @@
 import 'dart:developer' as dev;
 import 'dart:math';
 
-import 'package:emelya/constants.dart/app_colors.dart';
+import 'package:emelya/constants/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:emelya/core/utils/double.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BasketButton extends StatefulWidget {
@@ -206,7 +207,7 @@ class PriceCount extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text('${count.toStringAsFixed(2).replaceAll('.', ',')} р.',
+              child: Text('${count.toPrice()} р.',
                   style: Theme.of(context).textTheme.bodyText1),
             ),
           ),
