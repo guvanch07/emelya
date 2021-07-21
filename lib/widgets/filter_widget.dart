@@ -11,57 +11,52 @@ class Filter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.teal,
-      body: SafeArea(
-        child: ExpandableNotifier(
-          child: ScrollOnExpand(
-            child: ExpandablePanel(
-              theme: const ExpandableThemeData(
-                headerAlignment: ExpandablePanelHeaderAlignment.center,
-                tapBodyToExpand: true,
-                tapBodyToCollapse: true,
-                hasIcon: false,
-              ),
-              header: Container(
-                color: AppColors.white,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 15, 17, 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return ExpandableNotifier(
+      child: ScrollOnExpand(
+        child: ExpandablePanel(
+          theme: const ExpandableThemeData(
+            headerAlignment: ExpandablePanelHeaderAlignment.center,
+            tapBodyToExpand: true,
+            tapBodyToCollapse: true,
+            hasIcon: false,
+          ),
+          header: Container(
+            color: AppColors.white,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 15, 17, 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset('assets/icons/filter.svg'),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            'Фильтр',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          )
-                        ],
+                      SvgPicture.asset('assets/icons/filter.svg'),
+                      const SizedBox(
+                        width: 15,
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            'По популярности',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          SvgPicture.asset('assets/icons/chevron_down.svg'),
-                        ],
+                      Text(
+                        'Фильтр',
+                        style: Theme.of(context).textTheme.bodyText1,
                       )
                     ],
                   ),
-                ),
+                  Row(
+                    children: [
+                      Text(
+                        'По популярности',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      SvgPicture.asset('assets/icons/chevron_down.svg'),
+                    ],
+                  )
+                ],
               ),
-              expanded: const FilterExpanded(),
-              collapsed: Container(),
             ),
           ),
+          expanded: const FilterExpanded(),
+          collapsed: Container(),
         ),
       ),
     );

@@ -76,24 +76,26 @@ class CatalogList extends StatelessWidget {
   Widget build(BuildContext context) {
     final itemWidth = 44.w;
     final itemHeight = 30.h;
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 4.w),
-      child: GridView.builder(
-          itemCount: _products.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 4.w,
-            childAspectRatio: itemWidth / itemHeight,
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            final product = _products[index];
-            return ProductItem(
+    return GridView.builder(
+        itemCount: _products.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 4.w,
+          childAspectRatio: itemWidth / itemHeight,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          final product = _products[index];
+          return Padding(
+            padding: index % 2 == 0
+                ? EdgeInsets.only(left: 4.w)
+                : EdgeInsets.only(right: 4.w),
+            child: ProductItem(
               price: product.price,
               isFavorite: product.isFavorite,
               imageUri: product.imageUri,
               name: product.name,
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 }
