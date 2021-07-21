@@ -48,8 +48,6 @@ class AppOutlinedButton extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 35)),
         ),
         // padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
-        //shadowColor: color ?? AppColors.purple,
-        //backgroundColor: color ?? AppColors.white,
         side: const BorderSide(width: 1, color: AppColors.purple),
       ),
       onPressed: press,
