@@ -1,4 +1,5 @@
-import 'package:emelya/widgets/text_form_field.dart/searcher.dart';
+import 'package:emelya/widgets/text_form_field.dart/feedback_fields.dart';
+
 import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +12,9 @@ class SearchProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -22,7 +23,11 @@ class SearchProduct extends StatelessWidget {
             SizedBox(
               height: 43.0,
             ),
-            Searcher(),
+            FeedFields(
+              text: 'Введите название товара',
+              icon: Icon(Icons.search, color: Colors.grey, size: 30),
+              height: 55,
+            ),
             // Padding(
             //   padding: const EdgeInsets.only(
             //     right: 80,

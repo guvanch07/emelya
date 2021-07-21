@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:emelya/constants/app_colors.dart';
 import 'package:emelya/main.dart';
+import 'package:emelya/screens/menu.dart/feedback.dart';
 import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,15 @@ class Contacts extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TopScreen(),
-            Text(
-              'Контакты',
-              style: TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(right: 160.0),
+              child: Text(
+                'Контакты',
+                style: TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 22, top: 30),
+              padding: const EdgeInsets.only(left: 22, top: 20),
               child: Row(
                 children: [
                   Text('Минск'),
@@ -44,7 +48,7 @@ class Contacts extends StatelessWidget {
               ]),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 22, top: 18),
+              padding: const EdgeInsets.only(left: 22, top: 15),
               child: Text(
                   'Друзья, мы любим общаться и искренне радуемся вашей обратной связи! Сотрудники горячей линии помогут вам по любым вопросам. '),
             ),
@@ -158,7 +162,14 @@ class Contacts extends StatelessWidget {
               height: 20,
             ),
             AppOutlinedButton(
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FeedBackUser(),
+                  ),
+                );
+              },
               text: 'Обратная связь',
               textStyle: TextStyle(fontSize: 18, color: AppColors.purple),
             ),

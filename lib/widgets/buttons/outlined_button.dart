@@ -50,7 +50,10 @@ class AppOutlinedButton extends StatelessWidget {
         // padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
         //shadowColor: color ?? AppColors.purple,
         //backgroundColor: color ?? AppColors.white,
-        side: const BorderSide(width: 1, color: AppColors.purple),
+        side: const BorderSide(
+          width: 1,
+          color: AppColors.purple,
+        ),
       ),
       onPressed: press,
       child: Text(
@@ -67,24 +70,23 @@ class AppOutlinedButton extends StatelessWidget {
 }
 
 class CheckBoxButton extends StatelessWidget {
-  const CheckBoxButton({required this.press});
+  const CheckBoxButton({required this.press, required this.child});
   final VoidCallback press;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 24,
-      width: 24,
-      decoration: BoxDecoration(
+    return GestureDetector(
+      child: Container(
+        height: 24,
+        width: 24,
+        child: child,
+        decoration: BoxDecoration(
           border: Border.all(color: AppColors.purple),
-          borderRadius: BorderRadius.circular(9.0)),
-      child: MaterialButton(
-        height: 10,
-        minWidth: 16,
-        color: Colors.white,
-        onPressed: press,
-        child: null,
+          borderRadius: BorderRadius.circular(7.0),
+        ),
       ),
+      onTap: press,
     );
   }
 }

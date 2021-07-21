@@ -83,6 +83,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
   RangeValues values = RangeValues(0, 50);
   RangeLabels labels = RangeLabels('0', "50");
   bool _value = false;
+  bool _isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +181,9 @@ class _FilterExpandedState extends State<FilterExpanded> {
                                   child: Text(
                                 '5',
                                 style: TextStyle(
-                                    color: Color(0xFFAC4AEB), fontSize: 19),
+                                    color: Color(0xFFAC4AEB),
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal),
                               )),
                             ),
                             Text('до'),
@@ -196,7 +199,9 @@ class _FilterExpandedState extends State<FilterExpanded> {
                                   child: Text(
                                 '50',
                                 style: TextStyle(
-                                    color: Color(0xFFAC4AEB), fontSize: 19),
+                                    color: Color(0xFFAC4AEB),
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.normal),
                               )),
                             ),
                           ],
@@ -215,6 +220,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
                             inactiveColor: Colors.black,
                             activeColor: Color(0xFFAC4AEB),
                             labels: labels,
+
                             // RangeLabels(
                             //   _currentRangeValues.start.round().toString(),
                             //   _currentRangeValues.end.round().toString(),
@@ -267,20 +273,120 @@ class _FilterExpandedState extends State<FilterExpanded> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        CheckBoxButton(
-                          press: () {},
+                        Row(
+                          children: [
+                            CheckBoxButton(
+                              press: () {
+                                setState(() {
+                                  _isSelected = !_isSelected;
+                                });
+                              },
+                              child: Icon(
+                                _isSelected ? Icons.check : null,
+                                color: AppColors.purple,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Text(
+                              '50г',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.normal),
+                            )
+                          ],
                         ),
-                        CheckBoxButton(
-                          press: () {},
+                        Row(
+                          children: [
+                            CheckBoxButton(
+                              press: () {
+                                setState(() {
+                                  _isSelected = !_isSelected;
+                                });
+                              },
+                              child: Icon(
+                                _isSelected ? Icons.check : null,
+                                color: AppColors.purple,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Text(
+                              '100г',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.normal),
+                            )
+                          ],
                         ),
-                        CheckBoxButton(
-                          press: () {},
+                        Row(
+                          children: [
+                            CheckBoxButton(
+                              press: () {
+                                setState(() {
+                                  _isSelected = !_isSelected;
+                                });
+                              },
+                              child: Icon(
+                                _isSelected ? Icons.check : null,
+                                color: AppColors.purple,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Text(
+                              '200г',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.normal),
+                            )
+                          ],
                         ),
-                        CheckBoxButton(
-                          press: () {},
+                        Row(
+                          children: [
+                            CheckBoxButton(
+                              press: () {
+                                setState(() {
+                                  _isSelected = !_isSelected;
+                                });
+                              },
+                              child: Icon(
+                                _isSelected ? Icons.check : null,
+                                color: AppColors.purple,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Text(
+                              '300г',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.normal),
+                            )
+                          ],
                         ),
-                        CheckBoxButton(
-                          press: () {},
+                        Row(
+                          children: [
+                            CheckBoxButton(
+                              press: () {
+                                setState(() {
+                                  _isSelected = !_isSelected;
+                                });
+                              },
+                              child: Icon(
+                                _isSelected ? Icons.check : null,
+                                color: AppColors.purple,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 12,
+                            ),
+                            Text(
+                              '400г',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.normal),
+                            )
+                          ],
                         ),
                         Center(
                           child: AppOutlinedButton(
