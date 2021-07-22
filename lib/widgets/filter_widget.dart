@@ -54,7 +54,7 @@ class Filter extends StatelessWidget {
         Positioned(
           top: 17.5,
           right: 17,
-          child: InkWell(
+          child: GestureDetector(
             onTap: () => showGeneralDialog(
               barrierDismissible: false,
               barrierColor: Colors.black.withOpacity(0.5),
@@ -183,7 +183,7 @@ class _SortDialogState extends State<SortDialog> {
               height: 1.25,
               color: AppColors.purple,
             ),
-            for (int i = 1; i <= 5; i++)
+            for (int i = 0; i < SortType.getSortTypes.length; i++)
               Row(
                 children: [
                   Theme(
