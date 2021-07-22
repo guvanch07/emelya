@@ -68,7 +68,7 @@ class AppBottomNavBar extends StatefulWidget {
 }
 
 class _AppBottomNavBarState extends State<AppBottomNavBar> {
-  int currentIndex = 0;
+  int currentIndex = 3;
 
   void setBottomBarIndex(int index) {
     log('bnb setted to $index');
@@ -94,7 +94,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     return SafeArea(
       child: Stack(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 90, top: 50),
             child: CatalogList(),
           ),
@@ -117,7 +117,9 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             GestureDetector(
-                              onTap: () => setBottomBarIndex(0),
+                              onTap: () => {
+                                setBottomBarIndex(0),
+                              },
                               child: BottomBarButton(
                                 text: 'Меню',
                                 icon: 'menu',
