@@ -7,7 +7,7 @@ import 'package:emelya/widgets/filter_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'constants/app_colors.dart';
 
 const double xOffset = 0;
@@ -28,13 +28,13 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: TextTheme(
-              headline1: GoogleFonts.exo2(
-                textStyle: const TextStyle(
-                  color: AppColors.black,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
+              // headline1: GoogleFonts.exo2(
+              //   textStyle: const TextStyle(
+              //     color: AppColors.black,
+              //     fontSize: 28,
+              //     fontWeight: FontWeight.w900,
+              //   ),
+              // ),
               headline2: const TextStyle(
                 color: AppColors.black,
                 fontFamily: 'Arial',
