@@ -34,6 +34,15 @@ class ScreensList extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
+                  MaterialPageRoute(builder: (context) => Onboarding()),
+                );
+              },
+              child: const Text('Onboarding'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
                   MaterialPageRoute(builder: (context) => AppBottomNavBar()),
                 );
               },
