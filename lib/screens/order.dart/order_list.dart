@@ -1,3 +1,4 @@
+import 'package:emelya/screens/order.dart/user_data.dart';
 import 'package:emelya/screens/order.dart/your_order.dart';
 import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:emelya/widgets/topScreen.dart';
@@ -22,14 +23,17 @@ class OrderList extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15, right: 15),
-              child: Container(
-                height: 371,
-                width: 382,
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.0),
-                    color: Color(0xFFEFEFEF)),
-                child: YourOrder(),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                  height: 350,
+                  width: 382,
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.0),
+                      color: Color(0xFFEFEFEF)),
+                  child: YourOrder(),
+                ),
               ),
             ),
             Padding(
@@ -66,7 +70,12 @@ class OrderList extends StatelessWidget {
                   text: 'Отмена          ',
                   press: () {},
                 ),
-                AppOutlinedButton(text: 'Далее            ', press: () {})
+                AppOutlinedButton(
+                    text: 'Далее            ',
+                    press: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => UserData()));
+                    })
               ],
             )
           ],

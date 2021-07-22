@@ -38,74 +38,75 @@ class ProductList extends StatelessWidget {
     );
 
     return Scaffold(
-      body: ListView(
-        physics: BouncingScrollPhysics(),
+        body: SafeArea(
+      child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        // child: Column(
-        children: <Widget>[
-          Container(child: TopScreen()),
-          Center(
-            child: Text(
-              'Сыр «Пошехонский»',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        child: Column(
+          children: <Widget>[
+            Container(child: TopScreen()),
+            Center(
+              child: Text(
+                'Сыр «Пошехонский»',
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Container(
-            width: 390,
-            height: 240,
-            child: Column(
-              children: <Widget>[
-                Center(
-                  child: Container(
-                    child: image_carousel,
-                    height: 150,
+            Container(
+              width: 390,
+              height: 240,
+              child: Column(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      child: image_carousel,
+                      height: 150,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  AppOutlinedButton(
+                    press: () {},
+                    text: '    В корзину  24,45р.          ',
+                    padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Text(
+                    'В наличии 4 кг',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  width: 40,
                 ),
-                AppOutlinedButton(
-                  press: () {},
-                  text: '    В корзину  24,45р.          ',
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-                ),
+                CounterPc(),
               ],
             ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                ),
-                child: Text(
-                  'В наличии 4 кг',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, left: 20.0),
+              child: Text(
+                'Пищевая ценность на 100 г.',
+                style: TextStyle(fontSize: 16),
               ),
-              SizedBox(
-                width: 40,
-              ),
-              CounterPc(),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 20.0),
-            child: Text(
-              'Пищевая ценность на 100 г.',
-              style: TextStyle(fontSize: 16),
             ),
-          ),
-          SizedBox(
-            height: 15.0,
-          ),
-          Calories(),
-          SizedBox(
-            height: 25.0,
-          ),
-          PriceWeight(),
-        ],
+            SizedBox(
+              height: 15.0,
+            ),
+            Calories(),
+            SizedBox(
+              height: 25.0,
+            ),
+            PriceWeight(),
+          ],
+        ),
       ),
-    );
+    ));
   }
 }

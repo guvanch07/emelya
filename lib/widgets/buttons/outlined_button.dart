@@ -70,9 +70,12 @@ class AppOutlinedButton extends StatelessWidget {
 }
 
 class CheckBoxButton extends StatelessWidget {
-  const CheckBoxButton({required this.press, required this.child});
+  const CheckBoxButton(
+      {required this.press, required this.child, this.shape, this.radius});
   final VoidCallback press;
   final Widget child;
+  final shape;
+  final radius;
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +86,79 @@ class CheckBoxButton extends StatelessWidget {
         child: child,
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.purple),
-          borderRadius: BorderRadius.circular(7.0),
+          borderRadius: radius,
+          shape: shape,
         ),
       ),
       onTap: press,
+    );
+  }
+}
+
+enum SingingCharacter { card, cash, online }
+
+class RadioButton extends StatefulWidget {
+  @override
+  _RadioButtonState createState() => _RadioButtonState();
+}
+
+class _RadioButtonState extends State<RadioButton> {
+  SingingCharacter? _character = SingingCharacter.card;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Theme(
+          data: ThemeData(unselectedWidgetColor: AppColors.purple),
+          child: ListTile(
+            title: const Text('Наличными при получении'),
+            leading: Radio<SingingCharacter>(
+              activeColor: AppColors.purple,
+              value: SingingCharacter.card,
+              groupValue: _character,
+              onChanged: (SingingCharacter? value) {
+                setState(() {
+                  _character = value;
+                });
+              },
+            ),
+          ),
+        ),
+        Theme(
+          data: ThemeData(unselectedWidgetColor: AppColors.purple),
+          child: ListTile(
+            title: const Text('Картой при получении'),
+            leading: Radio<SingingCharacter>(
+                activeColor: AppColors.purple,
+                value: SingingCharacter.cash,
+                groupValue: _character,
+                onChanged: (SingingCharacter? value) {
+                  setState(() {
+                    _character = value;
+                  });
+                }),
+          ),
+        ),
+        Theme(
+          data: ThemeData(
+            unselectedWidgetColor: AppColors.purple,
+          ),
+          child: ListTile(
+            title: const Text('Картой онлайн — Добавить новую карту'),
+            leading: Radio<SingingCharacter>(
+              activeColor: AppColors.purple,
+              value: SingingCharacter.online,
+              groupValue: _character,
+              onChanged: (SingingCharacter? value) {
+                setState(() {
+                  _character = value;
+                });
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

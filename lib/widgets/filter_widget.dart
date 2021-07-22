@@ -276,6 +276,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
                         Row(
                           children: [
                             CheckBoxButton(
+                              radius: BorderRadius.all(Radius.circular(9)),
                               press: () {
                                 setState(() {
                                   _isSelected = !_isSelected;
@@ -299,6 +300,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
                         Row(
                           children: [
                             CheckBoxButton(
+                              radius: BorderRadius.all(Radius.circular(9)),
                               press: () {
                                 setState(() {
                                   _isSelected = !_isSelected;
@@ -322,6 +324,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
                         Row(
                           children: [
                             CheckBoxButton(
+                              radius: BorderRadius.all(Radius.circular(9)),
                               press: () {
                                 setState(() {
                                   _isSelected = !_isSelected;
@@ -345,6 +348,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
                         Row(
                           children: [
                             CheckBoxButton(
+                              radius: BorderRadius.all(Radius.circular(9)),
                               press: () {
                                 setState(() {
                                   _isSelected = !_isSelected;
@@ -368,6 +372,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
                         Row(
                           children: [
                             CheckBoxButton(
+                              radius: BorderRadius.all(Radius.circular(9)),
                               press: () {
                                 setState(() {
                                   _isSelected = !_isSelected;
@@ -400,7 +405,7 @@ class _FilterExpandedState extends State<FilterExpanded> {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -62,40 +62,36 @@ class _CountOrderState extends State<CountOrder> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 90,
-      height: 30.0,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.baseline,
-        textBaseline: TextBaseline.ideographic,
-        children: <Widget>[
-          _counter != 0
-              ? IconButton(
-                  icon: Icon(
-                    Icons.remove_circle,
-                    color: Colors.purple,
-                    size: 35,
-                  ),
-                  color: Color(0xFFAC4AEB),
-                  onPressed: () => setState(() => _counter--),
-                )
-              : Container(),
-          Text(
-            ' $_counter ',
-            style: TextStyle(
-              color: Color(0xFFAC4AEB),
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        _counter != 0
+            ? IconButton(
+                icon: Icon(
+                  Icons.remove_circle,
+                  color: Colors.purple,
+                  size: 24,
+                ),
+                color: Color(0xFFAC4AEB),
+                onPressed: () => setState(() => _counter--),
+              )
+            : Container(),
+        Text(
+          ' $_counter ',
+          style: TextStyle(
+            color: Color(0xFFAC4AEB),
+            fontSize: 14,
           ),
-          IconButton(
-              icon: Icon(
-                Icons.add_circle,
-                color: Colors.purple,
-                size: 35,
-              ),
-              color: Color(0xFFAC4AEB),
-              onPressed: () => setState(() => _counter++)),
-        ],
-      ),
+        ),
+        IconButton(
+            icon: Icon(
+              Icons.add_circle,
+              color: Colors.purple,
+              size: 24,
+            ),
+            color: Color(0xFFAC4AEB),
+            onPressed: () => setState(() => _counter++)),
+      ],
     );
   }
 }
