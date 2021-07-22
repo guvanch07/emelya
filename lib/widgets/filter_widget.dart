@@ -58,15 +58,17 @@ class Filter extends StatelessWidget {
             onTap: () => showGeneralDialog(
               barrierDismissible: false,
               barrierColor: Colors.black.withOpacity(0.5),
-              transitionDuration: const Duration(milliseconds: 500),
+              transitionDuration: const Duration(milliseconds: 400),
               context: context,
               pageBuilder: (context, anim1, anim2) {
-                return SafeArea(child: SortDialog());
+                return const SafeArea(child: SortDialog());
               },
               transitionBuilder: (context, anim1, anim2, child) {
                 return SlideTransition(
-                  position: Tween(begin: Offset(1, 1), end: Offset(0, 0))
-                      .animate(anim1),
+                  position: Tween(
+                    begin: const Offset(0, -1),
+                    end: const Offset(0, 0),
+                  ).animate(anim1),
                   child: child,
                 );
               },
@@ -90,10 +92,27 @@ class Filter extends StatelessWidget {
   }
 }
 
+class SortType {
+  SortType({
+    required this.id,
+    required this.sortName,
+  });
+
+  final int id;
+  final String sortName;
+
+  static List<SortType> getSortTypes = [
+    SortType(id: 0, sortName: 'По популярности'),
+    SortType(id: 1, sortName: 'По рейтингу'),
+    SortType(id: 2, sortName: 'По названию'),
+    SortType(id: 3, sortName: 'Новинки'),
+    SortType(id: 4, sortName: 'По возрастанию цены'),
+    SortType(id: 5, sortName: 'По убыванию цены'),
+  ];
+}
+
 class SortDialog extends StatefulWidget {
-  const SortDialog({
-    Key? key,
-  }) : super(key: key);
+  const SortDialog();
 
   @override
   _SortDialogState createState() => _SortDialogState();
@@ -109,72 +128,88 @@ class _SortDialogState extends State<SortDialog> {
   }
 
   var currentSortType = 'По популярности';
+  int value = 0;
 
   @override
   Widget build(BuildContext context) {
     final bodyStyle = Theme.of(context).textTheme.bodyText1;
 
-    return Card(
-      shape: const RoundedRectangleBorder(
-        side: BorderSide(
-          color: AppColors.purple,
-        ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(6),
-        ),
-      ),
-      margin: EdgeInsets.fromLTRB(35.w, 15, 15, 70.w),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 14,
-                      horizontal: 18,
-                    ),
-                    child: Text(
-                      currentSortType,
-                      style: bodyStyle?.copyWith(color: AppColors.purple),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 22,
-                  ),
-                  child: SvgPicture.asset(
-                    'assets/icons/chevron_up.svg',
-                    color: AppColors.purple,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 1.25,
+    return Align(
+      alignment: Alignment.topRight,
+      child: Card(
+        shape: const RoundedRectangleBorder(
+          side: BorderSide(
             color: AppColors.purple,
           ),
-          // for (int i = 1; i <= 5; i++)
-          //   ListTile(
-          //     title: Text(
-          //       'Radio $i',
-          //       style: Theme.of(context)
-          //           .textTheme
-          //           .subtitle1
-          //           ?.copyWith(color: i == 5 ? Colors.black38 : Colors.brown),
-          //     ),
-          //     leading: Radio(
-          //       value: i,
-          //       groupValue: _value,
-          //       onChanged: null,
-          //     ),
-          //   ),
-        ],
+          borderRadius: BorderRadius.all(
+            Radius.circular(6),
+          ),
+        ),
+        // insetPadding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
+        margin: EdgeInsets.only(left: 35.w, top: 5, right: 5),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 14,
+                        horizontal: 18,
+                      ),
+                      child: Text(
+                        currentSortType,
+                        style: bodyStyle?.copyWith(color: AppColors.purple),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 22,
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/icons/chevron_up.svg',
+                      color: AppColors.purple,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 1.25,
+              color: AppColors.purple,
+            ),
+            for (int i = 1; i <= 5; i++)
+              Row(
+                children: [
+                  Theme(
+                    data: ThemeData(
+                      accentColor: AppColors.purple,
+                      primaryColor: AppColors.purple,
+                      unselectedWidgetColor: AppColors.purple,
+                    ),
+                    child: Radio(
+                      value: i,
+                      groupValue: _value,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _value = value!;
+                        });
+                      },
+                    ),
+                  ),
+                  Text(
+                    SortType.getSortTypes[i].sortName,
+                    style: bodyStyle,
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }
