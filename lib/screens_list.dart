@@ -37,7 +37,7 @@ class ScreensList extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => AppBottomNavBar()),
                 );
               },
-              child: const Text('BottomNavBar'),
+              child: const Text('Main'),
             ),
             ElevatedButton(
               onPressed: () {

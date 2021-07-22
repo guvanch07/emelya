@@ -7,6 +7,7 @@ abstract class AppColors {
   static const Color black = Colors.black;
   static const Color purple = Color(0xFFAC4AEB);
   static const Color dividerColor = Color(0xFFEFEFEF);
+  static const Color backgroundColor = Color(0xFFFAFAFA);
 }
 
 const kStylePrice =
