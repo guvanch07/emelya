@@ -5,6 +5,8 @@ import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'checkout.dart';
+
 class PaymentMethod extends StatefulWidget {
   @override
   _PaymentMethodState createState() => _PaymentMethodState();
@@ -201,7 +203,14 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                       );
                                     }),
                                 AppOutlinedButton(
-                                    text: 'Далее        ', press: () {}),
+                                    text: 'Далее        ',
+                                    press: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CheckoutOrder()));
+                                    }),
                               ],
                             )
                           ],
