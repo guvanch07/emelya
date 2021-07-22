@@ -1,10 +1,10 @@
-import 'package:emelya/constants.dart/app_colors.dart';
-import 'package:emelya/screens/onboarding/onboarding.dart';
+import 'package:emelya/screens_list.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
+import 'constants/app_colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,12 +22,18 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: TextTheme(
-              headline1: GoogleFonts.exo2(
-                textStyle: const TextStyle(
-                  color: AppColors.black,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                ),
+              // headline1: GoogleFonts.exo2(
+              //   textStyle: const TextStyle(
+              //     color: AppColors.black,
+              //     fontSize: 28,
+              //     fontWeight: FontWeight.w900,
+              //   ),
+              // ),
+              headline2: const TextStyle(
+                color: AppColors.black,
+                fontFamily: 'Arial',
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
               ),
               bodyText1: const TextStyle(
                 color: AppColors.black,
@@ -35,9 +41,15 @@ class MyApp extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
+              bodyText2: const TextStyle(
+                color: AppColors.black,
+                fontFamily: 'Arial',
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
-          home: AppBottomNavBar(),
+          home: const ScreensList(),
         );
       },
     );
