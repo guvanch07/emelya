@@ -1,4 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/core/utils/toast.dart';
 import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,53 +12,169 @@ class Filter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpandableNotifier(
-      child: ScrollOnExpand(
-        child: ExpandablePanel(
-          theme: const ExpandableThemeData(
-            headerAlignment: ExpandablePanelHeaderAlignment.center,
-            tapBodyToExpand: true,
-            tapBodyToCollapse: true,
-            hasIcon: false,
-          ),
-          header: Container(
-            color: AppColors.white,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 15, 17, 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+    return Stack(
+      children: [
+        ExpandableNotifier(
+          child: ScrollOnExpand(
+            child: ExpandablePanel(
+              theme: const ExpandableThemeData(
+                headerAlignment: ExpandablePanelHeaderAlignment.center,
+                tapBodyToExpand: true,
+                tapBodyToCollapse: true,
+                hasIcon: false,
+              ),
+              header: Container(
+                color: AppColors.white,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 15, 17, 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SvgPicture.asset('assets/icons/filter.svg'),
-                      const SizedBox(
-                        width: 15,
+                      Row(
+                        children: [
+                          SvgPicture.asset('assets/icons/filter.svg'),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            'Фильтр',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          )
+                        ],
                       ),
-                      Text(
-                        'Фильтр',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      )
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        'По популярности',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      SvgPicture.asset('assets/icons/chevron_down.svg'),
-                    ],
-                  )
-                ],
+                ),
               ),
+              expanded: const FilterExpanded(),
+              collapsed: Container(),
             ),
           ),
-          expanded: const FilterExpanded(),
-          collapsed: Container(),
         ),
+        Positioned(
+          top: 17.5,
+          right: 17,
+          child: InkWell(
+            onTap: () => showGeneralDialog(
+              barrierDismissible: false,
+              barrierColor: Colors.black.withOpacity(0.5),
+              transitionDuration: const Duration(milliseconds: 500),
+              context: context,
+              pageBuilder: (context, anim1, anim2) {
+                return SafeArea(child: SortDialog());
+              },
+              transitionBuilder: (context, anim1, anim2, child) {
+                return SlideTransition(
+                  position: Tween(begin: Offset(1, 1), end: Offset(0, 0))
+                      .animate(anim1),
+                  child: child,
+                );
+              },
+            ),
+            child: Row(
+              children: [
+                Text(
+                  'По популярности',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                SvgPicture.asset('assets/icons/chevron_down.svg'),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class SortDialog extends StatefulWidget {
+  const SortDialog({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _SortDialogState createState() => _SortDialogState();
+}
+
+class _SortDialogState extends State<SortDialog> {
+  int _value = 1;
+
+  void _changeSortType(int? newValue) {
+    setState(() {
+      _value = newValue!;
+    });
+  }
+
+  var currentSortType = 'По популярности';
+
+  @override
+  Widget build(BuildContext context) {
+    final bodyStyle = Theme.of(context).textTheme.bodyText1;
+
+    return Card(
+      shape: const RoundedRectangleBorder(
+        side: BorderSide(
+          color: AppColors.purple,
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(6),
+        ),
+      ),
+      margin: EdgeInsets.fromLTRB(35.w, 15, 15, 70.w),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                      horizontal: 18,
+                    ),
+                    child: Text(
+                      currentSortType,
+                      style: bodyStyle?.copyWith(color: AppColors.purple),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                    horizontal: 22,
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/icons/chevron_up.svg',
+                    color: AppColors.purple,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 1.25,
+            color: AppColors.purple,
+          ),
+          // for (int i = 1; i <= 5; i++)
+          //   ListTile(
+          //     title: Text(
+          //       'Radio $i',
+          //       style: Theme.of(context)
+          //           .textTheme
+          //           .subtitle1
+          //           ?.copyWith(color: i == 5 ? Colors.black38 : Colors.brown),
+          //     ),
+          //     leading: Radio(
+          //       value: i,
+          //       groupValue: _value,
+          //       onChanged: null,
+          //     ),
+          //   ),
+        ],
       ),
     );
   }
