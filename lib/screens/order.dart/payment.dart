@@ -1,4 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/screens/order.dart/add_card.dart';
 import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:emelya/widgets/text_form_field.dart/feedback_fields.dart';
 import 'package:emelya/widgets/topScreen.dart';
@@ -127,27 +128,61 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 ),
               ),
             ),
-            FeedFields(
+            Container(
+              margin: const EdgeInsets.only(left: 12.0, right: 12.0),
               height: 55,
-              text: '',
-              icon: SvgPicture.asset('assets/icons/visa.svg'),
+              width: 370,
+              decoration: new BoxDecoration(
+                  color: Color(0xFFEFEFEF),
+                  borderRadius: new BorderRadius.all(
+                    new Radius.circular(9.0),
+                  )),
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: SvgPicture.asset('assets/icons/visa.svg'),
+                  ),
+                  Text('**** **** ****  7777')
+                ],
+              ),
             ),
             SizedBox(
               height: 14,
             ),
-            FeedFields(
+            Container(
+              margin: const EdgeInsets.only(left: 12.0, right: 12.0),
               height: 55,
-              text: '',
-              icon: SvgPicture.asset('assets/icons/visa.svg'),
+              width: 370,
+              decoration: new BoxDecoration(
+                  color: Color(0xFFEFEFEF),
+                  borderRadius: new BorderRadius.all(
+                    new Radius.circular(9.0),
+                  )),
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: SvgPicture.asset('assets/icons/visa.svg'),
+                  ),
+                  Text('**** **** ****  7777')
+                ],
+              ),
             ),
+
             SizedBox(
               height: 15,
             ),
             AppOutlinedButton(
-              press: () {},
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddCard()),
+                );
+              },
               text: 'Добавить карту                                  ',
             ),
-            SizedBox(height: 25),
+            SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -182,6 +217,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                               ),
                             ),
                             FeedFields(
+                              width: 270,
                               height: 130,
                               text: 'Напишите комментарий к заказу.'
                                   'Например, пожелание в какое колличество'

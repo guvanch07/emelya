@@ -107,8 +107,17 @@ class _RadioButtonState extends State<RadioButton> {
         Theme(
           data: ThemeData(unselectedWidgetColor: AppColors.purple),
           child: ListTile(
-            title: const Text('Наличными при получении'),
+            contentPadding: EdgeInsets.only(
+              left: 8,
+              top: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text(
+              'Наличными при получении',
+              style: kStyleText,
+            ),
             leading: Radio<SingingCharacter>(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               activeColor: AppColors.purple,
               value: SingingCharacter.card,
               groupValue: _character,
@@ -123,8 +132,13 @@ class _RadioButtonState extends State<RadioButton> {
         Theme(
           data: ThemeData(unselectedWidgetColor: AppColors.purple),
           child: ListTile(
-            title: const Text('Картой при получении'),
+            contentPadding: EdgeInsets.only(
+              left: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text('Картой при получении', style: kStyleText),
             leading: Radio<SingingCharacter>(
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 activeColor: AppColors.purple,
                 value: SingingCharacter.cash,
                 groupValue: _character,
@@ -140,8 +154,14 @@ class _RadioButtonState extends State<RadioButton> {
             unselectedWidgetColor: AppColors.purple,
           ),
           child: ListTile(
-            title: const Text('Картой онлайн — Добавить новую карту'),
+            contentPadding: EdgeInsets.only(
+              left: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text('Картой онлайн — Добавить новую карту',
+                style: kStyleText),
             leading: Radio<SingingCharacter>(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               activeColor: AppColors.purple,
               value: SingingCharacter.online,
               groupValue: _character,
@@ -154,6 +174,56 @@ class _RadioButtonState extends State<RadioButton> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class UserButton extends StatefulWidget {
+  const UserButton({required this.press, required this.text, this.icon});
+  final VoidCallback press;
+  final icon;
+  final String text;
+
+  @override
+  _UserButtonState createState() => _UserButtonState();
+}
+
+class _UserButtonState extends State<UserButton> {
+  bool _colorChanged = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.press,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+        child: Container(
+          padding: EdgeInsets.only(left: 22, right: 19),
+          height: 40,
+          width: 370,
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.purple),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              widget.icon,
+              Padding(
+                padding: const EdgeInsets.only(right: 80, left: 20),
+                child: Text(
+                  widget.text,
+                  style: TextStyle(color: AppColors.purple),
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward,
+                color: AppColors.purple,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

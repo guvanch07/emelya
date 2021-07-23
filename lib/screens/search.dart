@@ -26,6 +26,7 @@ class SearchProduct extends StatelessWidget {
             FeedFields(
               text: 'Введите название товара',
               icon: Icon(Icons.search, color: Colors.grey, size: 30),
+              width: 370,
               height: 55,
             ),
             // Padding(
