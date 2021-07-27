@@ -70,7 +70,6 @@ class CheckoutOrder extends StatelessWidget {
                             child: Container(
                               height: 280,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Align(
@@ -85,116 +84,134 @@ class CheckoutOrder extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(
                                       bottom: 10.0,
-                                      left: 10,
+                                      left: 20,
                                     ),
                                     child: Text(
                                       'Подтверждение номера телефона',
                                       style: TextStyle(fontSize: 18),
                                     ),
                                   ),
-                                  Text(
-                                    'Введите код из СМС чтобы подтвердить номер +375 (29) 777-77-77',
-                                    style: TextStyle(fontSize: 12),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 18, right: 10),
+                                    child: Text(
+                                      'Введите код из СМС чтобы подтвердить номер +375 (29) 777-77-77',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        FeedFields(
+                                          height: 50,
+                                          width: 90,
+                                          text: 'Код',
+                                          keybord: TextInputType.number,
+                                        ),
+                                        Text(
+                                          'Отправить код повторно через 0:08',
+                                          style: TextStyle(fontSize: 9),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  Row(
-                                    children: [
-                                      FeedFields(
-                                        height: 50,
-                                        width: 90,
-                                        text: 'Код',
-                                        keybord: TextInputType.number,
-                                      ),
-                                      Text(
-                                        'Отправить код повторно через 0:08',
-                                        style: TextStyle(fontSize: 9),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: <Widget>[
-                                      AppOutlinedButton(
-                                        text: 'Изменить номер',
-                                        press: () => showDialog<String>(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              Dialog(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(9.0)),
-                                            child: Container(
-                                                height: 220,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Align(
-                                                        alignment:
-                                                            Alignment.topRight,
-                                                        child: IconButton(
-                                                            onPressed: () {
-                                                              Navigator.pop(
-                                                                context,
-                                                              );
-                                                            },
-                                                            icon: Icon(
-                                                                Icons.close))),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                        bottom: 10.0,
-                                                        left: 10,
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: <Widget>[
+                                        AppOutlinedButton(
+                                          text: 'Изменить номер',
+                                          textStyle: TextStyle(
+                                              fontSize: 12,
+                                              color: AppColors.purple),
+                                          press: () => showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                Dialog(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          9.0)),
+                                              child: Container(
+                                                  height: 220,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Align(
+                                                          alignment: Alignment
+                                                              .topRight,
+                                                          child: IconButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                  context,
+                                                                );
+                                                              },
+                                                              icon: Icon(Icons
+                                                                  .close))),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                          bottom: 10.0,
+                                                          left: 10,
+                                                        ),
+                                                        child: Text(
+                                                          'Введите ваш номер',
+                                                          style: TextStyle(
+                                                              fontSize: 18),
+                                                        ),
                                                       ),
-                                                      child: Text(
-                                                        'Введите ваш номер',
-                                                        style: TextStyle(
-                                                            fontSize: 18),
+                                                      SizedBox(
+                                                        height: 15,
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    FeedFields(
-                                                      height: 55,
-                                                      width: 270,
-                                                      text: '+375',
-                                                      keybord:
-                                                          TextInputType.number,
-                                                    ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    AppOutlinedButton(
-                                                        text: 'Сохранить',
-                                                        press: () {
-                                                          Navigator.pop(
-                                                            context,
-                                                          );
-                                                        }),
-                                                  ],
-                                                )),
+                                                      FeedFields(
+                                                        height: 55,
+                                                        width: 270,
+                                                        text: '+375',
+                                                        keybord: TextInputType
+                                                            .number,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 15,
+                                                      ),
+                                                      AppOutlinedButton(
+                                                          text: 'Сохранить',
+                                                          press: () {
+                                                            Navigator.pop(
+                                                              context,
+                                                            );
+                                                          }),
+                                                    ],
+                                                  )),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      AppOutlinedButton(
-                                          text: 'Подтвердить',
-                                          press: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CheckoutOrder()));
-                                          }),
-                                    ],
+                                        AppOutlinedButton(
+                                            text: 'Подтвердить         ',
+                                            textStyle: TextStyle(
+                                                fontSize: 12,
+                                                color: AppColors.purple),
+                                            press: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          CheckoutOrder()));
+                                            }),
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),

@@ -48,6 +48,7 @@ class UserData extends StatelessWidget {
               keyboard: TextInputType.multiline,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 AdressForm(
                   text: 'Дом',
@@ -62,6 +63,7 @@ class UserData extends StatelessWidget {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 AdressForm(
                   text: 'Этаж',
@@ -81,7 +83,12 @@ class UserData extends StatelessWidget {
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  AppOutlinedButton(text: 'Отмена              ', press: () {}),
+                  AppOutlinedButton(
+                    text: 'Отмена              ',
+                    press: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                   AppOutlinedButton(
                       text: 'Далее               ',
                       press: () {

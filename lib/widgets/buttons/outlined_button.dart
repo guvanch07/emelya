@@ -1,4 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/screens/order.dart/add_card.dart';
 import 'package:flutter/material.dart';
 
 class AppOutlinedButton extends StatelessWidget {
@@ -100,6 +101,10 @@ class RadioButton extends StatefulWidget {
 class _RadioButtonState extends State<RadioButton> {
   SingingCharacter? _character = SingingCharacter.card;
 
+  int containerIndex = 0;
+
+  var pages = [PayCash(), PayCash(), AddCard()];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -124,6 +129,7 @@ class _RadioButtonState extends State<RadioButton> {
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+                  containerIndex = 0;
                 });
               },
             ),
@@ -145,6 +151,7 @@ class _RadioButtonState extends State<RadioButton> {
                 onChanged: (SingingCharacter? value) {
                   setState(() {
                     _character = value;
+                    containerIndex = 1;
                   });
                 }),
           ),
@@ -168,6 +175,7 @@ class _RadioButtonState extends State<RadioButton> {
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+                  containerIndex = 2;
                 });
               },
             ),
@@ -178,27 +186,33 @@ class _RadioButtonState extends State<RadioButton> {
   }
 }
 
-class UserButton extends StatefulWidget {
-  const UserButton({required this.press, required this.text, this.icon});
-  final VoidCallback press;
+class UserButton extends StatelessWidget {
+  const UserButton(
+      {required this.text,
+      this.icon,
+      required this.press,
+      required this.onColorChanged,
+      required this.selected});
+
   final icon;
   final String text;
+  final VoidCallback press;
 
-  @override
-  _UserButtonState createState() => _UserButtonState();
-}
+  final Function(Color) onColorChanged;
 
-class _UserButtonState extends State<UserButton> {
-  bool _colorChanged = false;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.press,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      child: GestureDetector(
+        onTap: () {
+          press();
+          onColorChanged(selected ? Colors.purple : Colors.transparent);
+        },
         child: Container(
-          padding: EdgeInsets.only(left: 22, right: 19),
+          padding: EdgeInsets.only(left: 20, right: 19),
           height: 40,
           width: 370,
           decoration: BoxDecoration(
@@ -206,19 +220,21 @@ class _UserButtonState extends State<UserButton> {
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              widget.icon,
+              icon,
               Padding(
-                padding: const EdgeInsets.only(right: 80, left: 20),
+                padding: const EdgeInsets.only(left: 20),
                 child: Text(
-                  widget.text,
+                  text,
                   style: TextStyle(color: AppColors.purple),
                 ),
               ),
-              Icon(
-                Icons.arrow_forward,
-                color: AppColors.purple,
+              Padding(
+                padding: const EdgeInsets.only(left: 130),
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: AppColors.purple,
+                ),
               )
             ],
           ),

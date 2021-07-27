@@ -71,15 +71,20 @@ class _YourOrderState extends State<YourOrder> {
                       SizedBox(
                         height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          CountOrder(),
-                          Text(
-                            '31,96 р.',
-                            style: kStylePrice,
-                          )
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            CountOrder(),
+                            // SizedBox(
+                            //   width: 40,
+                            // ),
+                            Text(
+                              '31,96 р.',
+                              style: kStylePrice,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -149,15 +154,20 @@ class _YourOrderState extends State<YourOrder> {
                       SizedBox(
                         height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          CountOrder(),
-                          Text(
-                            '31,96 р.',
-                            style: kStylePrice,
-                          )
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            CountOrder(),
+                            // SizedBox(
+                            //   width: 40,
+                            // ),
+                            Text(
+                              '31,96 р.',
+                              style: kStylePrice,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),

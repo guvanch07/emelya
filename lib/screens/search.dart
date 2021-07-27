@@ -14,38 +14,39 @@ class SearchProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            TopScreen(),
-
-            SizedBox(
-              height: 43.0,
-            ),
-            FeedFields(
-              text: 'Введите название товара',
-              icon: Icon(Icons.search, color: Colors.grey, size: 30),
-              width: 370,
-              height: 55,
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.only(
-            //     right: 80,
-            //   ),
-            //   child:
-            Expanded(
-              child: SvgPicture.asset(
-                'assets/images/noproducts.svg',
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              TopScreen(),
+              SizedBox(
+                height: 43.0,
               ),
-            ),
-
-            Text(
-              'Товары не найдены',
-              style: TextStyle(color: Color(0xffA7A7A7), fontSize: 18.0),
-            ),
-            Expanded(child: AppBottomNavBar())
-          ],
+              FeedFields(
+                text: 'Введите название товара',
+                icon: Icon(Icons.search, color: Colors.grey, size: 30),
+                width: 370,
+                height: 55,
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 140.0, bottom: 13.0),
+                height: 130,
+                width: 130,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFAFAFA),
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                    child: SvgPicture.asset('assets/images/noproducts.svg')),
+              ),
+              Text(
+                'Товары не найдены',
+                style: TextStyle(color: Color(0xFFA7A7A7)),
+              )
+            ],
+          ),
         ),
       ),
     );

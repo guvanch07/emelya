@@ -186,7 +186,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                AppOutlinedButton(text: 'Отмена          ', press: () {}),
+                AppOutlinedButton(
+                  text: 'Отмена          ',
+                  press: () {
+                    Navigator.pop(context);
+                  },
+                ),
                 AppOutlinedButton(
                   text: 'Далее          ',
                   press: () => showDialog<String>(

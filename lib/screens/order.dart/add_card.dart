@@ -18,8 +18,13 @@ class _AddCardState extends State<AddCard> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          width: double.infinity,
+          height: 360,
           child: Column(
             children: <Widget>[
+              SizedBox(
+                height: 30,
+              ),
               FeedFields(
                 text: 'Номер карты',
                 height: 55,
@@ -35,19 +40,22 @@ class _AddCardState extends State<AddCard> {
                   keybord: TextInputType.name,
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  FeedFields(
-                    text: 'Срок',
-                    height: 55,
-                    width: 150,
-                  ),
-                  FeedFields(
-                    text: 'CVV',
-                    height: 55,
-                    width: 150,
-                  ),
-                ],
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    FeedFields(
+                      text: 'Срок',
+                      height: 55,
+                      width: 150,
+                    ),
+                    FeedFields(
+                      text: 'CVV',
+                      height: 55,
+                      width: 150,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -66,7 +74,7 @@ class _AddCardState extends State<AddCard> {
                   activeColor: AppColors.purple,
                   value: _character,
                   groupValue: _character,
-                  onChanged: (bool? value) {
+                  onChanged: (value) {
                     setState(() {
                       value = !_character;
                     });
@@ -79,6 +87,36 @@ class _AddCardState extends State<AddCard> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class PayCash extends StatelessWidget {
+  const PayCash({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          AppOutlinedButton(text: 'Отмена', press: () {}),
+          AppOutlinedButton(text: 'Далее', press: () {})
+        ],
+      ),
+    );
+  }
+}
+
+class SelectCard extends StatelessWidget {
+  const SelectCard({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[Container()],
     );
   }
 }
