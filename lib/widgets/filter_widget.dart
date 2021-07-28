@@ -1,8 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
-<<<<<<< HEAD
-=======
 import 'package:emelya/core/utils/toast.dart';
->>>>>>> master
 import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
@@ -230,11 +227,6 @@ class FilterExpanded extends StatefulWidget {
 class _FilterExpandedState extends State<FilterExpanded> {
   // RangeValues _currentRangeValues = const RangeValues(5, 25);
 
-  RangeValues values = RangeValues(0, 50);
-  RangeLabels labels = RangeLabels('0', "50");
-  bool _value = false;
-  bool _isSelected = false;
-
   @override
   Widget build(BuildContext context) {
     final divider = Container(
@@ -324,255 +316,8 @@ class _FilterExpandedState extends State<FilterExpanded> {
                       SvgPicture.asset('assets/icons/chevron_down.svg'),
                     ],
                   ),
-<<<<<<< HEAD
-                  collapsed: Container(),
-                  expanded: Container(
-                    height: 120,
-                    color: Colors.white,
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Text('от'),
-                            Container(
-                              width: 130,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xFFAC4AEB),
-                                  ),
-                                  borderRadius: BorderRadius.circular(6)),
-                              child: Center(
-                                  child: Text(
-                                '5',
-                                style: TextStyle(
-                                    color: Color(0xFFAC4AEB),
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal),
-                              )),
-                            ),
-                            Text('до'),
-                            Container(
-                              width: 120,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Color(0xFFAC4AEB),
-                                  ),
-                                  borderRadius: BorderRadius.circular(6)),
-                              child: Center(
-                                  child: Text(
-                                '50',
-                                style: TextStyle(
-                                    color: Color(0xFFAC4AEB),
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.normal),
-                              )),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            thumbColor: Color(0xFFAC4AEB),
-                          ),
-                          child: RangeSlider(
-                            min: 0,
-                            max: 50,
-                            values: values,
-                            inactiveColor: Colors.black,
-                            activeColor: Color(0xFFAC4AEB),
-                            labels: labels,
-
-                            // RangeLabels(
-                            //   _currentRangeValues.start.round().toString(),
-                            //   _currentRangeValues.end.round().toString(),
-                            // ),
-                            onChanged: (value) {
-                              print("START: ${value.start}, End: ${value.end}");
-                              setState(() {
-                                values = value;
-                                labels = RangeLabels(
-                                    "${value.start.toInt().toString()}\$",
-                                    "${value.start.toInt().toString()}\$");
-                              });
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              height: 1,
-              color: AppColors.dividerColor,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            // const Text('aboba'),
-            ExpandableNotifier(
-              child: ScrollOnExpand(
-                child: ExpandablePanel(
-                  theme: const ExpandableThemeData(
-                    headerAlignment: ExpandablePanelHeaderAlignment.center,
-                    tapBodyToExpand: true,
-                    tapBodyToCollapse: true,
-                    hasIcon: false,
-                  ),
-                  header: Text(
-                    'Вес',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.copyWith(fontSize: 16),
-                  ),
-                  collapsed: Container(),
-                  expanded: Container(
-                    height: 200,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: [
-                            CheckBoxButton(
-                              radius: BorderRadius.all(Radius.circular(9)),
-                              press: () {
-                                setState(() {
-                                  _isSelected = !_isSelected;
-                                });
-                              },
-                              child: Icon(
-                                _isSelected ? Icons.check : null,
-                                color: AppColors.purple,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              '50г',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.normal),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            CheckBoxButton(
-                              radius: BorderRadius.all(Radius.circular(9)),
-                              press: () {
-                                setState(() {
-                                  _isSelected = !_isSelected;
-                                });
-                              },
-                              child: Icon(
-                                _isSelected ? Icons.check : null,
-                                color: AppColors.purple,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              '100г',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.normal),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            CheckBoxButton(
-                              radius: BorderRadius.all(Radius.circular(9)),
-                              press: () {
-                                setState(() {
-                                  _isSelected = !_isSelected;
-                                });
-                              },
-                              child: Icon(
-                                _isSelected ? Icons.check : null,
-                                color: AppColors.purple,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              '200г',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.normal),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            CheckBoxButton(
-                              radius: BorderRadius.all(Radius.circular(9)),
-                              press: () {
-                                setState(() {
-                                  _isSelected = !_isSelected;
-                                });
-                              },
-                              child: Icon(
-                                _isSelected ? Icons.check : null,
-                                color: AppColors.purple,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              '300г',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.normal),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            CheckBoxButton(
-                              radius: BorderRadius.all(Radius.circular(9)),
-                              press: () {
-                                setState(() {
-                                  _isSelected = !_isSelected;
-                                });
-                              },
-                              child: Icon(
-                                _isSelected ? Icons.check : null,
-                                color: AppColors.purple,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Text(
-                              '400г',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.normal),
-                            )
-                          ],
-                        ),
-                        Center(
-                          child: AppOutlinedButton(
-                            press: () {},
-                            text: '     Показать 125 товаров      ',
-                            borderRadius: 35,
-                          ),
-                        ),
-                      ],
-                    ),
-=======
                   collapsed: Container(
                     height: 25,
->>>>>>> master
                   ),
                   expanded: const PricePicker(),
                 ),
@@ -699,10 +444,17 @@ class WeightCheckbox extends StatelessWidget {
   }
 }
 
-class PricePicker extends StatelessWidget {
+class PricePicker extends StatefulWidget {
   const PricePicker({
     Key? key,
   }) : super(key: key);
+
+  @override
+  _PricePickerState createState() => _PricePickerState();
+}
+
+class _PricePickerState extends State<PricePicker> {
+  int height = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -734,34 +486,70 @@ class PricePicker extends StatelessWidget {
               Container(
                 height: 30,
                 width: 33.w,
-                child: TextFormField(
-                  decoration: inputDecoration,
-                  keyboardType: TextInputType.text,
-                  style: inputTextStyle,
-                ),
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.purple),
+                    borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                child: Center(
+                    child: Text('0',
+                        style: TextStyle(
+                            color: AppColors.purple,
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal))),
+                // TextFormField(
+                //   decoration: inputDecoration,
+                //   keyboardType: TextInputType.text,
+                //   style: inputTextStyle,
               ),
               Text(
                 'до',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Container(
-                height: 30,
-                width: 33.w,
-                child: TextFormField(
-                  decoration: inputDecoration,
-                  keyboardType: TextInputType.text,
-                  style: inputTextStyle,
-                ),
-              ),
+                  height: 30,
+                  width: 33.w,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.purple),
+                      borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                  child: Center(
+                    child: Text(
+                      height.toString(),
+                      style: TextStyle(
+                          color: AppColors.purple,
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  )
+                  // TextFormField(
+                  //   decoration: inputDecoration,
+                  //   keyboardType: TextInputType.text,
+                  //   style: inputTextStyle,
+                  // ),
+                  ),
             ],
           ),
           const SizedBox(
             height: 5,
           ),
-          Slider(
-            value: 0,
-            onChanged: (value) {},
-            activeColor: AppColors.purple,
+          SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+                inactiveTrackColor: Colors.black,
+                activeTrackColor: AppColors.purple,
+                thumbColor: AppColors.purple,
+                overlayColor: Colors.black45,
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 13.0),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 27.0)),
+            child: Slider(
+              value: height.toDouble(),
+              min: 0.0,
+              max: 50.0,
+              onChanged: (double newValue) {
+                setState(
+                  () {
+                    height = newValue.round();
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),

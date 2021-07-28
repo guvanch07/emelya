@@ -19,59 +19,78 @@ class UserData extends StatelessWidget {
           children: <Widget>[
             TopScreen(),
             Padding(
-              padding: const EdgeInsets.only(top: 40, bottom: 13, right: 200),
+              padding: const EdgeInsets.only(top: 40, right: 200),
               child: Text(
                 'Ваши данные',
                 style: kStyleTitleh2,
               ),
             ),
-            FeedFields(
+            AdressForm(
               text: 'ФИО*',
-              height: 55,
-              suficon: Icon(
-                Icons.check_circle_outline,
-                color: AppColors.purple,
-              ),
+              width: 370,
+              keyboard: TextInputType.name,
             ),
-            SizedBox(
-              height: 18,
-            ),
-            FeedFields(
-              text: 'Hомер телефон',
-              height: 55,
-              suficon: Icon(
-                Icons.check_circle_outline,
-                color: AppColors.purple,
-              ),
-              labeltext: 'Номер телефона*',
-              keybord: TextInputType.number,
+            AdressForm(
+              text: 'Номер телефона*',
+              width: 370,
+              keyboard: TextInputType.number,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 50, bottom: 13, right: 160),
+              padding: const EdgeInsets.only(top: 50, right: 160),
               child: Text(
                 'Доставка сегодня',
                 style: kStyleTitleh2,
               ),
             ),
-            FeedFields(
-              text: 'Ваш адрес',
-              height: 55,
-              suficon: Icon(
-                Icons.check_circle_outline,
-                color: AppColors.purple,
-              ),
-              labeltext: 'Ваш адрес*',
-              keybord: TextInputType.multiline,
+            AdressForm(
+              text: 'Ваш адрес*',
+              width: 370,
+              keyboard: TextInputType.multiline,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                AdressForm(
+                  text: 'Дом',
+                  width: 150,
+                  keyboard: TextInputType.number,
+                ),
+                AdressForm(
+                  text: 'Подъезд',
+                  width: 150,
+                  keyboard: TextInputType.number,
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                AdressForm(
+                  text: 'Этаж',
+                  width: 150,
+                  keyboard: TextInputType.number,
+                ),
+                AdressForm(
+                  text: 'Квартира',
+                  width: 150,
+                  keyboard: TextInputType.number,
+                ),
+              ],
             ),
             SizedBox(
-              height: 140,
+              height: 20,
             ),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  AppOutlinedButton(text: 'Отмена        ', press: () {}),
                   AppOutlinedButton(
-                      text: 'Далее         ',
+                    text: 'Отмена              ',
+                    press: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  AppOutlinedButton(
+                      text: 'Далее               ',
                       press: () {
                         Navigator.push(
                           context,

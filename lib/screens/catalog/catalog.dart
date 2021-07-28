@@ -1,3 +1,4 @@
+import 'package:emelya/screens/product.dart/product_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'product_item.dart';
@@ -89,11 +90,19 @@ class CatalogList extends StatelessWidget {
             padding: index % 2 == 0
                 ? EdgeInsets.only(left: 4.w)
                 : EdgeInsets.only(right: 4.w),
-            child: ProductItem(
-              price: product.price,
-              isFavorite: product.isFavorite,
-              imageUri: product.imageUri,
-              name: product.name,
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductList(),
+                ),
+              ),
+              child: ProductItem(
+                price: product.price,
+                isFavorite: product.isFavorite,
+                imageUri: product.imageUri,
+                name: product.name,
+              ),
             ),
           );
         });

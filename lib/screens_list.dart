@@ -3,6 +3,7 @@ import 'package:emelya/screens/catalog/catalog.dart';
 import 'package:emelya/screens/menu.dart/menu_list.dart';
 import 'package:emelya/screens/onboarding/onboarding.dart';
 import 'package:emelya/screens/order.dart/order_list.dart';
+import 'package:emelya/screens/personal_account.dart/user_account_view.dart';
 import 'package:emelya/screens/product.dart/product_list_view.dart';
 import 'package:emelya/screens/search.dart';
 import 'package:emelya/widgets/expandable_demo.dart';
@@ -101,6 +102,15 @@ class ScreensList extends StatelessWidget {
                 );
               },
               child: const Text('Ordering'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UserAccount()),
+                );
+              },
+              child: const Text('user account'),
             )
           ],
         ),
