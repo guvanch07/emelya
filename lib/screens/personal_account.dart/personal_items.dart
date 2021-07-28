@@ -121,7 +121,7 @@ class UserHistory extends StatelessWidget {
         ),
         Text(
           'Здесь будут ваши избранные товары',
-          style: kStyleTitleh2,
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         )
       ],
     );

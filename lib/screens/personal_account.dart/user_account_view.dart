@@ -11,24 +11,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../bot_bar_nav.dart';
 
-class UserAccount extends StatefulWidget {
-  const UserAccount({Key? key}) : super(key: key);
-
-  @override
-  _UserAccountState createState() => _UserAccountState();
-}
-
-class _UserAccountState extends State<UserAccount> {
-  Widget text = SelectAdress();
-  Color currentColor = Colors.transparent;
-
+class UserAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Flexible(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget>[
               TopScreen(),
@@ -58,54 +47,70 @@ class _UserAccountState extends State<UserAccount> {
               SizedBox(
                 height: 10,
               ),
-              UserButton(
-                press: () => setState(
-                  () => text = SelectAdress(),
-                ),
-                text: 'Настройки',
-                icon: Icon(Icons.settings, color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: false,
-              ),
-              UserButton(
-                press: () => setState(() => text = SelectedCard()),
-                text: 'Управление картами',
-                icon: FaIcon(FontAwesomeIcons.dollarSign,
-                    color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: true,
-              ),
-              UserButton(
-                press: () => setState(() => text = UserOrders()),
-                text: 'История заказов',
-                icon: Icon(Icons.credit_card, color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: false,
-              ),
-              UserButton(
-                press: () => setState(() => text = UserHistory()),
-                text: 'Моя история',
-                icon:
-                    FaIcon(FontAwesomeIcons.bookmark, color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: true,
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: double.infinity,
-                height: 400,
-                child: (text),
-              )
+              UserBut(),
             ],
           ),
         ),
-      )),
+      ),
+      bottomNavigationBar: BotNavBar(),
+    );
+  }
+}
+
+class UserBut extends StatefulWidget {
+  const UserBut({Key? key}) : super(key: key);
+
+  @override
+  _UserButState createState() => _UserButState();
+}
+
+class _UserButState extends State<UserBut> {
+  Widget text = SelectAdress();
+  Color currentColor = Colors.transparent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        UserButton(
+          press: () => setState(
+            () => text = SelectAdress(),
+          ),
+          text: 'Настройки',
+          icon: Icon(Icons.settings, color: AppColors.purple),
+          onColorChanged: (color) =>
+              setState(() => currentColor = Colors.purple),
+        ),
+        UserButton(
+          press: () => setState(() => text = SelectedCard()),
+          text: 'Управление картами',
+          icon: FaIcon(FontAwesomeIcons.dollarSign, color: AppColors.purple),
+          onColorChanged: (color) =>
+              setState(() => currentColor = Colors.purple),
+        ),
+        UserButton(
+          press: () => setState(() => text = UserOrders()),
+          text: 'История заказов',
+          icon: Icon(Icons.credit_card, color: AppColors.purple),
+          onColorChanged: (color) =>
+              setState(() => currentColor = Colors.purple),
+        ),
+        UserButton(
+          press: () => setState(() => text = UserHistory()),
+          text: 'Моя история',
+          icon: FaIcon(FontAwesomeIcons.bookmark, color: AppColors.purple),
+          onColorChanged: (color) =>
+              setState(() => currentColor = Colors.purple),
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Container(
+          width: double.infinity,
+          height: 400,
+          child: (text),
+        )
+      ],
     );
   }
 }

@@ -8,6 +8,8 @@ import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../bot_bar_nav.dart';
+
 class Contacts extends StatelessWidget {
   const Contacts({Key? key}) : super(key: key);
 
@@ -212,6 +214,7 @@ class Contacts extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: BotNavBar(),
     );
   }
 }

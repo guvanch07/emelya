@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:emelya/constants/app_colors.dart';
 import 'package:emelya/core/utils/toast.dart';
+import 'package:emelya/screens/catalog/cotolog_view.dart';
 import 'package:emelya/screens/onboarding/slide_dots.dart';
 import 'package:emelya/screens/onboarding/slide_item.dart';
 import 'package:emelya/screens/onboarding/slide.dart';
@@ -8,6 +9,8 @@ import 'package:emelya/widgets/buttons/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../main.dart';
 
 class Onboarding extends StatefulWidget {
   @override
@@ -128,7 +131,8 @@ class _OnboardingState extends State<Onboarding> {
                 height: 52,
                 child: AppElevatedButton(
                   text: "Далее",
-                  press: _onNextPressed,
+                  press: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CotologView())),
                 ),
               ),
               SizedBox(height: 20.w)

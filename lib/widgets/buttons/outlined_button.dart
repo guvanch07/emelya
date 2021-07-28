@@ -192,7 +192,7 @@ class UserButton extends StatelessWidget {
       this.icon,
       required this.press,
       required this.onColorChanged,
-      required this.selected});
+      this.selected});
 
   final icon;
   final String text;
@@ -200,7 +200,7 @@ class UserButton extends StatelessWidget {
 
   final Function(Color) onColorChanged;
 
-  final bool selected;
+  final selected;
 
   @override
   Widget build(BuildContext context) {
@@ -230,7 +230,7 @@ class UserButton extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 130),
+                padding: const EdgeInsets.only(left: 90),
                 child: Icon(
                   Icons.arrow_forward,
                   color: AppColors.purple,

@@ -4,6 +4,8 @@ import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 
+import '../../bot_bar_nav.dart';
+
 class OrderList extends StatelessWidget {
   const OrderList({Key? key}) : super(key: key);
 
@@ -88,6 +90,7 @@ class OrderList extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BotNavBar(),
     );
   }
 }

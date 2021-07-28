@@ -3,6 +3,8 @@ import 'package:emelya/screens/menu.dart/contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../bot_bar_nav.dart';
+
 class DrawerPage extends StatefulWidget {
   const DrawerPage({Key? key}) : super(key: key);
 
@@ -106,6 +108,7 @@ class _DrawerPageState extends State<DrawerPage> {
           ),
         ),
       ),
+      bottomNavigationBar: BotNavBar(),
     );
   }
 }

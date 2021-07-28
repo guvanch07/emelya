@@ -6,6 +6,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../bot_bar_nav.dart';
 import 'catalog.dart';
 import 'item_selector.dart';
 
@@ -90,6 +91,7 @@ class CotologView extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BotNavBar(),
     );
   }
 }

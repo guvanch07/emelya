@@ -6,6 +6,7 @@ import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../bot_bar_nav.dart';
 import 'checkout.dart';
 
 class PaymentMethod extends StatefulWidget {
@@ -265,6 +266,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ],
         ),
       )),
+      bottomNavigationBar: BotNavBar(),
     );
   }
 }

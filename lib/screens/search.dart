@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../bot_bar_nav.dart';
 import '../main.dart';
 
 class SearchProduct extends StatelessWidget {
@@ -49,6 +50,7 @@ class SearchProduct extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BotNavBar(),
     );
   }
 }

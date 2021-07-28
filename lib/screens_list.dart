@@ -31,15 +31,15 @@ class ScreensList extends StatelessWidget {
               },
               child: const Text('Onboarding'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AppBottomNavBar()),
-                );
-              },
-              child: const Text('Main'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => AppBottomNavBar()),
+            //     );
+            //   },
+            //   child: const Text('Main'),
+            // ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(

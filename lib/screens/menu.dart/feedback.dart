@@ -5,6 +5,8 @@ import 'package:emelya/widgets/text_form_field.dart/feedback_fields.dart';
 import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 
+import '../../bot_bar_nav.dart';
+
 class FeedBackUser extends StatelessWidget {
   const FeedBackUser({Key? key}) : super(key: key);
 
@@ -66,6 +68,7 @@ class FeedBackUser extends StatelessWidget {
           ],
         )),
       ),
+      bottomNavigationBar: BotNavBar(),
     );
   }
 }
