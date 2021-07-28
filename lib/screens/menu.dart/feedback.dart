@@ -62,7 +62,7 @@ class FeedBackUser extends StatelessWidget {
             ),
             AppOutlinedButton(
               press: () {},
-              text: '   Отправить       ',
+              text: 'Отправить            ',
             ),
             //AppBottomNavBar()
           ],

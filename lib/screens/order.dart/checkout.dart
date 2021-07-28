@@ -210,7 +210,7 @@ class CheckoutOrder extends StatelessWidget {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          CheckoutOrder()));
+                                                          App()));
                                             }),
                                       ],
                                     ),

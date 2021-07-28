@@ -25,14 +25,18 @@ class _DrawerPageState extends State<DrawerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      body: Center(
-          child: ElevatedButton(
-        onPressed: _openEndDrawer,
-        child: const Text('Open End Drawer'),
-      )),
-      endDrawer: Drawer(
+    return
+
+        //   key: _scaffoldKey,
+        //   body: Center(
+        //       child: ElevatedButton(
+        //     onPressed: _openEndDrawer,
+        //     child: const Text('Open End Drawer'),
+        //   )),
+        // endDrawer:
+        Container(
+      width: 200,
+      child: Drawer(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -107,8 +111,10 @@ class _DrawerPageState extends State<DrawerPage> {
             ],
           ),
         ),
+        // ),
+
+        //bottomNavigationBar: BotNavBar(),
       ),
-      //bottomNavigationBar: BotNavBar(),
     );
   }
 }
