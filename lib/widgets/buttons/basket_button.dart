@@ -2,7 +2,6 @@ import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:emelya/constants/app_colors.dart';
-import 'package:emelya/screens/order.dart/order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:emelya/core/utils/double.dart';
@@ -38,7 +37,7 @@ class _BasketButtonState extends State<BasketButton> {
   Widget build(BuildContext context) {
     dev.log('root button rebuilded');
 
-    void _incrementCounter() {
+    void incrementCounter() {
       setState(() {
         _price += rand.nextDouble() * 20;
         _count++;
@@ -46,26 +45,23 @@ class _BasketButtonState extends State<BasketButton> {
     }
 
     return Stack(
+      fit: StackFit.expand,
       children: [
-        GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OrderList(),
-            ),
-          ), //_incrementCounter,
-          child: BasketButtonRoot(
-            itemCount: _count,
-            fillColor: AppColors.black,
-            lineColor: AppColors.white,
-            lineWidth: 5,
-          ),
+        BasketButtonRoot(
+          itemCount: _count,
+          fillColor: AppColors.black,
+          lineColor: AppColors.white,
+          lineWidth: 5,
         ),
-        PriceCount(
-          count: _price,
-        ),
+        // Positioned(
+        //   top: 0,
+        //   left: 10,
+        //   child: PriceCount(
+        //     count: _price,
+        //   ),
+        // ),
         Positioned(
-          top: 32,
+          top: 5,
           left: 38.5,
           child: CustomPaint(
             painter: TrianglePainter(
@@ -108,6 +104,7 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
     dev.log('basket icon button rebuilded');
 
     return Stack(
+      // clipBehavior: Clip.none,
       fit: StackFit.expand,
       children: [
         CustomPaint(
@@ -118,15 +115,16 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
           ),
         ),
         Positioned(
-          bottom: -15,
-          child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: 90 / 4, vertical: 150 / 4),
-            child: SvgPicture.asset('assets/icons/basket.svg'),
-          ),
+          bottom: 20,
+          left: 22.8,
+          child: SvgPicture.asset('assets/icons/basket.svg'),
         ),
-        ItemCount(
-          count: widget.itemCount,
+        Positioned(
+          top: 18,
+          left: 35,
+          child: ItemCount(
+            count: widget.itemCount,
+          ),
         ),
       ],
     );
@@ -143,31 +141,24 @@ class ItemCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final containerSize = 90 * 0.22;
     dev.log('item count rebuilded');
 
-    return Positioned(
-      top: containerSize / 1.5 + 33,
-      left: 90 / 2 - containerSize / 2,
-      child: Container(
-        width: containerSize,
-        height: containerSize,
-        decoration: const BoxDecoration(
-          color: AppColors.purple,
-          borderRadius: BorderRadius.all(
-            Radius.circular(100),
-          ),
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: const BoxDecoration(
+        color: AppColors.purple,
+        borderRadius: BorderRadius.all(
+          Radius.circular(100),
         ),
-        child: Center(
-          child: Text(
-            count.toString(),
-            style: const TextStyle(
-              color: AppColors.white,
-              fontFamily: 'Arial',
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+      ),
+      child: Center(
+        child: Text(
+          count.toString(),
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              ?.copyWith(color: AppColors.white),
         ),
       ),
     );
@@ -186,30 +177,21 @@ class PriceCount extends StatelessWidget {
   Widget build(BuildContext context) {
     dev.log('item count rebuilded');
 
-    return Positioned(
-      top: 12,
-      left: 10,
-      child: Stack(
-        fit: StackFit.passthrough,
-        children: [
-          Container(
-            width: 70,
-            height: 25,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              border: Border.all(
-                width: 1.5,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(100),
-              ),
-            ),
-            child: Center(
-              child: Text('${count.toPrice()} р.',
-                  style: Theme.of(context).textTheme.bodyText1),
-            ),
-          ),
-        ],
+    return Container(
+      width: 70,
+      height: 25,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        border: Border.all(
+          width: 1.5,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(100),
+        ),
+      ),
+      child: Center(
+        child: Text('${count.toPrice()} р.',
+            style: Theme.of(context).textTheme.bodyText1),
       ),
     );
   }
@@ -288,13 +270,13 @@ class ButtonBackground extends CustomPainter {
     final paint = Paint();
     paint.color = fillColor;
     paint.style = PaintingStyle.fill;
-    canvas.drawCircle(Offset(90 / 2, 90 / 2 + 30), 90 / 2, paint);
+    canvas.drawCircle(Offset(90 / 2, 90 / 2), 90 / 2, paint);
   }
 
   Rect calculateArcsRect(Size size) {
-    final offest = lineWidth / 2;
-    final arcRect = Offset(offest, offest + 30) &
-        Size(size.width - offest * 2, size.width - offest * 2);
+    final offset = lineWidth / 2;
+    final arcRect = Offset(offset, offset) &
+        Size(size.width - offset * 2, size.width - offset * 2);
     return arcRect;
   }
 
