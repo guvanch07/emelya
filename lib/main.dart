@@ -1,7 +1,10 @@
 import 'dart:developer';
-
 import 'package:emelya/screens/catalog/catalog.dart';
+import 'package:emelya/screens/catalog/cotolog_view.dart';
 import 'package:emelya/screens/menu.dart/menu_list.dart';
+import 'package:emelya/screens/order.dart/order_list.dart';
+import 'package:emelya/screens/personal_account.dart/user_account_view.dart';
+import 'package:emelya/screens/search.dart';
 import 'package:emelya/screens_list.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
 import 'package:emelya/widgets/filter_widget.dart';
@@ -69,13 +72,18 @@ class AppBottomNavBar extends StatefulWidget {
 }
 
 class _AppBottomNavBarState extends State<AppBottomNavBar> {
-  int currentIndex = 3;
+  int currentIndex = 0;
+
+  var pages = [CotologView(), SearchProduct(), UserAccount(), DrawerPage()];
+  var _appPageController = PageController();
 
   void setBottomBarIndex(int index) {
-    log('bnb setted to $index');
+    //log('bnb setted to $index');
     setState(() {
       currentIndex = index;
     });
+    _appPageController.animateToPage(index,
+        duration: Duration(milliseconds: 400), curve: Curves.ease);
   }
 
   Widget _getPage() {
@@ -94,105 +102,131 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: Stack(
-          children: [
-            // _getPage(),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: Container(
-                width: size.width,
-                height: 90 + xOffset,
-                child: Stack(
+
+        child: PageView(
+          scrollDirection: Axis.horizontal,
+          children: pages,
+          onPageChanged: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          controller: _appPageController,
+        ),
+      ),
+      //  body(size),
+      bottomNavigationBar:
+          //BottomNavigationBar(
+          //   items: [],
+          // ),
+          //   );
+          // }
+
+          // Widget body(Size size) {
+          //   return
+          //   SafeArea(
+          //       child: Stack(children: [
+          // const Padding(
+          //   padding: EdgeInsets.only(bottom: 90, top: 50),
+          //   child: CatalogList(),
+          // ),
+          // Positioned(
+          //   bottom: 0,
+          //   left: 0,
+          //   child:
+          Container(
+        width: size.width,
+        height: 90 + xOffset,
+        child: Stack(children: [
+          CustomPaint(
+            size: Size(size.width, 90),
+            painter: BNBCustomPainter(),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CustomPaint(
-                      size: Size(size.width, 90),
-                      painter: BNBCustomPainter(),
+                    GestureDetector(
+                      onTap: () => setBottomBarIndex(0),
+                      child: BottomBarButton(
+                        text: 'Каталог',
+                        icon: 'catalog',
+                        space: 10,
+                        position: 0,
+                        selected: currentIndex,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              GestureDetector(
-                                onTap: () => {
-                                  setBottomBarIndex(0),
-                                },
-                                child: BottomBarButton(
-                                  text: 'Меню',
-                                  icon: 'menu',
-                                  space: 12,
-                                  position: 0,
-                                  selected: currentIndex,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                              GestureDetector(
-                                onTap: () => setBottomBarIndex(1),
-                                child: BottomBarButton(
-                                  text: 'Поиск',
-                                  icon: 'search',
-                                  space: 10,
-                                  position: 1,
-                                  selected: currentIndex,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20.w,
-                        ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                              GestureDetector(
-                                onTap: () => setBottomBarIndex(2),
-                                child: BottomBarButton(
-                                  text: 'Кабинет',
-                                  icon: 'profile',
-                                  space: 10,
-                                  position: 2,
-                                  selected: currentIndex,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 1.w,
-                              ),
-                              GestureDetector(
-                                onTap: () => setBottomBarIndex(3),
-                                child: BottomBarButton(
-                                  text: 'Каталог',
-                                  icon: 'catalog',
-                                  space: 10,
-                                  position: 3,
-                                  selected: currentIndex,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    GestureDetector(
+                      onTap: () => setBottomBarIndex(1),
+                      child: BottomBarButton(
+                        text: 'Поиск',
+                        icon: 'search',
+                        space: 10,
+                        position: 1,
+                        selected: currentIndex,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
                   ],
                 ),
               ),
-            ),
-            Positioned(
+              SizedBox(
+                width: 20.w,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    GestureDetector(
+                      onTap: () => setBottomBarIndex(2),
+                      child: BottomBarButton(
+                        text: 'Кабинет',
+                        icon: 'profile',
+                        space: 10,
+                        position: 2,
+                        selected: currentIndex,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    GestureDetector(
+                      onTap: () => {
+                        setBottomBarIndex(3),
+                      },
+                      child: BottomBarButton(
+                        text: 'Меню',
+                        icon: 'menu',
+                        space: 12,
+                        position: 3,
+                        selected: currentIndex,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          GestureDetector(
+            onTap: () {
+              OrderList();
+            },
+            child: Positioned(
               left: 35.w,
               bottom: 5,
               child: Container(
-                height: 5,
+                height: 1,
+
                 width: 30.w,
                 decoration: BoxDecoration(
                   color: AppColors.white.withOpacity(0.4),
@@ -202,21 +236,25 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                 ),
               ),
             ),
-            const Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 20),
-                child: SizedBox(
-                  height: 120,
-                  width: 90,
-                  child: BasketButton(),
-                ),
+
+          ),
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 1),
+              child: SizedBox(
+                height: 200,
+                width: 90,
+                child: BasketButton(),
               ),
             ),
-          ],
-        ),
+          ),
+        ]),
       ),
     );
+    //     ],
+    //   ),
+    // );
   }
 
   // const Padding(

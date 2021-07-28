@@ -226,6 +226,14 @@ class FilterExpanded extends StatelessWidget {
   }) : super(key: key);
 
   @override
+
+  _FilterExpandedState createState() => _FilterExpandedState();
+}
+
+class _FilterExpandedState extends State<FilterExpanded> {
+  // RangeValues _currentRangeValues = const RangeValues(5, 25);
+
+  @override
   Widget build(BuildContext context) {
     final divider = Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -454,10 +462,17 @@ class WeightCheckbox extends StatelessWidget {
   }
 }
 
-class PricePicker extends StatelessWidget {
+class PricePicker extends StatefulWidget {
   const PricePicker({
     Key? key,
   }) : super(key: key);
+
+  @override
+  _PricePickerState createState() => _PricePickerState();
+}
+
+class _PricePickerState extends State<PricePicker> {
+  int height = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -489,34 +504,70 @@ class PricePicker extends StatelessWidget {
               Container(
                 height: 30,
                 width: 33.w,
-                child: TextFormField(
-                  decoration: inputDecoration,
-                  keyboardType: TextInputType.text,
-                  style: inputTextStyle,
-                ),
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.purple),
+                    borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                child: Center(
+                    child: Text('0',
+                        style: TextStyle(
+                            color: AppColors.purple,
+                            fontSize: 20,
+                            fontWeight: FontWeight.normal))),
+                // TextFormField(
+                //   decoration: inputDecoration,
+                //   keyboardType: TextInputType.text,
+                //   style: inputTextStyle,
               ),
               Text(
                 'до',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               Container(
-                height: 30,
-                width: 33.w,
-                child: TextFormField(
-                  decoration: inputDecoration,
-                  keyboardType: TextInputType.text,
-                  style: inputTextStyle,
-                ),
-              ),
+                  height: 30,
+                  width: 33.w,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.purple),
+                      borderRadius: BorderRadius.all(Radius.circular(9.0))),
+                  child: Center(
+                    child: Text(
+                      height.toString(),
+                      style: TextStyle(
+                          color: AppColors.purple,
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  )
+                  // TextFormField(
+                  //   decoration: inputDecoration,
+                  //   keyboardType: TextInputType.text,
+                  //   style: inputTextStyle,
+                  // ),
+                  ),
             ],
           ),
           const SizedBox(
             height: 5,
           ),
-          Slider(
-            value: 0,
-            onChanged: (value) {},
-            activeColor: AppColors.purple,
+          SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+                inactiveTrackColor: Colors.black,
+                activeTrackColor: AppColors.purple,
+                thumbColor: AppColors.purple,
+                overlayColor: Colors.black45,
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 13.0),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 27.0)),
+            child: Slider(
+              value: height.toDouble(),
+              min: 0.0,
+              max: 50.0,
+              onChanged: (double newValue) {
+                setState(
+                  () {
+                    height = newValue.round();
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),

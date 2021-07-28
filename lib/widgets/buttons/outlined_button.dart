@@ -1,5 +1,7 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/screens/order.dart/add_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppOutlinedButton extends StatelessWidget {
   const AppOutlinedButton({
@@ -100,6 +102,10 @@ class RadioButton extends StatefulWidget {
 class _RadioButtonState extends State<RadioButton> {
   SingingCharacter? _character = SingingCharacter.card;
 
+  int containerIndex = 0;
+
+  var pages = [PayCash(), PayCash(), AddCard()];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -107,14 +113,24 @@ class _RadioButtonState extends State<RadioButton> {
         Theme(
           data: ThemeData(unselectedWidgetColor: AppColors.purple),
           child: ListTile(
-            title: const Text('Наличными при получении'),
+            contentPadding: EdgeInsets.only(
+              left: 8,
+              top: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text(
+              'Наличными при получении',
+              style: kStyleText,
+            ),
             leading: Radio<SingingCharacter>(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               activeColor: AppColors.purple,
               value: SingingCharacter.card,
               groupValue: _character,
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+                  containerIndex = 0;
                 });
               },
             ),
@@ -123,14 +139,20 @@ class _RadioButtonState extends State<RadioButton> {
         Theme(
           data: ThemeData(unselectedWidgetColor: AppColors.purple),
           child: ListTile(
-            title: const Text('Картой при получении'),
+            contentPadding: EdgeInsets.only(
+              left: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text('Картой при получении', style: kStyleText),
             leading: Radio<SingingCharacter>(
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 activeColor: AppColors.purple,
                 value: SingingCharacter.cash,
                 groupValue: _character,
                 onChanged: (SingingCharacter? value) {
                   setState(() {
                     _character = value;
+                    containerIndex = 1;
                   });
                 }),
           ),
@@ -140,20 +162,85 @@ class _RadioButtonState extends State<RadioButton> {
             unselectedWidgetColor: AppColors.purple,
           ),
           child: ListTile(
-            title: const Text('Картой онлайн — Добавить новую карту'),
+            contentPadding: EdgeInsets.only(
+              left: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text('Картой онлайн — Добавить новую карту',
+                style: kStyleText),
             leading: Radio<SingingCharacter>(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               activeColor: AppColors.purple,
               value: SingingCharacter.online,
               groupValue: _character,
               onChanged: (SingingCharacter? value) {
                 setState(() {
                   _character = value;
+                  containerIndex = 2;
                 });
               },
             ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class UserButton extends StatelessWidget {
+  const UserButton(
+      {required this.text,
+      required this.icon,
+      required this.press,
+      required this.onColorChanged,
+      required this.selected});
+
+  final String icon;
+  final String text;
+  final VoidCallback press;
+
+  final Function(Color) onColorChanged;
+
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      child: GestureDetector(
+        onTap: () {
+          press();
+          onColorChanged(selected ? Colors.purple : Colors.transparent);
+        },
+        child: Container(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          height: 40,
+          width: 370,
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.purple),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Row(
+            children: <Widget>[
+              SvgPicture.asset('assets/icons/$icon.svg'),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(text,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.copyWith(color: AppColors.purple)),
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward,
+                color: AppColors.purple,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

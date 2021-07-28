@@ -35,6 +35,11 @@ class _YourOrderState extends State<YourOrder> {
                   height: 118,
                   width: 118,
                   color: Colors.white,
+                  child: Container(
+                      height: 45,
+                      width: 80,
+                      child:
+                          Image(image: AssetImage('assets/images/mango.png'))),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 12),
@@ -66,15 +71,20 @@ class _YourOrderState extends State<YourOrder> {
                       SizedBox(
                         height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          CountOrder(),
-                          Text(
-                            '31,96 р.',
-                            style: kStylePrice,
-                          )
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            CountOrder(),
+                            // SizedBox(
+                            //   width: 40,
+                            // ),
+                            Text(
+                              '31,96 р.',
+                              style: kStylePrice,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -106,6 +116,13 @@ class _YourOrderState extends State<YourOrder> {
                   height: 118,
                   width: 118,
                   color: Colors.white,
+                  child: Container(
+                    width: 80,
+                    height: 45,
+                    child: Image(
+                      image: AssetImage('assets/images/salmon.png'),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 12),
@@ -114,7 +131,7 @@ class _YourOrderState extends State<YourOrder> {
                     textBaseline: TextBaseline.ideographic,
                     children: <Widget>[
                       Text(
-                        "Манго",
+                        "Форрель малосоленая филе",
                         style: TextStyle(
                             fontSize: 12, fontWeight: FontWeight.bold),
                       ),
@@ -137,15 +154,20 @@ class _YourOrderState extends State<YourOrder> {
                       SizedBox(
                         height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          CountOrder(),
-                          Text(
-                            '31,96 р.',
-                            style: kStylePrice,
-                          )
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            CountOrder(),
+                            // SizedBox(
+                            //   width: 40,
+                            // ),
+                            Text(
+                              '31,96 р.',
+                              style: kStylePrice,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
