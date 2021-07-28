@@ -77,28 +77,28 @@ class _UserButState extends State<UserBut> {
             () => text = SelectAdress(),
           ),
           text: 'Настройки',
-          icon: Icon(Icons.settings, color: AppColors.purple),
+          icon: 'settings',
           onColorChanged: (color) =>
               setState(() => currentColor = Colors.purple),
         ),
         UserButton(
           press: () => setState(() => text = SelectedCard()),
           text: 'Управление картами',
-          icon: FaIcon(FontAwesomeIcons.dollarSign, color: AppColors.purple),
+          icon: 'dollar',
           onColorChanged: (color) =>
               setState(() => currentColor = Colors.purple),
         ),
         UserButton(
           press: () => setState(() => text = UserOrders()),
           text: 'История заказов',
-          icon: Icon(Icons.credit_card, color: AppColors.purple),
+          icon: 'history',
           onColorChanged: (color) =>
               setState(() => currentColor = Colors.purple),
         ),
         UserButton(
           press: () => setState(() => text = UserHistory()),
           text: 'Моя история',
-          icon: FaIcon(FontAwesomeIcons.bookmark, color: AppColors.purple),
+          icon: 'favorite',
           onColorChanged: (color) =>
               setState(() => currentColor = Colors.purple),
         ),
