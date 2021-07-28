@@ -14,8 +14,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'constants/app_colors.dart';
 
-const double xOffset = 0;
-
 void main() {
   runApp(MyApp());
 }
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Bottom Nav Bar V2',
+          title: 'Емеля',
           theme: ThemeData(
             visualDensity: VisualDensity.adaptivePlatformDensity,
             textTheme: TextTheme(
@@ -66,12 +64,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AppBottomNavBar extends StatefulWidget {
+class App extends StatefulWidget {
   @override
-  _AppBottomNavBarState createState() => _AppBottomNavBarState();
+  _AppState createState() => _AppState();
 }
 
-class _AppBottomNavBarState extends State<AppBottomNavBar> {
+class _AppState extends State<App> {
   int currentIndex = 0;
 
   var pages = [CotologView(), SearchProduct(), UserAccount(), DrawerPage()];
@@ -101,8 +99,8 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: SafeArea(
 
+      body: SafeArea(
         child: PageView(
           scrollDirection: Axis.horizontal,
           children: pages,
@@ -136,7 +134,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
           //   child:
           Container(
         width: size.width,
-        height: 90 + xOffset,
+        height: 90,
         child: Stack(children: [
           CustomPaint(
             size: Size(size.width, 90),
@@ -217,33 +215,31 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: () {
-              OrderList();
-            },
-            child: Positioned(
-              left: 35.w,
-              bottom: 5,
-              child: Container(
-                height: 1,
-
-                width: 30.w,
-                decoration: BoxDecoration(
-                  color: AppColors.white.withOpacity(0.4),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(100),
-                  ),
-                ),
-              ),
-            ),
-
-          ),
-          const Align(
-            alignment: Alignment.bottomCenter,
+          // GestureDetector(
+          //   onTap: () {
+          //     OrderList();
+          //   },
+          //   child: Positioned(
+          //     left: 35.w,
+          //     bottom: 5,
+          //     child: Container(
+          //       height: 1,
+          //       width: 30.w,
+          //       decoration: BoxDecoration(
+          //         color: AppColors.white.withOpacity(0.4),
+          //         borderRadius: const BorderRadius.all(
+          //           Radius.circular(100),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          const Center(
+            heightFactor: 0.4,
             child: Padding(
               padding: EdgeInsets.only(bottom: 1),
               child: SizedBox(
-                height: 200,
+                height: 90,
                 width: 90,
                 child: BasketButton(),
               ),
@@ -327,24 +323,24 @@ class BNBCustomPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Path path_0 = Path();
-    path_0.moveTo(size.width, size.height + xOffset);
-    path_0.lineTo(size.width * -0.1183575, size.height * 0.9891446 + xOffset);
-    path_0.lineTo(size.width * -0.1183575, size.height * 0.1358696 + xOffset);
+    path_0.moveTo(size.width, size.height);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.9891446);
+    path_0.lineTo(size.width * -0.1183575, size.height * 0.1358696);
     path_0.cubicTo(
         size.width * 0.2402821,
-        size.height * -0.1449043 + xOffset,
+        size.height * -0.1449043,
         size.width * 0.3241667,
-        size.height * 0.1684783 + xOffset,
+        size.height * 0.1684783,
         size.width * 0.6181425,
-        size.height * 0.09616098 + xOffset);
+        size.height * 0.09616098);
     path_0.cubicTo(
         size.width * 0.9065000,
-        size.height * -0.05978859 + xOffset,
+        size.height * -0.05978859,
         size.width * 0.9952488,
-        size.height * 0.01630826 + xOffset,
+        size.height * 0.01630826,
         size.width * 1.119254,
-        size.height * 0.1684783 + xOffset);
-    path_0.lineTo(size.width, size.height + xOffset);
+        size.height * 0.1684783);
+    path_0.lineTo(size.width, size.height);
     path_0.close();
 
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;

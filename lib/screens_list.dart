@@ -44,7 +44,7 @@ class ScreensList extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AppBottomNavBar()),
+                  MaterialPageRoute(builder: (context) => App()),
                 );
               },
               child: const Text('Main'),

@@ -220,13 +220,12 @@ class _SortDialogState extends State<SortDialog> {
   }
 }
 
-class FilterExpanded extends StatelessWidget {
+class FilterExpanded extends StatefulWidget {
   const FilterExpanded({
     Key? key,
   }) : super(key: key);
 
   @override
-
   _FilterExpandedState createState() => _FilterExpandedState();
 }
 

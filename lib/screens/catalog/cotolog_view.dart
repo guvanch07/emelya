@@ -26,7 +26,7 @@ class CotologView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 28, bottom: 15),
                 child: Text(
                   'Наш каталог товаров',
-                  style: kStyleTitleh1,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
               Padding(

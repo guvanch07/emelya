@@ -27,86 +27,83 @@ class _UserAccountState extends State<UserAccount> {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Flexible(
-          child: Column(
-            children: <Widget>[
-              TopScreen(),
-              Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 18),
-                child: Text(
-                  'Личный кабинет',
-                  style: kStyleTitleh1,
+        child: Column(
+          children: <Widget>[
+            TopScreen(),
+            Padding(
+              padding: const EdgeInsets.only(top: 40, bottom: 18),
+              child: Text(
+                'Личный кабинет',
+                style: kStyleTitleh1,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: CircleAvatar(
+                radius: 60,
+                backgroundColor: Color(0xFFEFEFEF),
+                child: Icon(
+                  Icons.person_outline_rounded,
+                  size: 100,
+                  color: Colors.white,
                 ),
               ),
-              GestureDetector(
-                onTap: () {},
-                child: CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Color(0xFFEFEFEF),
-                  child: Icon(
-                    Icons.person_outline_rounded,
-                    size: 100,
-                    color: Colors.white,
+            ),
+            Text(
+              'Виктория Вика',
+              style: kStyleTitleh2,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                UserButton(
+                  press: () => setState(
+                    () => text = SelectAdress(),
                   ),
+                  text: 'Настройки',
+                  icon: 'settings',
+                  onColorChanged: (color) =>
+                      setState(() => currentColor = Colors.purple),
+                  selected: false,
                 ),
-              ),
-              Text(
-                'Виктория Вика',
-                style: kStyleTitleh2,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  UserButton(
-                    press: () => setState(
-                      () => text = SelectAdress(),
-                    ),
-                    text: 'Настройки',
-                    icon: 'settings',
-                    onColorChanged: (color) =>
-                        setState(() => currentColor = Colors.purple),
-                    selected: false,
-                  ),
-                  UserButton(
-                    press: () => setState(() => text = SelectedCard()),
-                    text: 'Управление картами',
-                    icon: 'dollar',
-                    onColorChanged: (color) =>
-                        setState(() => currentColor = Colors.purple),
-                    selected: true,
-                  ),
-                  UserButton(
-                    press: () => setState(() => text = UserOrders()),
-                    text: 'История заказов',
-                    icon: 'card',
-                    onColorChanged: (color) =>
-                        setState(() => currentColor = Colors.purple),
-                    selected: false,
-                  ),
-                  UserButton(
-                    press: () => setState(() => text = UserHistory()),
-                    text: 'Моя история',
-                    icon: 'history',
-                    onColorChanged: (color) =>
-                        setState(() => currentColor = Colors.purple),
-                    selected: true,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                width: double.infinity,
-                height: 400,
-                child: (text),
-              )
-            ],
-          ),
+                UserButton(
+                  press: () => setState(() => text = SelectedCard()),
+                  text: 'Управление картами',
+                  icon: 'dollar',
+                  onColorChanged: (color) =>
+                      setState(() => currentColor = Colors.purple),
+                  selected: true,
+                ),
+                UserButton(
+                  press: () => setState(() => text = UserOrders()),
+                  text: 'История заказов',
+                  icon: 'card',
+                  onColorChanged: (color) =>
+                      setState(() => currentColor = Colors.purple),
+                  selected: false,
+                ),
+                UserButton(
+                  press: () => setState(() => text = UserHistory()),
+                  text: 'Моя история',
+                  icon: 'history',
+                  onColorChanged: (color) =>
+                      setState(() => currentColor = Colors.purple),
+                  selected: true,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: double.infinity,
+              height: 400,
+              child: (text),
+            )
+          ],
         ),
       )),
     );
