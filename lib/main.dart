@@ -1,10 +1,21 @@
+import 'dart:developer';
+//import 'package:google_fonts/google_fonts.dart';
+import 'package:emelya/screens/catalog/catalog.dart';
+import 'package:emelya/screens/catalog/cotolog_view.dart';
+import 'package:emelya/screens/menu.dart/menu_list.dart';
+import 'package:emelya/screens/order.dart/order_list.dart';
+import 'package:emelya/screens/personal_account.dart/user_account_view.dart';
+import 'package:emelya/screens/search.dart';
 import 'package:emelya/screens_list.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
+import 'package:emelya/widgets/filter_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
-//import 'package:google_fonts/google_fonts.dart';
+
 import 'constants/app_colors.dart';
+
+const double xOffset = 0;
 
 void main() {
   runApp(MyApp());
@@ -64,10 +75,16 @@ class AppBottomNavBar extends StatefulWidget {
 class _AppBottomNavBarState extends State<AppBottomNavBar> {
   int currentIndex = 0;
 
-  setBottomBarIndex(int index) {
+  var pages = [CotologView(), SearchProduct(), UserAccount(), DrawerPage()];
+  var _appPageController = PageController();
+
+  void setBottomBarIndex(int index) {
+    //log('bnb setted to $index');
     setState(() {
       currentIndex = index;
     });
+    _appPageController.animateToPage(index,
+        duration: Duration(milliseconds: 400), curve: Curves.ease);
   }
 
   @override
@@ -75,126 +92,158 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white.withAlpha(55),
-      body: bottomNavBar(size),
-    );
-  }
+      backgroundColor: AppColors.backgroundColor,
+      body: SafeArea(
+        child: PageView(
+          scrollDirection: Axis.horizontal,
+          children: pages,
+          onPageChanged: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          controller: _appPageController,
+        ),
+      ),
+      //  body(size),
+      bottomNavigationBar:
+          //BottomNavigationBar(
+          //   items: [],
+          // ),
+          //   );
+          // }
 
-  Stack bottomNavBar(Size size) {
-    return Stack(
-      children: [
-        Positioned(
-          bottom: 0,
-          left: 0,
-          child: Container(
-            width: size.width,
-            height: 150,
-            child: Stack(
-              children: [
-                CustomPaint(
-                  size: Size(size.width, 90),
-                  painter: BNBCustomPainter(),
-                ),
-                const Center(
-                  child: SizedBox(
-                    height: 120,
-                    width: 90,
-                    child: BasketButton(),
-                  ),
-                ),
-                Row(
+          // Widget body(Size size) {
+          //   return
+          //   SafeArea(
+          //       child: Stack(children: [
+          // const Padding(
+          //   padding: EdgeInsets.only(bottom: 90, top: 50),
+          //   child: CatalogList(),
+          // ),
+          // Positioned(
+          //   bottom: 0,
+          //   left: 0,
+          //   child:
+          Container(
+        width: size.width,
+        height: 90 + xOffset,
+        child: Stack(children: [
+          CustomPaint(
+            size: Size(size.width, 90),
+            painter: BNBCustomPainter(),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          GestureDetector(
-                            onTap: () => currentIndex = 0,
-                            child: BottomBarButton(
-                              text: 'Меню',
-                              icon: 'menu',
-                              space: 12,
-                              position: 0,
-                              selected: currentIndex,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          GestureDetector(
-                            onTap: () => currentIndex = 1,
-                            child: BottomBarButton(
-                              text: 'Поиск',
-                              icon: 'search',
-                              space: 10,
-                              position: 1,
-                              selected: currentIndex,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () => setBottomBarIndex(0),
+                      child: BottomBarButton(
+                        text: 'Каталог',
+                        icon: 'catalog',
+                        space: 10,
+                        position: 0,
+                        selected: currentIndex,
                       ),
                     ),
                     SizedBox(
-                      width: 20.w,
+                      width: 1.w,
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          GestureDetector(
-                            onTap: () => currentIndex = 2,
-                            child: BottomBarButton(
-                              text: 'Кабинет',
-                              icon: 'profile',
-                              space: 10,
-                              position: 2,
-                              selected: currentIndex,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 1.w,
-                          ),
-                          GestureDetector(
-                            onTap: () => currentIndex = 3,
-                            child: BottomBarButton(
-                              text: 'Каталог',
-                              icon: 'catalog',
-                              space: 10,
-                              position: 3,
-                              selected: currentIndex,
-                            ),
-                          ),
-                        ],
+                    GestureDetector(
+                      onTap: () => setBottomBarIndex(1),
+                      child: BottomBarButton(
+                        text: 'Поиск',
+                        icon: 'search',
+                        space: 10,
+                        position: 1,
+                        selected: currentIndex,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 20.w,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    GestureDetector(
+                      onTap: () => setBottomBarIndex(2),
+                      child: BottomBarButton(
+                        text: 'Кабинет',
+                        icon: 'profile',
+                        space: 10,
+                        position: 2,
+                        selected: currentIndex,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    GestureDetector(
+                      onTap: () => {
+                        setBottomBarIndex(3),
+                      },
+                      child: BottomBarButton(
+                        text: 'Меню',
+                        icon: 'menu',
+                        space: 12,
+                        position: 3,
+                        selected: currentIndex,
                       ),
                     ),
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
-        ),
-        Positioned(
-          left: 35.w,
-          bottom: 5,
-          child: Container(
-            height: 5,
-            width: 30.w,
-            decoration: BoxDecoration(
-              color: AppColors.white.withOpacity(0.4),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(100),
+          GestureDetector(
+            onTap: () {
+              OrderList();
+            },
+            child: Positioned(
+              left: 35.w,
+              bottom: 5,
+              child: Container(
+                height: 1,
+                width: 30.w,
+                decoration: BoxDecoration(
+                  color: AppColors.white.withOpacity(0.4),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(100),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 1),
+              child: SizedBox(
+                height: 200,
+                width: 90,
+                child: BasketButton(),
+              ),
+            ),
+          ),
+        ]),
+      ),
     );
+    //     ],
+    //   ),
+    // );
   }
 }
 
@@ -258,8 +307,6 @@ class _BottomBarButtonState extends State<BottomBarButton> {
 }
 
 class BNBCustomPainter extends CustomPainter {
-  final xOffset = 60;
-
   @override
   void paint(Canvas canvas, Size size) {
     final Path path_0 = Path();
@@ -286,6 +333,7 @@ class BNBCustomPainter extends CustomPainter {
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
     paint_0_fill.color = AppColors.purple;
     canvas.drawPath(path_0, paint_0_fill);
+    // canvas.drawColor(AppColors.backgroundColor, BlendMode.darken);
   }
 
   @override

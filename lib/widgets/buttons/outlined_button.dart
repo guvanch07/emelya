@@ -1,4 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/screens/order.dart/add_card.dart';
 import 'package:flutter/material.dart';
 
 class AppOutlinedButton extends StatelessWidget {
@@ -48,12 +49,7 @@ class AppOutlinedButton extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 35)),
         ),
         // padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
-        //shadowColor: color ?? AppColors.purple,
-        //backgroundColor: color ?? AppColors.white,
-        side: const BorderSide(
-          width: 1,
-          color: AppColors.purple,
-        ),
+        side: const BorderSide(width: 1, color: AppColors.purple),
       ),
       onPressed: press,
       child: Text(
@@ -70,9 +66,12 @@ class AppOutlinedButton extends StatelessWidget {
 }
 
 class CheckBoxButton extends StatelessWidget {
-  const CheckBoxButton({required this.press, required this.child});
+  const CheckBoxButton(
+      {required this.press, required this.child, this.shape, this.radius});
   final VoidCallback press;
   final Widget child;
+  final shape;
+  final radius;
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +82,164 @@ class CheckBoxButton extends StatelessWidget {
         child: child,
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.purple),
-          borderRadius: BorderRadius.circular(7.0),
+          borderRadius: radius,
+          shape: shape,
         ),
       ),
       onTap: press,
+    );
+  }
+}
+
+enum SingingCharacter { card, cash, online }
+
+class RadioButton extends StatefulWidget {
+  @override
+  _RadioButtonState createState() => _RadioButtonState();
+}
+
+class _RadioButtonState extends State<RadioButton> {
+  SingingCharacter? _character = SingingCharacter.card;
+
+  int containerIndex = 0;
+
+  var pages = [PayCash(), PayCash(), AddCard()];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Theme(
+          data: ThemeData(unselectedWidgetColor: AppColors.purple),
+          child: ListTile(
+            contentPadding: EdgeInsets.only(
+              left: 8,
+              top: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text(
+              'Наличными при получении',
+              style: kStyleText,
+            ),
+            leading: Radio<SingingCharacter>(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              activeColor: AppColors.purple,
+              value: SingingCharacter.card,
+              groupValue: _character,
+              onChanged: (SingingCharacter? value) {
+                setState(() {
+                  _character = value;
+                  containerIndex = 0;
+                });
+              },
+            ),
+          ),
+        ),
+        Theme(
+          data: ThemeData(unselectedWidgetColor: AppColors.purple),
+          child: ListTile(
+            contentPadding: EdgeInsets.only(
+              left: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text('Картой при получении', style: kStyleText),
+            leading: Radio<SingingCharacter>(
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                activeColor: AppColors.purple,
+                value: SingingCharacter.cash,
+                groupValue: _character,
+                onChanged: (SingingCharacter? value) {
+                  setState(() {
+                    _character = value;
+                    containerIndex = 1;
+                  });
+                }),
+          ),
+        ),
+        Theme(
+          data: ThemeData(
+            unselectedWidgetColor: AppColors.purple,
+          ),
+          child: ListTile(
+            contentPadding: EdgeInsets.only(
+              left: 8,
+            ),
+            visualDensity: VisualDensity(vertical: -4),
+            title: const Text('Картой онлайн — Добавить новую карту',
+                style: kStyleText),
+            leading: Radio<SingingCharacter>(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              activeColor: AppColors.purple,
+              value: SingingCharacter.online,
+              groupValue: _character,
+              onChanged: (SingingCharacter? value) {
+                setState(() {
+                  _character = value;
+                  containerIndex = 2;
+                });
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class UserButton extends StatelessWidget {
+  const UserButton(
+      {required this.text,
+      this.icon,
+      required this.press,
+      required this.onColorChanged,
+      required this.selected});
+
+  final icon;
+  final String text;
+  final VoidCallback press;
+
+  final Function(Color) onColorChanged;
+
+  final bool selected;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      child: GestureDetector(
+        onTap: () {
+          press();
+          onColorChanged(selected ? Colors.purple : Colors.transparent);
+        },
+        child: Container(
+          padding: EdgeInsets.only(left: 20, right: 19),
+          height: 40,
+          width: 370,
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.purple),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Row(
+            children: <Widget>[
+              icon,
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  text,
+                  style: TextStyle(color: AppColors.purple),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 130),
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: AppColors.purple,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

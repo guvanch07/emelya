@@ -37,6 +37,7 @@ class FeedBackUser extends StatelessWidget {
             FeedFields(
               text: 'Ваш E-mail',
               keybord: TextInputType.emailAddress,
+              width: 370,
               height: 55,
             ),
             SizedBox(
@@ -45,11 +46,13 @@ class FeedBackUser extends StatelessWidget {
             FeedFields(
               text: 'Ваш номер телефона',
               keybord: TextInputType.number,
+              width: 370,
               height: 55,
             ),
             SizedBox(height: 18),
             FeedFields(
               text: 'Напишите свое предложение',
+              width: 370,
               height: 150,
             ),
             SizedBox(

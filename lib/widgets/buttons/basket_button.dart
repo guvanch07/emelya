@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/screens/order.dart/order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:emelya/core/utils/double.dart';
@@ -48,7 +49,12 @@ class _BasketButtonState extends State<BasketButton> {
     return Stack(
       children: [
         GestureDetector(
-          onTap: _incrementCounter,
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OrderList(),
+            ),
+          ), //_incrementCounter,
           child: BasketButtonRoot(
             itemCount: _count,
             fillColor: AppColors.black,
@@ -61,7 +67,7 @@ class _BasketButtonState extends State<BasketButton> {
           count: _price,
         ),
         Positioned(
-          top: 34,
+          top: 32,
           left: 38.5,
           child: CustomPaint(
             painter: TrianglePainter(
