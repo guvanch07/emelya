@@ -2,7 +2,6 @@ import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:emelya/constants/app_colors.dart';
-import 'package:emelya/screens/order.dart/order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:emelya/core/utils/double.dart';
@@ -36,10 +35,9 @@ class _BasketButtonState extends State<BasketButton> {
 
   @override
   Widget build(BuildContext context) {
-    const double buttonSize = 90;
     dev.log('root button rebuilded');
 
-    void _incrementCounter() {
+    void incrementCounter() {
       setState(() {
         _price += rand.nextDouble() * 20;
         _count++;
@@ -47,27 +45,23 @@ class _BasketButtonState extends State<BasketButton> {
     }
 
     return Stack(
+      fit: StackFit.expand,
       children: [
-        GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OrderList(),
-            ),
-          ), //_incrementCounter,
-          child: BasketButtonRoot(
-            itemCount: _count,
-            fillColor: AppColors.black,
-            lineColor: AppColors.white,
-            lineWidth: 5,
-            size: buttonSize,
-          ),
+        BasketButtonRoot(
+          itemCount: _count,
+          fillColor: AppColors.black,
+          lineColor: AppColors.white,
+          lineWidth: 5,
         ),
-        PriceCount(
-          count: _price,
-        ),
+        // Positioned(
+        //   top: 0,
+        //   left: 10,
+        //   child: PriceCount(
+        //     count: _price,
+        //   ),
+        // ),
         Positioned(
-          top: 32,
+          top: 5,
           left: 38.5,
           child: CustomPaint(
             painter: TrianglePainter(
@@ -89,14 +83,12 @@ class _BasketButtonState extends State<BasketButton> {
 class BasketButtonRoot extends StatefulWidget {
   const BasketButtonRoot({
     Key? key,
-    required this.size,
     required this.itemCount,
     required this.fillColor,
     required this.lineColor,
     required this.lineWidth,
   }) : super(key: key);
 
-  final double size;
   final int itemCount;
   final Color fillColor;
   final Color lineColor;
@@ -112,27 +104,27 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
     dev.log('basket icon button rebuilded');
 
     return Stack(
+      // clipBehavior: Clip.none,
       fit: StackFit.expand,
       children: [
         CustomPaint(
           painter: ButtonBackground(
-            size: widget.size,
             fillColor: widget.fillColor,
             lineColor: widget.lineColor,
             lineWidth: widget.lineWidth,
           ),
         ),
         Positioned(
-          bottom: -15,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: widget.size / 4, vertical: 150 / 4),
-            child: SvgPicture.asset('assets/icons/basket.svg'),
-          ),
+          bottom: 20,
+          left: 22.8,
+          child: SvgPicture.asset('assets/icons/basket.svg'),
         ),
-        ItemCount(
-          size: widget.size,
-          count: widget.itemCount,
+        Positioned(
+          top: 18,
+          left: 35,
+          child: ItemCount(
+            count: widget.itemCount,
+          ),
         ),
       ],
     );
@@ -143,39 +135,30 @@ class ItemCount extends StatelessWidget {
   const ItemCount({
     Key? key,
     required this.count,
-    required this.size,
   }) : super(key: key);
 
   final int count;
-  final double size;
 
   @override
   Widget build(BuildContext context) {
-    final containerSize = size * 0.22;
     dev.log('item count rebuilded');
 
-    return Positioned(
-      top: containerSize / 1.5 + 33,
-      left: size / 2 - containerSize / 2,
-      child: Container(
-        width: containerSize,
-        height: containerSize,
-        decoration: const BoxDecoration(
-          color: AppColors.purple,
-          borderRadius: BorderRadius.all(
-            Radius.circular(100),
-          ),
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: const BoxDecoration(
+        color: AppColors.purple,
+        borderRadius: BorderRadius.all(
+          Radius.circular(100),
         ),
-        child: Center(
-          child: Text(
-            count.toString(),
-            style: const TextStyle(
-              color: AppColors.white,
-              fontFamily: 'Arial',
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+      ),
+      child: Center(
+        child: Text(
+          count.toString(),
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              ?.copyWith(color: AppColors.white),
         ),
       ),
     );
@@ -194,30 +177,21 @@ class PriceCount extends StatelessWidget {
   Widget build(BuildContext context) {
     dev.log('item count rebuilded');
 
-    return Positioned(
-      top: 12,
-      left: 10,
-      child: Stack(
-        fit: StackFit.passthrough,
-        children: [
-          Container(
-            width: 70,
-            height: 25,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              border: Border.all(
-                width: 1.5,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(100),
-              ),
-            ),
-            child: Center(
-              child: Text('${count.toPrice()} р.',
-                  style: Theme.of(context).textTheme.bodyText1),
-            ),
-          ),
-        ],
+    return Container(
+      width: 70,
+      height: 25,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        border: Border.all(
+          width: 1.5,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(100),
+        ),
+      ),
+      child: Center(
+        child: Text('${count.toPrice()} р.',
+            style: Theme.of(context).textTheme.bodyText1),
       ),
     );
   }
@@ -261,13 +235,11 @@ class ButtonBackground extends CustomPainter {
     required this.fillColor,
     required this.lineColor,
     required this.lineWidth,
-    required this.size,
   });
 
   final Color fillColor;
   final Color lineColor;
   final double lineWidth;
-  final double size;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -298,14 +270,13 @@ class ButtonBackground extends CustomPainter {
     final paint = Paint();
     paint.color = fillColor;
     paint.style = PaintingStyle.fill;
-    canvas.drawCircle(
-        Offset(this.size / 2, this.size / 2 + 30), this.size / 2, paint);
+    canvas.drawCircle(Offset(90 / 2, 90 / 2), 90 / 2, paint);
   }
 
   Rect calculateArcsRect(Size size) {
-    final offest = lineWidth / 2;
-    final arcRect = Offset(offest, offest + 30) &
-        Size(size.width - offest * 2, size.width - offest * 2);
+    final offset = lineWidth / 2;
+    final arcRect = Offset(offset, offset) &
+        Size(size.width - offset * 2, size.width - offset * 2);
     return arcRect;
   }
 
