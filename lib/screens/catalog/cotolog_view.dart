@@ -27,7 +27,7 @@ class CotologView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 28, bottom: 15),
                 child: Text(
                   'Наш каталог товаров',
-                  style: kStyleTitleh1,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
               Padding(
@@ -86,12 +86,12 @@ class CotologView extends StatelessWidget {
               ),
               Filter(),
               Container(
-                  height: 400, width: double.infinity, child: CatalogList()),
+                  height: 600, width: double.infinity, child: CatalogList()),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

@@ -68,7 +68,7 @@ class FeedBackUser extends StatelessWidget {
           ],
         )),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

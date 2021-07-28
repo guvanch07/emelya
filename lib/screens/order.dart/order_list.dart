@@ -90,7 +90,7 @@ class OrderList extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

@@ -131,8 +131,8 @@ class _OnboardingState extends State<Onboarding> {
                 height: 52,
                 child: AppElevatedButton(
                   text: "Далее",
-                  press: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CotologView())),
+                  press: () => Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => App())),
                 ),
               ),
               SizedBox(height: 20.w)

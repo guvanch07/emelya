@@ -266,7 +266,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ],
         ),
       )),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

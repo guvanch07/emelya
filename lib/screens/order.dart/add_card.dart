@@ -89,7 +89,7 @@ class _AddCardState extends State<AddCard> {
           ),
         ),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

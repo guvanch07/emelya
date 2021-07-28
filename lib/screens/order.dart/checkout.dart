@@ -234,7 +234,7 @@ class CheckoutOrder extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

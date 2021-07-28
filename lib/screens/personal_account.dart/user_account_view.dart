@@ -11,13 +11,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../bot_bar_nav.dart';
 
-class UserAccount extends StatelessWidget {
+class UserAccount extends StatefulWidget {
+  @override
+  _UserAccountState createState() => _UserAccountState();
+}
+
+class _UserAccountState extends State<UserAccount> {
+  Widget text = SelectAdress();
+  Color currentColor = Colors.transparent;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget>[
               TopScreen(),
@@ -47,70 +53,116 @@ class UserAccount extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              UserBut(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  UserButton(
+                    press: () => setState(
+                      () => text = SelectAdress(),
+                    ),
+                    text: 'Настройки',
+                    icon: 'settings',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: false,
+                  ),
+                  UserButton(
+                    press: () => setState(() => text = SelectedCard()),
+                    text: 'Управление картами',
+                    icon: 'dollar',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: true,
+                  ),
+                  UserButton(
+                    press: () => setState(() => text = UserOrders()),
+                    text: 'История заказов',
+                    icon: 'card',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: false,
+                  ),
+                  UserButton(
+                    press: () => setState(() => text = UserHistory()),
+                    text: 'Моя история',
+                    icon: 'history',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: true,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                width: double.infinity,
+                height: 400,
+                child: (text),
+              )
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }
 
-class UserBut extends StatefulWidget {
-  const UserBut({Key? key}) : super(key: key);
+// class UserBut extends StatefulWidget {
+//   const UserBut({Key? key}) : super(key: key);
 
-  @override
-  _UserButState createState() => _UserButState();
-}
+//   @override
+//   _UserButState createState() => _UserButState();
+// }
 
-class _UserButState extends State<UserBut> {
-  Widget text = SelectAdress();
-  Color currentColor = Colors.transparent;
+// class _UserButState extends State<UserBut> {
+//   Widget text = SelectAdress();
+//   Color currentColor = Colors.transparent;
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        UserButton(
-          press: () => setState(
-            () => text = SelectAdress(),
-          ),
-          text: 'Настройки',
-          icon: 'settings',
-          onColorChanged: (color) =>
-              setState(() => currentColor = Colors.purple),
-        ),
-        UserButton(
-          press: () => setState(() => text = SelectedCard()),
-          text: 'Управление картами',
-          icon: 'dollar',
-          onColorChanged: (color) =>
-              setState(() => currentColor = Colors.purple),
-        ),
-        UserButton(
-          press: () => setState(() => text = UserOrders()),
-          text: 'История заказов',
-          icon: 'history',
-          onColorChanged: (color) =>
-              setState(() => currentColor = Colors.purple),
-        ),
-        UserButton(
-          press: () => setState(() => text = UserHistory()),
-          text: 'Моя история',
-          icon: 'favorite',
-          onColorChanged: (color) =>
-              setState(() => currentColor = Colors.purple),
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Container(
-          width: double.infinity,
-          height: 400,
-          child: (text),
-        )
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: <Widget>[
+//         UserButton(
+//           press: () => setState(
+//             () => text = SelectAdress(),
+//           ),
+//           text: 'Настройки',
+//           icon: 'settings',
+//           onColorChanged: (color) =>
+//               setState(() => currentColor = Colors.purple),
+//         ),
+//         UserButton(
+//           press: () => setState(() => text = SelectedCard()),
+//           text: 'Управление картами',
+//           icon: 'dollar',
+//           onColorChanged: (color) =>
+//               setState(() => currentColor = Colors.purple),
+//         ),
+//         UserButton(
+//           press: () => setState(() => text = UserOrders()),
+//           text: 'История заказов',
+//           icon: 'history',
+//           onColorChanged: (color) =>
+//               setState(() => currentColor = Colors.purple),
+//         ),
+//         UserButton(
+//           press: () => setState(() => text = UserHistory()),
+//           text: 'Моя история',
+//           icon: 'favorite',
+//           onColorChanged: (color) =>
+//               setState(() => currentColor = Colors.purple),
+//         ),
+//         SizedBox(
+//           height: 15,
+//         ),
+//         Container(
+//           width: double.infinity,
+//           height: 400,
+//           child: (text),
+//         )
+//       ],
+//     );
+//   }
+// }

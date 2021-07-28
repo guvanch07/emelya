@@ -108,7 +108,7 @@ class _DrawerPageState extends State<DrawerPage> {
           ),
         ),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

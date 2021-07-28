@@ -12,82 +12,87 @@ class Filter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        ExpandableNotifier(
-          child: ScrollOnExpand(
-            child: ExpandablePanel(
-              theme: const ExpandableThemeData(
-                headerAlignment: ExpandablePanelHeaderAlignment.center,
-                tapBodyToExpand: true,
-                tapBodyToCollapse: true,
-                hasIcon: false,
-              ),
-              header: Container(
-                color: AppColors.white,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 15, 17, 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 130),
+      child: SingleChildScrollView(
+        child: Stack(
+          children: [
+            ExpandableNotifier(
+              child: ScrollOnExpand(
+                child: ExpandablePanel(
+                  theme: const ExpandableThemeData(
+                    headerAlignment: ExpandablePanelHeaderAlignment.center,
+                    tapBodyToExpand: true,
+                    tapBodyToCollapse: true,
+                    hasIcon: false,
+                  ),
+                  header: Container(
+                    color: AppColors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 15, 17, 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SvgPicture.asset('assets/icons/filter.svg'),
-                          const SizedBox(
-                            width: 15,
+                          Row(
+                            children: [
+                              SvgPicture.asset('assets/icons/filter.svg'),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                'Фильтр',
+                                style: Theme.of(context).textTheme.bodyText1,
+                              )
+                            ],
                           ),
-                          Text(
-                            'Фильтр',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          )
                         ],
                       ),
-                    ],
+                    ),
                   ),
+                  expanded: const FilterExpanded(),
+                  collapsed: Container(),
                 ),
               ),
-              expanded: const FilterExpanded(),
-              collapsed: Container(),
             ),
-          ),
+            Positioned(
+              top: 17.5,
+              right: 17,
+              child: GestureDetector(
+                onTap: () => showGeneralDialog(
+                  barrierDismissible: false,
+                  barrierColor: Colors.black.withOpacity(0.5),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  context: context,
+                  pageBuilder: (context, anim1, anim2) {
+                    return const SafeArea(child: SortDialog());
+                  },
+                  transitionBuilder: (context, anim1, anim2, child) {
+                    return SlideTransition(
+                      position: Tween(
+                        begin: const Offset(0, -1),
+                        end: const Offset(0, 0),
+                      ).animate(anim1),
+                      child: child,
+                    );
+                  },
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      'По популярности',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    SvgPicture.asset('assets/icons/chevron_down.svg'),
+                  ],
+                ),
+              ),
+            )
+          ],
         ),
-        Positioned(
-          top: 17.5,
-          right: 17,
-          child: GestureDetector(
-            onTap: () => showGeneralDialog(
-              barrierDismissible: false,
-              barrierColor: Colors.black.withOpacity(0.5),
-              transitionDuration: const Duration(milliseconds: 400),
-              context: context,
-              pageBuilder: (context, anim1, anim2) {
-                return const SafeArea(child: SortDialog());
-              },
-              transitionBuilder: (context, anim1, anim2, child) {
-                return SlideTransition(
-                  position: Tween(
-                    begin: const Offset(0, -1),
-                    end: const Offset(0, 0),
-                  ).animate(anim1),
-                  child: child,
-                );
-              },
-            ),
-            child: Row(
-              children: [
-                Text(
-                  'По популярности',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                SvgPicture.asset('assets/icons/chevron_down.svg'),
-              ],
-            ),
-          ),
-        )
-      ],
+      ),
     );
   }
 }
@@ -399,6 +404,18 @@ class WeightPicker extends StatelessWidget {
         ),
         WeightCheckbox(
           weight: '100 г',
+          value: val2,
+        ),
+        WeightCheckbox(
+          weight: '200 г',
+          value: val2,
+        ),
+        WeightCheckbox(
+          weight: '300 г',
+          value: val2,
+        ),
+        WeightCheckbox(
+          weight: '400 г',
           value: val2,
         ),
         const SizedBox(

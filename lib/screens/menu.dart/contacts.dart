@@ -214,7 +214,7 @@ class Contacts extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BotNavBar(),
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }
