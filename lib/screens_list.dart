@@ -29,6 +29,15 @@ class ScreensList extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => Onboarding()),
                 );
               },
+              child: const Text('DEMO PAGE'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Onboarding()),
+                );
+              },
               child: const Text('Onboarding'),
             ),
             ElevatedButton(
@@ -85,15 +94,15 @@ class ScreensList extends StatelessWidget {
               },
               child: const Text('ProductList'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DrawerPage()),
-                );
-              },
-              child: const Text('Menu'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => DrawerPage()),
+            //     );
+            //   },
+            //   child: const Text('Menu'),
+            // ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(

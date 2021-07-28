@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
-
 import 'constants/app_colors.dart';
 
 const double xOffset = 0;
@@ -87,6 +86,15 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
         duration: Duration(milliseconds: 400), curve: Curves.ease);
   }
 
+  Widget _getPage() {
+    switch (currentIndex) {
+      case 0:
+        //invoke drawer
+        break;
+    }
+    return Container();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -94,6 +102,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
+
         child: PageView(
           scrollDirection: Axis.horizontal,
           children: pages,
@@ -217,6 +226,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
               bottom: 5,
               child: Container(
                 height: 1,
+
                 width: 30.w,
                 decoration: BoxDecoration(
                   color: AppColors.white.withOpacity(0.4),
@@ -226,6 +236,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
                 ),
               ),
             ),
+
           ),
           const Align(
             alignment: Alignment.bottomCenter,
@@ -245,6 +256,12 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     //   ),
     // );
   }
+
+  // const Padding(
+  //           padding: EdgeInsets.only(bottom: 90, top: 50),
+  //           child: CatalogList(),
+  //         ),
+
 }
 
 class BottomBarButton extends StatefulWidget {
