@@ -38,7 +38,7 @@ class _BasketButtonState extends State<BasketButton> {
   Widget build(BuildContext context) {
     dev.log('root button rebuilded');
 
-    void _incrementCounter() {
+    void incrementCounter() {
       setState(() {
         _price += rand.nextDouble() * 20;
         _count++;
@@ -47,19 +47,11 @@ class _BasketButtonState extends State<BasketButton> {
 
     return Stack(
       children: [
-        GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OrderList(),
-            ),
-          ), //_incrementCounter,
-          child: BasketButtonRoot(
-            itemCount: _count,
-            fillColor: AppColors.black,
-            lineColor: AppColors.white,
-            lineWidth: 5,
-          ),
+        BasketButtonRoot(
+          itemCount: _count,
+          fillColor: AppColors.black,
+          lineColor: AppColors.white,
+          lineWidth: 5,
         ),
         PriceCount(
           count: _price,
@@ -108,7 +100,7 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
     dev.log('basket icon button rebuilded');
 
     return Stack(
-      fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         CustomPaint(
           painter: ButtonBackground(
@@ -118,12 +110,10 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
           ),
         ),
         Positioned(
-          bottom: -15,
-          child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: 90 / 4, vertical: 150 / 4),
-            child: SvgPicture.asset('assets/icons/basket.svg'),
-          ),
+          // bottom: 25,
+          top: 57,
+          left: 22.8,
+          child: SvgPicture.asset('assets/icons/basket.svg'),
         ),
         ItemCount(
           count: widget.itemCount,
@@ -190,7 +180,6 @@ class PriceCount extends StatelessWidget {
       top: 12,
       left: 10,
       child: Stack(
-        fit: StackFit.passthrough,
         children: [
           Container(
             width: 70,
