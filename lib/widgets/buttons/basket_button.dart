@@ -36,7 +36,6 @@ class _BasketButtonState extends State<BasketButton> {
 
   @override
   Widget build(BuildContext context) {
-    const double buttonSize = 90;
     dev.log('root button rebuilded');
 
     void _incrementCounter() {
@@ -60,7 +59,6 @@ class _BasketButtonState extends State<BasketButton> {
             fillColor: AppColors.black,
             lineColor: AppColors.white,
             lineWidth: 5,
-            size: buttonSize,
           ),
         ),
         PriceCount(
@@ -89,14 +87,12 @@ class _BasketButtonState extends State<BasketButton> {
 class BasketButtonRoot extends StatefulWidget {
   const BasketButtonRoot({
     Key? key,
-    required this.size,
     required this.itemCount,
     required this.fillColor,
     required this.lineColor,
     required this.lineWidth,
   }) : super(key: key);
 
-  final double size;
   final int itemCount;
   final Color fillColor;
   final Color lineColor;
@@ -116,7 +112,6 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
       children: [
         CustomPaint(
           painter: ButtonBackground(
-            size: widget.size,
             fillColor: widget.fillColor,
             lineColor: widget.lineColor,
             lineWidth: widget.lineWidth,
@@ -125,13 +120,12 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
         Positioned(
           bottom: -15,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: widget.size / 4, vertical: 150 / 4),
+            padding:
+                EdgeInsets.symmetric(horizontal: 90 / 4, vertical: 150 / 4),
             child: SvgPicture.asset('assets/icons/basket.svg'),
           ),
         ),
         ItemCount(
-          size: widget.size,
           count: widget.itemCount,
         ),
       ],
@@ -143,20 +137,18 @@ class ItemCount extends StatelessWidget {
   const ItemCount({
     Key? key,
     required this.count,
-    required this.size,
   }) : super(key: key);
 
   final int count;
-  final double size;
 
   @override
   Widget build(BuildContext context) {
-    final containerSize = size * 0.22;
+    final containerSize = 90 * 0.22;
     dev.log('item count rebuilded');
 
     return Positioned(
       top: containerSize / 1.5 + 33,
-      left: size / 2 - containerSize / 2,
+      left: 90 / 2 - containerSize / 2,
       child: Container(
         width: containerSize,
         height: containerSize,
@@ -261,13 +253,11 @@ class ButtonBackground extends CustomPainter {
     required this.fillColor,
     required this.lineColor,
     required this.lineWidth,
-    required this.size,
   });
 
   final Color fillColor;
   final Color lineColor;
   final double lineWidth;
-  final double size;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -298,8 +288,7 @@ class ButtonBackground extends CustomPainter {
     final paint = Paint();
     paint.color = fillColor;
     paint.style = PaintingStyle.fill;
-    canvas.drawCircle(
-        Offset(this.size / 2, this.size / 2 + 30), this.size / 2, paint);
+    canvas.drawCircle(Offset(90 / 2, 90 / 2 + 30), 90 / 2, paint);
   }
 
   Rect calculateArcsRect(Size size) {
