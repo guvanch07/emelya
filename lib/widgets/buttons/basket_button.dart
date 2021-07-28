@@ -53,11 +53,15 @@ class _BasketButtonState extends State<BasketButton> {
           lineColor: AppColors.white,
           lineWidth: 5,
         ),
-        PriceCount(
-          count: _price,
-        ),
+        // Positioned(
+        //   top: 0,
+        //   left: 10,
+        //   child: PriceCount(
+        //     count: _price,
+        //   ),
+        // ),
         Positioned(
-          top: 18,
+          top: 5,
           left: 38.5,
           child: CustomPaint(
             painter: TrianglePainter(
@@ -115,8 +119,12 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
           left: 22.8,
           child: SvgPicture.asset('assets/icons/basket.svg'),
         ),
-        ItemCount(
-          count: widget.itemCount,
+        Positioned(
+          top: 18,
+          left: 35,
+          child: ItemCount(
+            count: widget.itemCount,
+          ),
         ),
       ],
     );
@@ -135,26 +143,22 @@ class ItemCount extends StatelessWidget {
   Widget build(BuildContext context) {
     dev.log('item count rebuilded');
 
-    return Positioned(
-      top: 20,
-      left: 90,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: AppColors.purple,
-          borderRadius: BorderRadius.all(
-            Radius.circular(100),
-          ),
+    return Container(
+      width: 20,
+      height: 20,
+      decoration: const BoxDecoration(
+        color: AppColors.purple,
+        borderRadius: BorderRadius.all(
+          Radius.circular(100),
         ),
-        child: Center(
-          child: Text(
-            count.toString(),
-            style: const TextStyle(
-              color: AppColors.white,
-              fontFamily: 'Arial',
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+      ),
+      child: Center(
+        child: Text(
+          count.toString(),
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              ?.copyWith(color: AppColors.white),
         ),
       ),
     );
@@ -173,29 +177,21 @@ class PriceCount extends StatelessWidget {
   Widget build(BuildContext context) {
     dev.log('item count rebuilded');
 
-    return Positioned(
-      top: -5,
-      left: 10,
-      child: Stack(
-        children: [
-          Container(
-            width: 70,
-            height: 25,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              border: Border.all(
-                width: 1.5,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(100),
-              ),
-            ),
-            child: Center(
-              child: Text('${count.toPrice()} р.',
-                  style: Theme.of(context).textTheme.bodyText1),
-            ),
-          ),
-        ],
+    return Container(
+      width: 70,
+      height: 25,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        border: Border.all(
+          width: 1.5,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(100),
+        ),
+      ),
+      child: Center(
+        child: Text('${count.toPrice()} р.',
+            style: Theme.of(context).textTheme.bodyText1),
       ),
     );
   }

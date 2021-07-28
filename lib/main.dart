@@ -236,17 +236,30 @@ class _AppState extends State<App> {
             //     ),
             //   ),
             // ),
+
             Center(
               heightFactor: 0.5,
               child: GestureDetector(
                 onTap: () {
-                  OrderList();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => OrderList()),
+                  );
                 },
-                child: SizedBox(
-                  height: 120,
+                child:
+                    //ConstrainedBox(
+                    //constraints: BoxConstraints(minHeight: 90, minWidth: 90),
+                    Container(
+                  height: 90,
                   width: 90,
                   child: BasketButton(),
                 ),
+              ),
+            ),
+            Positioned(
+              bottom: 105,
+              left: 40.w,
+              child: PriceCount(
+                count: 0,
               ),
             ),
           ],
