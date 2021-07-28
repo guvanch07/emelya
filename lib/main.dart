@@ -257,7 +257,7 @@ class _AppState extends State<App> {
             ),
             Positioned(
               bottom: 105,
-              left: 40.w,
+              left: 50.w - 35,
               child: PriceCount(
                 count: 0,
               ),
