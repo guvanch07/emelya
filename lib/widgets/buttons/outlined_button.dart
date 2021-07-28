@@ -1,6 +1,7 @@
 import 'package:emelya/constants/app_colors.dart';
 import 'package:emelya/screens/order.dart/add_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppOutlinedButton extends StatelessWidget {
   const AppOutlinedButton({
@@ -189,12 +190,12 @@ class _RadioButtonState extends State<RadioButton> {
 class UserButton extends StatelessWidget {
   const UserButton(
       {required this.text,
-      this.icon,
+      required this.icon,
       required this.press,
       required this.onColorChanged,
       required this.selected});
 
-  final icon;
+  final String icon;
   final String text;
   final VoidCallback press;
 
@@ -212,7 +213,7 @@ class UserButton extends StatelessWidget {
           onColorChanged(selected ? Colors.purple : Colors.transparent);
         },
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 19),
+          padding: EdgeInsets.only(left: 20, right: 20),
           height: 40,
           width: 370,
           decoration: BoxDecoration(
@@ -221,20 +222,20 @@ class UserButton extends StatelessWidget {
           ),
           child: Row(
             children: <Widget>[
-              icon,
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Text(
-                  text,
-                  style: TextStyle(color: AppColors.purple),
+              SvgPicture.asset('assets/icons/$icon.svg'),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(text,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.copyWith(color: AppColors.purple)),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 130),
-                child: Icon(
-                  Icons.arrow_forward,
-                  color: AppColors.purple,
-                ),
+              Icon(
+                Icons.arrow_forward,
+                color: AppColors.purple,
               )
             ],
           ),

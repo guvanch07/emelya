@@ -58,41 +58,44 @@ class _UserAccountState extends State<UserAccount> {
               SizedBox(
                 height: 10,
               ),
-              UserButton(
-                press: () => setState(
-                  () => text = SelectAdress(),
-                ),
-                text: 'Настройки',
-                icon: Icon(Icons.settings, color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: false,
-              ),
-              UserButton(
-                press: () => setState(() => text = SelectedCard()),
-                text: 'Управление картами',
-                icon: FaIcon(FontAwesomeIcons.dollarSign,
-                    color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: true,
-              ),
-              UserButton(
-                press: () => setState(() => text = UserOrders()),
-                text: 'История заказов',
-                icon: Icon(Icons.credit_card, color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: false,
-              ),
-              UserButton(
-                press: () => setState(() => text = UserHistory()),
-                text: 'Моя история',
-                icon:
-                    FaIcon(FontAwesomeIcons.bookmark, color: AppColors.purple),
-                onColorChanged: (color) =>
-                    setState(() => currentColor = Colors.purple),
-                selected: true,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  UserButton(
+                    press: () => setState(
+                      () => text = SelectAdress(),
+                    ),
+                    text: 'Настройки',
+                    icon: 'settings',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: false,
+                  ),
+                  UserButton(
+                    press: () => setState(() => text = SelectedCard()),
+                    text: 'Управление картами',
+                    icon: 'dollar',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: true,
+                  ),
+                  UserButton(
+                    press: () => setState(() => text = UserOrders()),
+                    text: 'История заказов',
+                    icon: 'card',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: false,
+                  ),
+                  UserButton(
+                    press: () => setState(() => text = UserHistory()),
+                    text: 'Моя история',
+                    icon: 'history',
+                    onColorChanged: (color) =>
+                        setState(() => currentColor = Colors.purple),
+                    selected: true,
+                  ),
+                ],
               ),
               SizedBox(
                 height: 15,
