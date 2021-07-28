@@ -2,7 +2,6 @@ import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:emelya/constants/app_colors.dart';
-import 'package:emelya/screens/order.dart/order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:emelya/core/utils/double.dart';
@@ -46,6 +45,7 @@ class _BasketButtonState extends State<BasketButton> {
     }
 
     return Stack(
+      fit: StackFit.expand,
       children: [
         BasketButtonRoot(
           itemCount: _count,
@@ -57,7 +57,7 @@ class _BasketButtonState extends State<BasketButton> {
           count: _price,
         ),
         Positioned(
-          top: 32,
+          top: 18,
           left: 38.5,
           child: CustomPaint(
             painter: TrianglePainter(
@@ -100,7 +100,8 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
     dev.log('basket icon button rebuilded');
 
     return Stack(
-      clipBehavior: Clip.none,
+      // clipBehavior: Clip.none,
+      fit: StackFit.expand,
       children: [
         CustomPaint(
           painter: ButtonBackground(
@@ -110,8 +111,7 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
           ),
         ),
         Positioned(
-          // bottom: 25,
-          top: 57,
+          bottom: 20,
           left: 22.8,
           child: SvgPicture.asset('assets/icons/basket.svg'),
         ),
@@ -133,15 +133,12 @@ class ItemCount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final containerSize = 90 * 0.22;
     dev.log('item count rebuilded');
 
     return Positioned(
-      top: containerSize / 1.5 + 33,
-      left: 90 / 2 - containerSize / 2,
+      top: 20,
+      left: 90,
       child: Container(
-        width: containerSize,
-        height: containerSize,
         decoration: const BoxDecoration(
           color: AppColors.purple,
           borderRadius: BorderRadius.all(
@@ -177,7 +174,7 @@ class PriceCount extends StatelessWidget {
     dev.log('item count rebuilded');
 
     return Positioned(
-      top: 12,
+      top: -5,
       left: 10,
       child: Stack(
         children: [
@@ -277,13 +274,13 @@ class ButtonBackground extends CustomPainter {
     final paint = Paint();
     paint.color = fillColor;
     paint.style = PaintingStyle.fill;
-    canvas.drawCircle(Offset(90 / 2, 90 / 2 + 30), 90 / 2, paint);
+    canvas.drawCircle(Offset(90 / 2, 90 / 2), 90 / 2, paint);
   }
 
   Rect calculateArcsRect(Size size) {
-    final offest = lineWidth / 2;
-    final arcRect = Offset(offest, offest + 30) &
-        Size(size.width - offest * 2, size.width - offest * 2);
+    final offset = lineWidth / 2;
+    final arcRect = Offset(offset, offset) &
+        Size(size.width - offset * 2, size.width - offset * 2);
     return arcRect;
   }
 

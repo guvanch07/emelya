@@ -136,6 +136,7 @@ class _AppState extends State<App> {
         width: size.width,
         height: 90,
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
             CustomPaint(
               size: Size(size.width, 90),
@@ -235,12 +236,14 @@ class _AppState extends State<App> {
             //     ),
             //   ),
             // ),
-            GestureDetector(
-              onTap: () => print(1),
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 1),
+            Center(
+              heightFactor: 0.5,
+              child: GestureDetector(
+                onTap: () {
+                  OrderList();
+                },
                 child: SizedBox(
-                  height: 90,
+                  height: 120,
                   width: 90,
                   child: BasketButton(),
                 ),
