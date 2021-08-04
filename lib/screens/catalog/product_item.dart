@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:emelya/core/utils/double.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
   const ProductItem({
     Key? key,
     required this.price,
@@ -18,6 +18,23 @@ class ProductItem extends StatelessWidget {
   final bool isFavorite;
   final String imageUri;
   final String name;
+
+  @override
+  _ProductItemState createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
+  bool _isFavorite = false;
+
+  void _toggleFavorite() {
+    setState(() {
+      if (_isFavorite) {
+        _isFavorite = false;
+      } else {
+        _isFavorite = true;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +53,43 @@ class ProductItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  price.toPrice(),
+                  widget.price.toPrice(),
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
-                GestureDetector(
-                    onTap: () => {
-                          //TODO: add to favorite logic
-                        },
-                    child: SvgPicture.asset('assets/icons/favorite.svg')),
+                IconButton(
+                    onPressed: () => _toggleFavorite(),
+                    icon: _isFavorite
+                        ? Icon(
+                            Icons.bookmark,
+                            color: AppColors.purple,
+                            size: 20,
+                          )
+                        : Icon(
+                            Icons.bookmark_border,
+                            size: 20,
+                          ))
+                // GestureDetector(
+                //     onTap: () => {
+                //           _toggleFavorite,
+                //           //TODO: add to favorite logic
+                //         },
+                //     child: SvgPicture.asset(
+                //       _isFavorite
+                //           ? 'assets/icons/favorited.svg'
+                //           : 'assets/icons/favorite.svg',
+                //     )),
               ],
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Image.asset(
-                  imageUri,
+                  widget.imageUri,
                 ),
               ),
             ),
             Text(
-              name,
+              widget.name,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText1,
             ),

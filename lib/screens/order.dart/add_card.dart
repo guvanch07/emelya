@@ -1,4 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/screens/menu.dart/menu_list.dart';
 import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:emelya/widgets/text_form_field.dart/feedback_fields.dart';
 import 'package:flutter/material.dart';
@@ -6,18 +7,36 @@ import 'package:flutter/material.dart';
 import '../../bot_bar_nav.dart';
 
 class AddCard extends StatefulWidget {
-  const AddCard({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
 
   @override
   _AddCardState createState() => _AddCardState();
 }
 
 class _AddCardState extends State<AddCard> {
-  bool _character = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
+
+  int _radioValue1 = 0;
+
+  void _handleRadioValueChange1(value) {
+    setState(() {
+      _radioValue1 = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: DrawerPage(),
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -60,36 +79,49 @@ class _AddCardState extends State<AddCard> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
-              ListTile(
-                contentPadding: EdgeInsets.only(
-                  left: 8,
-                ),
-                title: const Text(
-                  'Сохранить информацию о кредитной карте',
-                  style: kStyleText,
-                ),
-                leading: Radio(
-                  visualDensity: VisualDensity(vertical: -4),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  activeColor: AppColors.purple,
-                  value: _character,
-                  groupValue: _character,
-                  onChanged: (value) {
-                    setState(() {
-                      value = !_character;
-                    });
-                  },
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, bottom: 15.0),
+                child: Row(
+                  children: [
+                    Theme(
+                      data: ThemeData(unselectedWidgetColor: AppColors.purple),
+                      child: Radio(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        activeColor: AppColors.purple,
+                        value: 2,
+                        groupValue: _radioValue1,
+                        onChanged: _handleRadioValueChange1,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _radioValue1 = 1;
+                        });
+                      },
+                      child: Text("Сохранить информацию о кредитной карте"),
+                    )
+                  ],
                 ),
               ),
-              AppOutlinedButton(
-                  text: 'Сохранить                       ', press: () {})
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  AppOutlinedButton(
+                      text: 'Отмена                   ',
+                      press: () => Navigator.pop(context)),
+                  AppOutlinedButton(
+                      text: 'Сохранить             ',
+                      press: () => Navigator.pop(context))
+                ],
+              )
             ],
           ),
         ),
       ),
-      //bottomNavigationBar: BotNavBar(),
+      bottomNavigationBar: BotNavBar(preees: _openEndDrawer),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:emelya/constants/app_colors.dart';
+import 'package:emelya/screens/menu.dart/menu_list.dart';
 import 'package:emelya/widgets/filter_widget.dart';
 import 'package:emelya/widgets/text_form_field.dart/feedback_fields.dart';
 import 'package:emelya/widgets/topScreen.dart';
@@ -11,12 +12,19 @@ import 'catalog.dart';
 import 'item_selector.dart';
 
 class CotologView extends StatelessWidget {
-  const CotologView({Key? key}) : super(key: key);
+  static const String id = 'cotolog_view';
   static const largePadding = EdgeInsets.symmetric(horizontal: 140);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: DrawerPage(),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -73,25 +81,26 @@ class CotologView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    collapsed: Container(
-                      height: 25,
-                    ),
+                    collapsed: Container(),
                     expanded: ItemSelector(),
                   ),
                 ),
               ),
-              Text(
-                'ТОП ПОПУЛЯРНЫХ ТОВАРОВ',
-                style: kStyleTitleh2,
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0, right: 45.0),
+                child: Text(
+                  'ТОП ПОПУЛЯРНЫХ ТОВАРОВ',
+                  style: kStyleTitleh2,
+                ),
               ),
               Filter(),
               Container(
-                  height: 600, width: double.infinity, child: CatalogList()),
+                  height: 750, width: double.infinity, child: CatalogList()),
             ],
           ),
         ),
       ),
-      //bottomNavigationBar: BotNavBar(),
+      bottomNavigationBar: BotNavBar(preees: _openEndDrawer),
     );
   }
 }

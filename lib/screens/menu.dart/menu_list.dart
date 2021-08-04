@@ -6,8 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../bot_bar_nav.dart';
 
 class DrawerPage extends StatefulWidget {
-  const DrawerPage({Key? key}) : super(key: key);
-
   @override
   _DrawerPageState createState() => _DrawerPageState();
 }
@@ -15,28 +13,25 @@ class DrawerPage extends StatefulWidget {
 class _DrawerPageState extends State<DrawerPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void _openEndDrawer() {
-    _scaffoldKey.currentState!.openEndDrawer();
-  }
+  // void _openEndDrawer() {
+  //   _scaffoldKey.currentState!.openEndDrawer();
+  // }
 
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
-  }
+  // void _closeEndDrawer() {
+  //   Navigator.of(context).pop();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return
-
-        //   key: _scaffoldKey,
+        //key: _scaffoldKey,
         //   body: Center(
         //       child: ElevatedButton(
         //     onPressed: _openEndDrawer,
         //     child: const Text('Open End Drawer'),
         //   )),
-        // endDrawer:
-        Container(
-      width: 200,
-      child: Drawer(
+        Drawer(
+      child: Container(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -111,10 +106,9 @@ class _DrawerPageState extends State<DrawerPage> {
             ],
           ),
         ),
-        // ),
-
-        //bottomNavigationBar: BotNavBar(),
       ),
+
+      //bottomNavigationBar: BotNavBar(),
     );
   }
 }

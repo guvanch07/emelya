@@ -6,13 +6,20 @@ import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../bot_bar_nav.dart';
+import 'menu_list.dart';
 
 class FeedBackUser extends StatelessWidget {
-  const FeedBackUser({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: DrawerPage(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
@@ -60,15 +67,28 @@ class FeedBackUser extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            AppOutlinedButton(
-              press: () {},
-              text: 'Отправить            ',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                AppOutlinedButton(
+                  press: () {
+                    Navigator.pop(context);
+                  },
+                  text: 'Отмена                 ',
+                ),
+                AppOutlinedButton(
+                  press: () {
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Успешно отправлено')));
+                  },
+                  text: 'Отправить           ',
+                ),
+              ],
             ),
-            //AppBottomNavBar()
           ],
         )),
       ),
-      //bottomNavigationBar: BotNavBar(),
+      bottomNavigationBar: BotNavBar(preees: _openEndDrawer),
     );
   }
 }

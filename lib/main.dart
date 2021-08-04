@@ -57,7 +57,13 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          home: Onboarding(),
+          initialRoute: Onboarding.id,
+          routes: {
+            CotologView.id: (context) => CotologView(),
+            SearchProduct.id: (context) => SearchProduct(),
+            UserAccount.id: (context) => UserAccount(),
+            Onboarding.id: (context) => Onboarding(),
+          },
         );
       },
     );
@@ -201,9 +207,7 @@ class _AppState extends State<App> {
                         width: 1.w,
                       ),
                       GestureDetector(
-                        onTap: () => {
-                          setBottomBarIndex(3),
-                        },
+                        onTap: () => setBottomBarIndex(3),
                         child: BottomBarButton(
                           text: 'Меню',
                           icon: 'menu',

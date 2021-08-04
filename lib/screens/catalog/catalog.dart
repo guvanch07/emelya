@@ -78,6 +78,7 @@ class CatalogList extends StatelessWidget {
     final itemWidth = 44.w;
     final itemHeight = 30.h;
     return GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
         itemCount: _products.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

@@ -9,212 +9,224 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../bot_bar_nav.dart';
+import 'menu_list.dart';
 
 class Contacts extends StatelessWidget {
-  const Contacts({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: DrawerPage(),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            TopScreen(),
-            Padding(
-              padding: const EdgeInsets.only(right: 160.0),
-              child: Text(
-                'Контакты',
-                style: TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              TopScreen(),
+              Padding(
+                padding: const EdgeInsets.only(right: 160.0),
+                child: Text(
+                  'Контакты',
+                  style: TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 22, top: 20),
-              child: Row(
-                children: [
-                  Text('Минск'),
+              Padding(
+                padding: const EdgeInsets.only(left: 22, top: 20),
+                child: Row(
+                  children: [
+                    Text('Минск'),
+                    Text(
+                      '+375 (29) 666-66-66',
+                      style: TextStyle(color: Color(0xFFAC4AEB)),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 22, top: 15),
+                child: Row(children: [
+                  Text('Каждый день'),
+                  Text(
+                    ' с 9.00 до 21.00',
+                    style: TextStyle(color: Color(0xFFAC4AEB)),
+                  )
+                ]),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 22, top: 15),
+                child: Text(
+                    'Друзья, мы любим общаться и искренне радуемся вашей обратной связи! Сотрудники горячей линии помогут вам по любым вопросам. '),
+              ),
+              SizedBox(
+                height: 31,
+              ),
+              Text(
+                'Хотите работать у нас?',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.phone_outlined,
+                    color: Color(0xFFAC4AEB),
+                  ),
                   Text(
                     '+375 (29) 666-66-66',
                     style: TextStyle(color: Color(0xFFAC4AEB)),
                   ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Icon(
+                    Icons.email_outlined,
+                    color: Color(0xFFAC4AEB),
+                  ),
+                  Text(
+                    'knv@proviant.by',
+                    style: TextStyle(color: Color(0xFFAC4AEB)),
+                  )
                 ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 22, top: 15),
-              child: Row(children: [
-                Text('Каждый ден'),
-                Text(
-                  ' с 9.00 до 21.00',
-                  style: TextStyle(color: Color(0xFFAC4AEB)),
-                )
-              ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 22, top: 15),
-              child: Text(
-                  'Друзья, мы любим общаться и искренне радуемся вашей обратной связи! Сотрудники горячей линии помогут вам по любым вопросам. '),
-            ),
-            SizedBox(
-              height: 31,
-            ),
-            Text(
-              'Хотите работать у нас?',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.phone_outlined,
-                  color: Color(0xFFAC4AEB),
-                ),
-                Text(
-                  '+375 (29) 666-66-66',
-                  style: TextStyle(color: Color(0xFFAC4AEB)),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Icon(
-                  Icons.email_outlined,
-                  color: Color(0xFFAC4AEB),
-                ),
-                Text(
-                  'knv@proviant.by',
-                  style: TextStyle(color: Color(0xFFAC4AEB)),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Text(
-              'Отдел по работе с В2В-клиентами',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.phone_outlined,
-                  color: Color(0xFFAC4AEB),
-                ),
-                Text(
-                  '+375 (29) 666-66-66',
-                  style: TextStyle(color: Color(0xFFAC4AEB)),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Icon(
-                  Icons.email_outlined,
-                  color: Color(0xFFAC4AEB),
-                ),
-                Text(
-                  'knv@proviant.by',
-                  style: TextStyle(color: Color(0xFFAC4AEB)),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                GestureDetector(
-                  child: Row(children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(right: 3),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: (SvgPicture.asset('assets/icons/vk.svg')),
-                    ),
-                    Text(
-                      'Vkontakte',
-                      style: TextStyle(fontSize: 18),
-                    )
-                  ]),
-                  onTap: () {},
-                ),
-                SizedBox(
-                  width: 50,
-                ),
-                GestureDetector(
-                  child: Row(children: <Widget>[
-                    Container(
-                      child: (SvgPicture.asset('assets/icons/insta.svg')),
-                    ),
-                    Text(
-                      'Instagram',
-                      style: TextStyle(fontSize: 18),
-                    )
-                  ]),
-                  onTap: () {},
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            AppOutlinedButton(
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FeedBackUser(),
+              SizedBox(
+                height: 30,
+              ),
+              Text(
+                'Отдел по работе с В2В-клиентами',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.phone_outlined,
+                    color: Color(0xFFAC4AEB),
                   ),
-                );
-              },
-              text: 'Обратная связь',
-              textStyle: TextStyle(fontSize: 18, color: AppColors.purple),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 90),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.ideographic,
-                children: [
-                  GestureDetector(
-                      child: Text("Публичная оферта",
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black)),
-                      onTap: () {}),
+                  Text(
+                    '+375 (29) 666-66-66',
+                    style: TextStyle(color: Color(0xFFAC4AEB)),
+                  ),
                   SizedBox(
-                    height: 10,
+                    width: 30,
                   ),
-                  GestureDetector(
-                      child: Text("Правил сайта",
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black)),
-                      onTap: () {}),
-                  SizedBox(
-                    height: 10,
+                  Icon(
+                    Icons.email_outlined,
+                    color: Color(0xFFAC4AEB),
                   ),
-                  GestureDetector(
-                      child: Text("Политика конфиденциальности",
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black)),
-                      onTap: () {}),
+                  Text(
+                    'knv@proviant.by',
+                    style: TextStyle(color: Color(0xFFAC4AEB)),
+                  )
                 ],
               ),
-            ),
-          ],
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  GestureDetector(
+                    child: Row(children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(right: 3),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: (SvgPicture.asset('assets/icons/vk.svg')),
+                      ),
+                      Text(
+                        'Vkontakte',
+                        style: TextStyle(fontSize: 18),
+                      )
+                    ]),
+                    onTap: () {},
+                  ),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  GestureDetector(
+                    child: Row(children: <Widget>[
+                      Container(
+                        child: (SvgPicture.asset('assets/icons/insta.svg')),
+                      ),
+                      Text(
+                        'Instagram',
+                        style: TextStyle(fontSize: 18),
+                      )
+                    ]),
+                    onTap: () {},
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              AppOutlinedButton(
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FeedBackUser(),
+                    ),
+                  );
+                },
+                text: 'Обратная связь',
+                textStyle: TextStyle(fontSize: 18, color: AppColors.purple),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 90),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.ideographic,
+                  children: [
+                    GestureDetector(
+                        child: Text("Публичная оферта",
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.black)),
+                        onTap: () {}),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                        child: Text("Правил сайта",
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.black)),
+                        onTap: () {}),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                        child: Text("Политика конфиденциальности",
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Colors.black)),
+                        onTap: () {}),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              )
+            ],
+          ),
         ),
       ),
-      //bottomNavigationBar: BotNavBar(),
+      bottomNavigationBar: BotNavBar(preees: _openEndDrawer),
     );
   }
 }

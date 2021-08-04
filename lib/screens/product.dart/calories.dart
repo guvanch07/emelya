@@ -94,7 +94,7 @@ class PriceWeight extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 20.0, top: 30.0),
+          padding: const EdgeInsets.only(left: 20.0, top: 30.0, right: 10),
           child: Text(
               'Состав: молоко коровье пастеризованное, пищевая соль, закваска мезофильных, термофильных молочнокислых микроорганизмов, молокосвертывающий ферментный препарат животного происхождения, уплотнитель – хлорид кальция, краситель пищевой аннато'),
         ),

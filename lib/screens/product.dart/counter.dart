@@ -19,33 +19,31 @@ class _CounterPcState extends State<CounterPc> {
       height: 40.0,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0), color: Color(0xFFEFEFEF)),
-      child: Expanded(
-        child: Row(
-          children: <Widget>[
-            _counter != 0
-                ? IconButton(
-                    alignment: Alignment.center,
-                    icon: Icon(Icons.remove),
-                    color: Color(0xFFAC4AEB),
-                    onPressed: () => setState(() => _counter--),
-                  )
-                : Container(),
-            Expanded(
-                child: Center(
-              child: Text(
-                '$_counter шт',
-                style: TextStyle(
+      child: Row(
+        children: <Widget>[
+          _counter != 0
+              ? IconButton(
+                  alignment: Alignment.center,
+                  icon: Icon(Icons.remove),
                   color: Color(0xFFAC4AEB),
-                ),
-              ),
-            )),
-            IconButton(
-                alignment: Alignment.center,
-                icon: Icon(Icons.add),
+                  onPressed: () => setState(() => _counter--),
+                )
+              : Container(),
+          Expanded(
+              child: Center(
+            child: Text(
+              '$_counter шт',
+              style: TextStyle(
                 color: Color(0xFFAC4AEB),
-                onPressed: () => setState(() => _counter++)),
-          ],
-        ),
+              ),
+            ),
+          )),
+          IconButton(
+              alignment: Alignment.center,
+              icon: Icon(Icons.add),
+              color: Color(0xFFAC4AEB),
+              onPressed: () => setState(() => _counter++)),
+        ],
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:emelya/screens/menu.dart/menu_list.dart';
 import 'package:emelya/screens/order.dart/user_data.dart';
 import 'package:emelya/screens/order.dart/your_order.dart';
 import 'package:emelya/widgets/buttons/outlined_button.dart';
@@ -7,11 +8,17 @@ import 'package:flutter/material.dart';
 import '../../bot_bar_nav.dart';
 
 class OrderList extends StatelessWidget {
-  const OrderList({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openEndDrawer() {
+    _scaffoldKey.currentState!.openEndDrawer();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: DrawerPage(),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -19,7 +26,7 @@ class OrderList extends StatelessWidget {
             children: <Widget>[
               TopScreen(),
               Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 30),
+                padding: const EdgeInsets.only(top: 30, bottom: 30),
                 child: Text(
                   'Оформление заказа',
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -68,29 +75,31 @@ class OrderList extends StatelessWidget {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  AppOutlinedButton(
-                    text: 'Отмена          ',
-                    press: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  AppOutlinedButton(
-                      text: 'Далее            ',
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    AppOutlinedButton(
+                      text: 'Отмена          ',
                       press: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UserData()));
-                      })
-                ],
+                        Navigator.pop(context);
+                      },
+                    ),
+                    AppOutlinedButton(
+                        text: 'Далее            ',
+                        press: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserData()));
+                        }),
+                  ]),
+              SizedBox(
+                height: 30,
               )
             ],
           ),
         ),
       ),
-      //bottomNavigationBar: BotNavBar(),
+      bottomNavigationBar: BotNavBar(preees: _openEndDrawer),
     );
   }
 }
