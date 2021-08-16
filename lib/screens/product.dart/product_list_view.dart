@@ -1,14 +1,18 @@
 //import 'package:carousel_pro/carousel_pro.dart';
+import 'package:emelya/constants/app_colors.dart';
 import 'package:emelya/screens/menu.dart/menu_list.dart';
+import 'package:emelya/widgets/buttons/counter.dart';
 import 'package:emelya/widgets/buttons/outlined_button.dart';
 import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:another_carousel_pro/another_carousel_pro.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../bot_bar_nav.dart';
 import '../../main.dart';
+import 'boogmark.dart';
 import 'calories.dart';
 import 'counter.dart';
 
@@ -22,6 +26,7 @@ class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFAFAFA),
       key: _scaffoldKey,
       endDrawer: DrawerPage(),
       body: SafeArea(
@@ -29,31 +34,54 @@ class ProductList extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget>[
-              TopScreen(),
-              Center(
-                child: Text(
-                  'Сыр «Пошехонский»',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                ),
+              Container(
+                color: Colors.white,
+                child: Column(children: [
+                  TopScreen(),
+                  Text(
+                    'Сыр «Пошехонский»',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  ),
+                ]),
               ),
               Container(
-                width: 390,
-                height: 240,
+                color: Colors.white,
+                height: 240.0,
+                width: 390.0,
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 10,
+                ),
                 child: Column(
                   children: <Widget>[
-                    Center(
-                      child: Container(
-                        child: imageCarousel,
-                        height: 150,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Center(
+                          child: Container(
+                            child: imageCarousel,
+                            height: 135,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 70.0,
+                          ),
+                          child: BookMarkIcon(
+                            color: AppColors.purple,
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: 20.0,
+                      height: 40.0,
                     ),
                     AppOutlinedButton(
-                      press: () {},
-                      text: '    В корзину  24,45р.          ',
-                      padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+                      press: () {
+                        Provider.of<CounterProduct>(context, listen: false)
+                            .addBasket();
+                      },
+                      text: ' В корзину  24,45р.                            ',
                     ),
                   ],
                 ),
@@ -67,7 +95,7 @@ class ProductList extends StatelessWidget {
                     child: Text(
                       'В наличии 4 кг',
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(
@@ -77,11 +105,8 @@ class ProductList extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0, left: 20.0),
-                child: Text(
-                  'Пищевая ценность на 100 г.',
-                  style: TextStyle(fontSize: 16),
-                ),
+                padding: const EdgeInsets.only(top: 20.0, right: 135.0),
+                child: Text('Пищевая ценность на 100 г.', style: kStyleText),
               ),
               SizedBox(
                 height: 15.0,
@@ -92,7 +117,7 @@ class ProductList extends StatelessWidget {
               ),
               PriceWeight(),
               SizedBox(
-                height: 30.0,
+                height: 60.0,
               ),
             ],
           ),

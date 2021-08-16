@@ -2,14 +2,15 @@ import 'package:emelya/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class FeedFields extends StatelessWidget {
-  const FeedFields(
+  FeedFields(
       {required this.text,
       this.keybord,
       this.icon,
       required this.width,
       this.suficon,
       this.labeltext,
-      required this.height});
+      required this.height,
+      required this.controller});
   final text;
   final keybord;
   final icon;
@@ -17,6 +18,7 @@ class FeedFields extends StatelessWidget {
   final suficon;
   final labeltext;
   final double? height;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class FeedFields extends StatelessWidget {
           ),
         ),
         child: TextField(
+          controller: controller,
           keyboardType: keybord,
           decoration: InputDecoration(
             labelStyle: TextStyle(color: Color(0xFF000000)),
@@ -52,49 +55,53 @@ class FeedFields extends StatelessWidget {
 }
 
 class AdressForm extends StatelessWidget {
-  const AdressForm({required this.text, required this.width, this.keyboard});
+  AdressForm(
+      {required this.text,
+      required this.width,
+      this.keyboard,
+      required this.controller});
 
   final String text;
   final double width;
   final keyboard;
-
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
-        child: Container(
-          width: width,
-          height: 55,
-          decoration: new BoxDecoration(
-            color: Color(0xFFEFEFEF),
-            borderRadius: new BorderRadius.all(
-              new Radius.circular(9.0),
+    return Container(
+      margin: const EdgeInsets.only(right: 15, left: 15, top: 15),
+      width: width,
+      height: 55,
+      decoration: new BoxDecoration(
+        color: Color(0xFFEFEFEF),
+        borderRadius: new BorderRadius.all(
+          new Radius.circular(9.0),
+        ),
+      ),
+      child: TextField(
+        controller: controller,
+        keyboardType: keyboard,
+        decoration: InputDecoration(
+            suffixIcon: Icon(
+              Icons.check_circle_outline,
+              color: AppColors.purple,
             ),
-          ),
-          child: TextField(
-            keyboardType: keyboard,
-            decoration: InputDecoration(
-                suffixIcon: Icon(
-                  Icons.check_circle_outline,
-                  color: AppColors.purple,
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+              color: Colors.black,
+            )),
+            filled: true,
+            fillColor: Color(0xFFEFEFEF),
+            labelStyle: TextStyle(
+              color: Colors.black,
+            ),
+            labelText: text,
+            hintText: text,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(9),
                 ),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                  color: Colors.black,
-                )),
-                filled: true,
-                fillColor: Color(0xFFEFEFEF),
-                labelStyle: TextStyle(
-                  color: Colors.black,
-                ),
-                labelText: text,
-                hintText: text,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(9),
-                    ),
-                    borderSide: BorderSide.none)),
-          ),
-        ));
+                borderSide: BorderSide.none)),
+      ),
+    );
   }
 }

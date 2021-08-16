@@ -9,9 +9,11 @@ import 'package:emelya/screens/personal_account.dart/user_account_view.dart';
 import 'package:emelya/screens/search.dart';
 import 'package:emelya/screens_list.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
+import 'package:emelya/widgets/buttons/counter.dart';
 import 'package:emelya/widgets/filter_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import 'constants/app_colors.dart';
@@ -166,9 +168,11 @@ class _BotNavBarState extends State<BotNavBar> {
           Positioned(
             bottom: 105,
             left: 50.w - 35,
+            // child: ListenableProvider<CounterProduct>(
+            //   create: (context) => CounterProduct(),
             child: PriceCount(
-              count: 0,
-            ),
+                //count: 0,
+                ),
           ),
         ],
       ),

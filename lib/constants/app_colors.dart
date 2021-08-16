@@ -17,4 +17,5 @@ const kStyleTitleh1 = TextStyle(
   fontWeight: FontWeight.bold,
 );
 const kStyleTitleh2 = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-const kStyleText = TextStyle(fontSize: 14, fontFamily: 'Arial');
+const kStyleText =
+    TextStyle(fontSize: 14, fontFamily: 'Arial', fontWeight: FontWeight.w400);

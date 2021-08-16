@@ -1,3 +1,4 @@
+import 'package:emelya/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -9,8 +10,8 @@ class Calories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Expanded(
-            child: Column(
+        SizedBox(width: 30),
+        Column(
           children: [
             Text(
               '348,3',
@@ -19,11 +20,14 @@ class Calories extends StatelessWidget {
             SizedBox(
               height: 5.0,
             ),
-            Text('Ккал'),
+            Text(
+              'Ккал',
+              style: kStyleText,
+            ),
           ],
-        )),
-        Expanded(
-            child: Column(
+        ),
+        SizedBox(width: 30),
+        Column(
           children: [
             Text(
               '27,9',
@@ -32,11 +36,14 @@ class Calories extends StatelessWidget {
             SizedBox(
               height: 5.0,
             ),
-            Text('Белки (г)'),
+            Text(
+              'Белки (г)',
+              style: kStyleText,
+            ),
           ],
-        )),
-        Expanded(
-            child: Column(
+        ),
+        SizedBox(width: 30),
+        Column(
           children: [
             Text(
               '26,3',
@@ -45,9 +52,12 @@ class Calories extends StatelessWidget {
             SizedBox(
               height: 5.0,
             ),
-            Text('Жиры (г)'),
+            Text(
+              'Жиры (г)',
+              style: kStyleText,
+            ),
           ],
-        )),
+        ),
       ],
     );
   }
@@ -59,53 +69,90 @@ class PriceWeight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
-              child: Column(
+        Container(
+          padding: EdgeInsets.only(left: 30.0, right: 20),
+          margin: EdgeInsets.symmetric(horizontal: 13.0),
+          height: 66.0,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(9.0), color: Colors.white),
+          child: Row(
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Цена за 1 кг',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 5.0,
                   ),
-                  Text('35,5руб'),
+                  Text(
+                    '35,5руб',
+                    style: kStyleText,
+                  ),
                 ],
               ),
-            ),
-            VerticalDivider(thickness: 3, color: Colors.black),
-            Container(
-                child: Column(
-              children: [
-                Text(
-                  'Страна производителя',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text('Беларусь'),
-              ],
-            )),
-          ],
+
+              SizedBox(
+                width: 25,
+              ),
+              Container(
+                width: 1,
+                height: 45,
+                color: Colors.grey,
+              ),
+              SizedBox(
+                width: 25,
+              ),
+              //VerticalDivider(thickness: 3, color: Colors.black,),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Страна производителя',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    'Беларусь',
+                    style: kStyleText,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20.0, top: 30.0, right: 10),
           child: Text(
-              'Состав: молоко коровье пастеризованное, пищевая соль, закваска мезофильных, термофильных молочнокислых микроорганизмов, молокосвертывающий ферментный препарат животного происхождения, уплотнитель – хлорид кальция, краситель пищевой аннато'),
+            'Состав: молоко коровье пастеризованное, пищевая соль, закваска мезофильных, термофильных молочнокислых микроорганизмов, молокосвертывающий ферментный препарат животного происхождения, уплотнитель – хлорид кальция, краситель пищевой аннато',
+            style: kStyleText,
+          ),
         ),
         SizedBox(
           height: 15,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text('Годен: 20 суток'),
-            Text('Вес/объем: 220 г'),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 80),
+              child: Text(
+                'Годен: 20 суток',
+                style: kStyleText,
+              ),
+            ),
+            Text(
+              'Вес/объем: 220 г',
+              style: kStyleText,
+            ),
           ],
         ),
       ],

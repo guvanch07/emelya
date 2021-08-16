@@ -15,6 +15,7 @@ class CotologView extends StatelessWidget {
   static const String id = 'cotolog_view';
   static const largePadding = EdgeInsets.symmetric(horizontal: 140);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _controller = TextEditingController();
 
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
@@ -46,6 +47,7 @@ class CotologView extends StatelessWidget {
                 ),
               ),
               FeedFields(
+                controller: _controller,
                 text: 'Введите адрес',
                 icon: Icon(Icons.search, color: Colors.grey, size: 30),
                 width: 370,
@@ -95,7 +97,7 @@ class CotologView extends StatelessWidget {
               ),
               Filter(),
               Container(
-                  height: 750, width: double.infinity, child: CatalogList()),
+                  height: 1050, width: double.infinity, child: CatalogList()),
             ],
           ),
         ),

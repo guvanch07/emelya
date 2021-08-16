@@ -8,12 +8,15 @@ import 'package:emelya/screens/personal_account.dart/user_account_view.dart';
 import 'package:emelya/screens/search.dart';
 import 'package:emelya/screens_list.dart';
 import 'package:emelya/widgets/buttons/basket_button.dart';
+import 'package:emelya/widgets/buttons/counter.dart';
 import 'package:emelya/widgets/filter_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'constants/app_colors.dart';
+import 'models.dart/postingData.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,49 +26,57 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Емеля',
-          theme: ThemeData(
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            textTheme: TextTheme(
-              headline1: const TextStyle(
-                color: AppColors.black,
-                fontSize: 28,
-                fontFamily: 'Arial',
-                fontWeight: FontWeight.w900,
-              ),
-              headline2: const TextStyle(
-                color: AppColors.black,
-                fontFamily: 'Arial',
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-              bodyText1: const TextStyle(
-                color: AppColors.black,
-                fontFamily: 'Arial',
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-              bodyText2: const TextStyle(
-                color: AppColors.black,
-                fontFamily: 'Arial',
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => CounterProduct(),
+        ),
+        ChangeNotifierProvider(create: (_) => UserDataPost())
+      ],
+      builder: (context, child) => Sizer(
+        builder: (context, orientation, deviceType) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Емеля',
+            theme: ThemeData(
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+              textTheme: TextTheme(
+                headline1: const TextStyle(
+                  color: AppColors.black,
+                  fontSize: 28,
+                  fontFamily: 'Arial',
+                  fontWeight: FontWeight.w900,
+                ),
+                headline2: const TextStyle(
+                  color: AppColors.black,
+                  fontFamily: 'Arial',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+                bodyText1: const TextStyle(
+                  color: AppColors.black,
+                  fontFamily: 'Arial',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+                bodyText2: const TextStyle(
+                  color: AppColors.black,
+                  fontFamily: 'Arial',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-          ),
-          initialRoute: Onboarding.id,
-          routes: {
-            CotologView.id: (context) => CotologView(),
-            SearchProduct.id: (context) => SearchProduct(),
-            UserAccount.id: (context) => UserAccount(),
-            Onboarding.id: (context) => Onboarding(),
-          },
-        );
-      },
+            initialRoute: Onboarding.id,
+            routes: {
+              CotologView.id: (context) => CotologView(),
+              SearchProduct.id: (context) => SearchProduct(),
+              UserAccount.id: (context) => UserAccount(),
+              Onboarding.id: (context) => Onboarding(),
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -263,8 +274,8 @@ class _AppState extends State<App> {
               bottom: 105,
               left: 50.w - 35,
               child: PriceCount(
-                count: 0,
-              ),
+                  //count: 0,
+                  ),
             ),
           ],
         ),

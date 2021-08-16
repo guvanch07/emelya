@@ -12,6 +12,7 @@ import 'menu.dart/menu_list.dart';
 class SearchProduct extends StatelessWidget {
   static const String id = 'search_screen';
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _controller = TextEditingController();
 
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
@@ -34,6 +35,7 @@ class SearchProduct extends StatelessWidget {
                 height: 43.0,
               ),
               FeedFields(
+                controller: _controller,
                 text: 'Введите название товара',
                 icon: Icon(Icons.search, color: Colors.grey, size: 30),
                 width: 370,

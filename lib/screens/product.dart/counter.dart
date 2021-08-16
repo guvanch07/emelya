@@ -15,8 +15,9 @@ class _CounterPcState extends State<CounterPc> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5.0),
       width: 155.0,
-      height: 40.0,
+      height: 32.0,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0), color: Color(0xFFEFEFEF)),
       child: Row(
@@ -24,7 +25,10 @@ class _CounterPcState extends State<CounterPc> {
           _counter != 0
               ? IconButton(
                   alignment: Alignment.center,
-                  icon: Icon(Icons.remove),
+                  icon: Icon(
+                    Icons.remove,
+                    size: 18,
+                  ),
                   color: Color(0xFFAC4AEB),
                   onPressed: () => setState(() => _counter--),
                 )
@@ -34,13 +38,20 @@ class _CounterPcState extends State<CounterPc> {
             child: Text(
               '$_counter шт',
               style: TextStyle(
-                color: Color(0xFFAC4AEB),
-              ),
+                  color: Color(
+                    0xFFAC4AEB,
+                  ),
+                  fontFamily: 'Arial',
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w400),
             ),
           )),
           IconButton(
               alignment: Alignment.center,
-              icon: Icon(Icons.add),
+              icon: Icon(
+                Icons.add,
+                size: 18,
+              ),
               color: Color(0xFFAC4AEB),
               onPressed: () => setState(() => _counter++)),
         ],

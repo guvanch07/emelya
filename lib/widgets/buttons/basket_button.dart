@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:emelya/core/utils/double.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import 'counter.dart';
 
 class BasketButton extends StatefulWidget {
   const BasketButton({
@@ -22,33 +25,22 @@ class BasketButton extends StatefulWidget {
 }
 
 class _BasketButtonState extends State<BasketButton> {
-  late int _count;
-  late double _price;
-  final Random rand = Random();
-
-  @override
-  void initState() {
-    _count = widget.initProductsCount;
-    _price = widget.initPriceCount;
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   _count = widget.initProductsCount;
+  //   _price = widget.initPriceCount;
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     dev.log('root button rebuilded');
 
-    void incrementCounter() {
-      setState(() {
-        _price += rand.nextDouble() * 20;
-        _count++;
-      });
-    }
-
     return Stack(
       fit: StackFit.expand,
       children: [
         BasketButtonRoot(
-          itemCount: _count,
+          //itemCount: '${appbloc.getCounter}',
           fillColor: AppColors.black,
           lineColor: AppColors.white,
           lineWidth: 5,
@@ -83,13 +75,13 @@ class _BasketButtonState extends State<BasketButton> {
 class BasketButtonRoot extends StatefulWidget {
   const BasketButtonRoot({
     Key? key,
-    required this.itemCount,
+    //required this.itemCount,
     required this.fillColor,
     required this.lineColor,
     required this.lineWidth,
   }) : super(key: key);
 
-  final int itemCount;
+  //final itemCount;
   final Color fillColor;
   final Color lineColor;
   final double lineWidth;
@@ -122,25 +114,30 @@ class _BasketButtonRootState extends State<BasketButtonRoot> {
         Positioned(
           top: 18,
           left: 35,
-          child: ItemCount(
-            count: widget.itemCount,
-          ),
+          child:
+              // ChangeNotifierProvider<CounterProduct>(
+              //   create: (context) => CounterProduct(),
+              //   builder: (context, child) =>
+              // child:
+              ItemCount(),
         ),
+        // )
       ],
     );
   }
 }
 
 class ItemCount extends StatelessWidget {
-  const ItemCount({
-    Key? key,
-    required this.count,
-  }) : super(key: key);
+  // const ItemCount({
+  //   Key? key,
+  //   required this.count,
+  // }) : super(key: key);
 
-  final int count;
+  // final count;
 
   @override
   Widget build(BuildContext context) {
+    //final appbloc = Provider.of<CounterProduct>(context);
     dev.log('item count rebuilded');
 
     return Container(
@@ -153,12 +150,16 @@ class ItemCount extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Text(
-          count.toString(),
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1
-              ?.copyWith(color: AppColors.white),
+        child: Consumer<CounterProduct>(
+          builder: (context, countProduct, child) => Text(
+            '${countProduct.getCounter}',
+
+            //'${context.watch<CounterProduct>().getCounter}',
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                ?.copyWith(color: AppColors.white),
+          ),
         ),
       ),
     );
@@ -166,34 +167,36 @@ class ItemCount extends StatelessWidget {
 }
 
 class PriceCount extends StatelessWidget {
-  const PriceCount({
-    Key? key,
-    required this.count,
-  }) : super(key: key);
+  // const PriceCount({
+  //   Key? key,
+  //   required this.count,
+  // }) : super(key: key);
 
-  final double count;
+  // final double count;
 
   @override
   Widget build(BuildContext context) {
     dev.log('item count rebuilded');
 
     return Container(
-      width: 70,
-      height: 25,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border.all(
-          width: 1.5,
+        width: 70,
+        height: 25,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          border: Border.all(
+            width: 1.5,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(100),
+          ),
         ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(100),
-        ),
-      ),
-      child: Center(
-        child: Text('${count.toPrice()} р.',
-            style: Theme.of(context).textTheme.bodyText1),
-      ),
-    );
+        child: Center(
+          child: Consumer<CounterProduct>(
+            builder: (context, priceProduct, child) => Text(
+                '${priceProduct.getPrice}p',
+                style: Theme.of(context).textTheme.bodyText1),
+          ),
+        ));
   }
 }
 

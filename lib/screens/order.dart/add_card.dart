@@ -19,7 +19,7 @@ class AddCard extends StatefulWidget {
 
 class _AddCardState extends State<AddCard> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final TextEditingController _controller = TextEditingController();
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
   }
@@ -47,6 +47,7 @@ class _AddCardState extends State<AddCard> {
                 height: 30,
               ),
               FeedFields(
+                controller: _controller,
                 text: 'Номер карты',
                 height: 55,
                 width: 370,
@@ -55,6 +56,7 @@ class _AddCardState extends State<AddCard> {
               Padding(
                 padding: const EdgeInsets.only(top: 15, bottom: 15),
                 child: FeedFields(
+                  controller: _controller,
                   text: 'Имя владельца карты',
                   height: 55,
                   width: 370,
@@ -66,14 +68,18 @@ class _AddCardState extends State<AddCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     FeedFields(
+                      controller: _controller,
                       text: 'Срок',
                       height: 55,
                       width: 150,
+                      keybord: TextInputType.number,
                     ),
                     FeedFields(
+                      controller: _controller,
                       text: 'CVV',
                       height: 55,
                       width: 150,
+                      keybord: TextInputType.number,
                     ),
                   ],
                 ),

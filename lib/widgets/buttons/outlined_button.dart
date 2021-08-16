@@ -199,3 +199,133 @@ class _RadioButtonState extends State<RadioButton> {
     );
   }
 }
+
+class UserButton extends StatefulWidget {
+  const UserButton({
+    required this.text,
+    required this.icon,
+    required this.press,
+    required this.onColorChanged,
+    required this.position,
+    required this.press1,
+  });
+
+  final String icon;
+  final String text;
+  final VoidCallback press;
+  final VoidCallback press1;
+  final int onColorChanged;
+  final int position;
+
+  @override
+  _UserButtonState createState() => _UserButtonState();
+}
+
+class _UserButtonState extends State<UserButton> {
+  bool isSelected() {
+    if (widget.position == widget.onColorChanged) {
+      setState(() {});
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+      child: GestureDetector(
+        onTap: () {
+          widget.press();
+          widget.press1();
+        },
+        child: Container(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          height: 40,
+          width: 370,
+          decoration: BoxDecoration(
+              border: Border.all(color: AppColors.purple),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: isSelected() ? AppColors.purple : Colors.transparent),
+          child: Row(
+            children: <Widget>[
+              SvgPicture.asset('assets/icons/${widget.icon}.svg',
+                  color: isSelected() ? Colors.white : AppColors.purple),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    widget.text,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        color: isSelected() ? Colors.white : AppColors.purple),
+                  ),
+                ),
+              ),
+              Icon(Icons.arrow_forward,
+                  color: isSelected() ? Colors.white : AppColors.purple),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BasketButton extends StatefulWidget {
+  const BasketButton(
+      {this.text,
+      this.press1,
+      this.color,
+      this.textColor,
+      this.padding,
+      this.borderRadius,
+      this.textStyle,
+      this.counter});
+  final text;
+  final VoidCallback? press1;
+  final Color? color;
+  final Color? textColor;
+  final EdgeInsets? padding;
+  final double? borderRadius;
+  final TextStyle? textStyle;
+  final int? counter;
+  @override
+  _BasketButtonState createState() => _BasketButtonState();
+}
+
+class _BasketButtonState extends State<BasketButton> {
+  int counter = 0;
+  void addBasket() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.all(Radius.circular(widget.borderRadius ?? 35)),
+        ),
+        // padding: padding ?? const EdgeInsets.symmetric(horizontal: 20),
+        side: const BorderSide(width: 1, color: AppColors.purple),
+      ),
+      onPressed: () {
+        addBasket();
+        widget.press1!();
+      },
+      child: Text(
+        widget.text,
+        textAlign: TextAlign.center,
+        style: widget.textStyle ??
+            Theme.of(context)
+                .textTheme
+                .bodyText1
+                ?.copyWith(color: AppColors.purple),
+      ),
+    );
+  }
+}

@@ -9,6 +9,7 @@ import '../../bot_bar_nav.dart';
 import 'menu_list.dart';
 
 class FeedBackUser extends StatelessWidget {
+  final TextEditingController _controller = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _openEndDrawer() {
@@ -44,6 +45,7 @@ class FeedBackUser extends StatelessWidget {
               height: 18,
             ),
             FeedFields(
+              controller: _controller,
               text: 'Ваш E-mail',
               keybord: TextInputType.emailAddress,
               width: 370,
@@ -53,6 +55,7 @@ class FeedBackUser extends StatelessWidget {
               height: 18,
             ),
             FeedFields(
+              controller: _controller,
               text: 'Ваш номер телефона',
               keybord: TextInputType.number,
               width: 370,
@@ -60,6 +63,7 @@ class FeedBackUser extends StatelessWidget {
             ),
             SizedBox(height: 18),
             FeedFields(
+              controller: _controller,
               text: 'Напишите свое предложение',
               width: 370,
               height: 150,

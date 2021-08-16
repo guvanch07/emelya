@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PayCashPayment extends StatelessWidget {
-  const PayCashPayment({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,18 +84,20 @@ class SelectedCard extends StatelessWidget {
 }
 
 class SelectAdress extends StatelessWidget {
-  const SelectAdress({Key? key}) : super(key: key);
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         AdressForm(
+          controller: _controller,
           text: 'Введите ваш номер',
           width: 370,
           keyboard: TextInputType.number,
         ),
         AdressForm(
+          controller: _controller,
           text: 'Введите ваше имя',
           width: 370,
           keyboard: TextInputType.name,
@@ -174,7 +174,7 @@ class UserOrders extends StatelessWidget {
 }
 
 class AddCardPayment extends StatelessWidget {
-  const AddCardPayment({Key? key}) : super(key: key);
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +231,7 @@ class AddCardPayment extends StatelessWidget {
                           ),
                         ),
                         FeedFields(
+                          controller: _controller,
                           width: 270,
                           height: 130,
                           text: 'Напишите комментарий к заказу.'

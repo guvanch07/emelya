@@ -129,6 +129,12 @@ class _SortDialogState extends State<SortDialog> {
     });
   }
 
+  void setBottomBarIndex(String sortName) {
+    setState(() {
+      currentSortType = sortName;
+    });
+  }
+
   var currentSortType = 'По популярности';
   int value = 0;
 
@@ -200,6 +206,8 @@ class _SortDialogState extends State<SortDialog> {
                       onChanged: (int? value) {
                         setState(() {
                           _value = value!;
+                          Navigator.of(context).pop();
+                          setBottomBarIndex('По популярности');
                         });
                       },
                     ),
@@ -397,23 +405,23 @@ class WeightPicker extends StatelessWidget {
       children: [
         WeightCheckbox(
           weight: '50 г',
-          value: val1,
+          //value: val1,
         ),
         WeightCheckbox(
           weight: '100 г',
-          value: val2,
+          //value: val2,
         ),
         WeightCheckbox(
           weight: '200 г',
-          value: val2,
+          //value: val2,
         ),
         WeightCheckbox(
           weight: '300 г',
-          value: val2,
+          //value: val2,
         ),
         WeightCheckbox(
           weight: '400 г',
-          value: val2,
+          //value: val2,
         ),
         const SizedBox(
           height: 8,
@@ -423,16 +431,21 @@ class WeightPicker extends StatelessWidget {
   }
 }
 
-class WeightCheckbox extends StatelessWidget {
+class WeightCheckbox extends StatefulWidget {
   const WeightCheckbox({
     Key? key,
     required this.weight,
-    required this.value,
   }) : super(key: key);
 
   final String weight;
-  final bool value;
 
+  @override
+  _WeightCheckboxState createState() => _WeightCheckboxState();
+}
+
+bool selected = false;
+
+class _WeightCheckboxState extends State<WeightCheckbox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -440,16 +453,23 @@ class WeightCheckbox extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(
+            activeColor: Colors.transparent,
+            checkColor: AppColors.purple,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            side: const BorderSide(color: AppColors.purple),
+            side: BorderSide(
+                color: selected ? AppColors.purple : AppColors.purple),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(6)),
             ),
-            value: value,
-            onChanged: (onChanged) {},
+            value: selected,
+            onChanged: (value) {
+              setState(() {
+                selected = value!;
+              });
+            },
           ),
           Text(
-            weight,
+            widget.weight,
             style: Theme.of(context).textTheme.bodyText1,
           )
         ],
@@ -469,7 +489,7 @@ class PricePicker extends StatefulWidget {
 
 class _PricePickerState extends State<PricePicker> {
   int height = 50;
-
+  RangeValues _rangeSliderDiscreteValues = const RangeValues(40, 80);
   @override
   Widget build(BuildContext context) {
     const inputDecoration = InputDecoration(
@@ -504,15 +524,12 @@ class _PricePickerState extends State<PricePicker> {
                     border: Border.all(color: AppColors.purple),
                     borderRadius: BorderRadius.all(Radius.circular(9.0))),
                 child: Center(
-                    child: Text('0',
+                    child: Text(
+                        _rangeSliderDiscreteValues.start.round().toString(),
                         style: TextStyle(
                             color: AppColors.purple,
                             fontSize: 20,
                             fontWeight: FontWeight.normal))),
-                // TextFormField(
-                //   decoration: inputDecoration,
-                //   keyboardType: TextInputType.text,
-                //   style: inputTextStyle,
               ),
               Text(
                 'до',
@@ -526,19 +543,13 @@ class _PricePickerState extends State<PricePicker> {
                       borderRadius: BorderRadius.all(Radius.circular(9.0))),
                   child: Center(
                     child: Text(
-                      height.toString(),
+                      _rangeSliderDiscreteValues.end.round().toString(),
                       style: TextStyle(
                           color: AppColors.purple,
                           fontSize: 20,
                           fontWeight: FontWeight.normal),
                     ),
-                  )
-                  // TextFormField(
-                  //   decoration: inputDecoration,
-                  //   keyboardType: TextInputType.text,
-                  //   style: inputTextStyle,
-                  // ),
-                  ),
+                  )),
             ],
           ),
           const SizedBox(
@@ -546,22 +557,20 @@ class _PricePickerState extends State<PricePicker> {
           ),
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
-                inactiveTrackColor: Colors.black,
-                activeTrackColor: AppColors.purple,
+                inactiveTrackColor: AppColors.purple,
+                activeTrackColor: Colors.black,
                 thumbColor: AppColors.purple,
                 overlayColor: Colors.black45,
                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 13.0),
                 overlayShape: RoundSliderOverlayShape(overlayRadius: 27.0)),
-            child: Slider(
-              value: height.toDouble(),
-              min: 0.0,
-              max: 50.0,
-              onChanged: (double newValue) {
-                setState(
-                  () {
-                    height = newValue.round();
-                  },
-                );
+            child: RangeSlider(
+              values: _rangeSliderDiscreteValues,
+              min: 0,
+              max: 100,
+              onChanged: (values) {
+                setState(() {
+                  _rangeSliderDiscreteValues = values;
+                });
               },
             ),
           ),

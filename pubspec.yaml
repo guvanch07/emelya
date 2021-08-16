@@ -33,12 +33,18 @@ dependencies:
   # fluttertoast: ^8.0.7
   font_awesome_flutter: ^9.1.0
   google_fonts: ^2.1.0
-  lint: ^1.5.3
+  
   sizer: ^2.0.13
   syncfusion_flutter_core: ^19.2.48
   cupertino_tabbar: ^2.0.0
   flutter_map: ^0.13.1
-  location: ^4.2.0
+  
+  geolocator: ^7.4.0
+  provider: ^5.0.0
+  http: ^0.13.3
+  google_maps_flutter: ^2.0.6
+
+  image_picker: ^0.8.3+2
   
 
 dev_dependencies:

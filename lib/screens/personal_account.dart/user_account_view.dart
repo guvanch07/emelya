@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:emelya/constants/app_colors.dart';
 import 'package:emelya/main.dart';
 import 'package:emelya/screens/menu.dart/menu_list.dart';
@@ -9,11 +11,13 @@ import 'package:emelya/widgets/topScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../bot_bar_nav.dart';
 
 class UserAccount extends StatelessWidget {
   static const String id = 'user_screen';
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _openEndDrawer() {
@@ -37,18 +41,7 @@ class UserAccount extends StatelessWidget {
                 style: kStyleTitleh1,
               ),
             ),
-            GestureDetector(
-              onTap: () {},
-              child: CircleAvatar(
-                radius: 60,
-                backgroundColor: Color(0xFFEFEFEF),
-                child: Icon(
-                  Icons.person_outline_rounded,
-                  size: 100,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            Usercount(),
             Text(
               'Виктория Вика',
               style: kStyleTitleh2,
@@ -74,7 +67,6 @@ class _UserButState extends State<UserBut> {
   Widget text = SelectAdress();
   int currentIndex = 0;
   void setBottomBarIndex(int index) {
-    //log('bnb setted to $index');
     setState(() {
       currentIndex = index;
     });
@@ -138,74 +130,95 @@ class _UserButState extends State<UserBut> {
   }
 }
 
-class UserButton extends StatefulWidget {
-  const UserButton({
-    required this.text,
-    required this.icon,
-    required this.press,
-    required this.onColorChanged,
-    required this.position,
-    required this.press1,
-  });
-
-  final String icon;
-  final String text;
-  final VoidCallback press;
-  final VoidCallback press1;
-  final int onColorChanged;
-  final int position;
-
+class Usercount extends StatefulWidget {
   @override
-  _UserButtonState createState() => _UserButtonState();
+  _UsercountState createState() => _UsercountState();
 }
 
-class _UserButtonState extends State<UserButton> {
-  bool isSelected() {
-    if (widget.position == widget.onColorChanged) {
-      setState(() {});
-      return true;
-    } else {
-      return false;
-    }
-  }
+class _UsercountState extends State<Usercount> {
+  var _imageFile;
+
+  final ImagePicker _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-      child: GestureDetector(
-        onTap: () {
-          widget.press();
-          widget.press1();
-        },
-        child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          height: 40,
-          width: 370,
-          decoration: BoxDecoration(
-              border: Border.all(color: AppColors.purple),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: isSelected() ? AppColors.purple : Colors.transparent),
-          child: Row(
-            children: <Widget>[
-              SvgPicture.asset('assets/icons/${widget.icon}.svg',
-                  color: isSelected() ? Colors.white : AppColors.purple),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text(
-                    widget.text,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: isSelected() ? Colors.white : AppColors.purple),
-                  ),
-                ),
-              ),
-              Icon(Icons.arrow_forward,
-                  color: isSelected() ? Colors.white : AppColors.purple),
-            ],
-          ),
+    return GestureDetector(
+      onTap: () => showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: ((builder) => bottomSheet())),
+      child: Container(
+        width: 111.0,
+        height: 111.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
         ),
+        child: _imageFile != null
+            ? Container(
+                width: 111.0,
+                height: 111.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: FileImage(
+                        File(_imageFile.path),
+                      ),
+                      fit: BoxFit.cover),
+                ),
+              )
+            : SvgPicture.asset('assets/images/dude.svg'),
       ),
     );
+  }
+
+  @override
+  Widget bottomSheet() {
+    return Container(
+      height: 80.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        vertical: 20.0,
+        horizontal: 30.0,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(15.0),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          IconButton(
+            onPressed: () {
+              takePhoto(ImageSource.gallery);
+            },
+            icon: Icon(
+              Icons.photo_outlined,
+              size: 40.0,
+              color: AppColors.purple,
+            ),
+          ),
+          IconButton(
+              onPressed: () {
+                takePhoto(ImageSource.camera);
+              },
+              icon: Icon(
+                Icons.camera_alt_outlined,
+                size: 40.0,
+                color: AppColors.purple,
+              ))
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource imageSource) async {
+    final pickedFile = await _picker.getImage(
+      source: imageSource,
+    );
+    setState(() {
+      _imageFile = pickedFile;
+    });
   }
 }

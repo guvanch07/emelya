@@ -11,6 +11,7 @@ import '../../bot_bar_nav.dart';
 
 class CheckoutOrder extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _controller = TextEditingController();
 
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
@@ -116,6 +117,7 @@ class CheckoutOrder extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         FeedFields(
+                                          controller: _controller,
                                           height: 50,
                                           width: 90,
                                           text: 'Код',
@@ -187,6 +189,7 @@ class CheckoutOrder extends StatelessWidget {
                                                         height: 15,
                                                       ),
                                                       FeedFields(
+                                                        controller: _controller,
                                                         height: 55,
                                                         width: 270,
                                                         text: '+375',
